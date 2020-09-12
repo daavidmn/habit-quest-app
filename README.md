@@ -2,7 +2,7 @@
 
 ## Preparando o ambiente
 Download:
-* [node.js]
+* [node.js](https://nodejs.org/pt-br/)
 * [GitHub](http://github.com)
 * [Android Studio](https://developer.android.com/studio)
 

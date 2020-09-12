@@ -7,7 +7,7 @@ console.disableYellowBox = true;
 import {
   createAppContainer,
   createBottomTabNavigator,
-  createStackNavigator
+  createStackNavigator,
 } from "vue-native-router";
 
 import pgInicio from "./pages/inicio.vue";
@@ -15,58 +15,58 @@ import pgColecao from "./pages/colecao.vue";
 import pgAmigos from "./pages/amigos.vue";
 import pgExpedicao from "./pages/expedicao.vue";
 import pgConfig from "./pages/config.vue";
-import React from 'react';
-import { Ionicons } from '@expo/vector-icons';
+import React from "react";
+import { Ionicons } from "@expo/vector-icons";
 
 const BottomTabNavigator = createBottomTabNavigator(
   {
     inicio: {
       screen: pgInicio,
       navigationOptions: {
-        title: 'Início',
+        title: "Início",
         // tabBarIcon: ({ focused, tintColor }) => {
         //   //const iconName = `md-trophy${focused ? '' : '-outline'}`;
         //   const iconName = `md-trophy${focused ? '' : '-outline'}`;
         //   return <Ionicons name={iconName} size={25} color={tintColor} />;
         // },
-        tabBarIcon: () => { 
-          return <Ionicons name={`md-home`} size={25} color={'#fff'} />;
+        tabBarIcon: () => {
+          return <Ionicons name={`md-home`} size={25} color={"#fff"} />;
         },
       },
     },
     colecao: {
       screen: pgColecao,
       navigationOptions: {
-        title: 'Coleção',
-        tabBarIcon: () => { 
-          return <Ionicons name={`md-trophy`} size={25} color={'#fff'} />;
+        title: "Coleção",
+        tabBarIcon: () => {
+          return <Ionicons name={`md-trophy`} size={25} color={"#fff"} />;
         },
       },
     },
     amigos: {
       screen: pgAmigos,
       navigationOptions: {
-        title: 'Amigos',
-        tabBarIcon: () => { 
-          return <Ionicons name={`ios-happy`} size={25} color={'#fff'} />;
+        title: "Amigos",
+        tabBarIcon: () => {
+          return <Ionicons name={`ios-happy`} size={25} color={"#fff"} />;
         },
       },
     },
     expedicao: {
       screen: pgExpedicao,
       navigationOptions: {
-        title: 'Expedição',
-        tabBarIcon: () => { 
-          return <Ionicons name={`md-map`} size={25} color={'#fff'} />;
+        title: "Expedição",
+        tabBarIcon: () => {
+          return <Ionicons name={`md-map`} size={25} color={"#fff"} />;
         },
       },
     },
     config: {
       screen: pgConfig,
       navigationOptions: {
-        title: 'Config.',
-        tabBarIcon: () => { 
-          return <Ionicons name={`md-settings`} size={25} color={'#fff'} />;
+        title: "Config.",
+        tabBarIcon: () => {
+          return <Ionicons name={`md-settings`} size={25} color={"#fff"} />;
         },
       },
     },
@@ -74,46 +74,43 @@ const BottomTabNavigator = createBottomTabNavigator(
   {
     initialRouteName: "inicio",
     tabBarOptions: {
-        activeTintColor: '#fff',
-        activeBackgroundColor: '#386641',
-        inactiveTintColor: '#fff',
-        inactiveBackgroundColor: '#6A994E',
-        labelStyle: {
+      activeTintColor: "#fff",
+      activeBackgroundColor: "#386641",
+      inactiveTintColor: "#fff",
+      inactiveBackgroundColor: "#6A994E",
+      labelStyle: {
         fontSize: 11,
-        },
-        style: {
-          height: 70,
-          margin: 0,
-          borderTopLeftRadius: 15,
-          borderTopRightRadius: 15,
-          backgroundColor: '#6A994E',
-        },
-        tabStyle: {
-          margin: 10,
-          padding: 2,
-          borderRadius: 6,
-        }
+      },
+      style: {
+        height: 70,
+        margin: 0,
+        borderTopLeftRadius: 15,
+        borderTopRightRadius: 15,
+        backgroundColor: "#6A994E",
+      },
+      tabStyle: {
+        margin: 10,
+        padding: 2,
+        borderRadius: 6,
+      },
     },
-  },
-  
+  }
 );
 
 const StackNavigator = createStackNavigator(
   {
-    AndroidTabs: BottomTabNavigator
+    AndroidTabs: BottomTabNavigator,
   },
   {
-    initialRouteName: 'AndroidTabs'
+    initialRouteName: "AndroidTabs",
   }
 );
-
-
 
 const AppNavigator = createAppContainer(StackNavigator);
 
 export default {
   components: { AppNavigator },
-}
+};
 </script>
 
 <style>

@@ -26,4 +26,5 @@ Inicie o servidor do projeto:
 npm start
 ```
 
-A interface visual do expo irá abrir, a partir de lá você pode selecionar para rodar o projeto no android que está sendo emulado, entretando você também pode simplesmente apertar a tecla <kbd>a</kbd>.
+A interface visual do expo irá abrir, a partir de lá você pode selecionar para rodar o projeto no android que está sendo emulado.
+Entretando você também pode simplesmente apertar a tecla <kbd>a</kbd> no cmd / terminal.

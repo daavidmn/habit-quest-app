@@ -1,36 +1,60 @@
 <template>
-  <view class="container" id="parent">
+  <view class="container">
     <view class="header">
       <view class="avatar-mini"></view>
-      <view class="progress-bar"></view>
-      <view class="tasks"></view>
-      <view class="achievements"></view>
+      <view class="progress-bar">
+        <text class="progress-text">LV 150</text>
+        <text class="progress-text">1500/3000</text>
+        <view class="progress-fill"></view>
+      </view>
+      <view class="tasks">
+        <text class="tasks-text">20</text>
+      </view>
+      <view class="achievements">
+        <text class="achievements-text">15</text>
+      </view>
     </view>
     <view class="weekbar"></view>
     <view class="habits">
-      <view class="habit-box">
-        <view class="check-container">
-          <view class="check-box"></view>
-        </view>
-        <view class="habit-title"></view>
-      </view>
-      <view class="habit-box"></view>
-      <view class="habit-box"></view>
-      <view class="habit-box"></view>
+      <Habitbox title="Corrida com cachorro" xp="100" />
+      <Habitbox title="Corrida com cachorro" xp="100" />
     </view>
+    <ActionButton
+      buttonColor="rgba(56,102,65, 1)"
+      :size="88"
+      class="botao"
+      :onPress="goToCadastrar"
+    ></ActionButton>
+    <!-- <touchable-opacity class="botaoCadastro" :on-press="goToCadastrar">      
+      <view class="botaoVisual"></view>
+    </touchable-opacity>-->
+    <text>asaasdass</text>
   </view>
 </template>
 
 <script>
+import Habitbox from "../components/Habitbox";
+import ActionButton from "react-native-action-button";
+
 export default {
+  components: {
+    Habitbox,
+    ActionButton,
+  },
+  data: function () {
+    return {};
+  },
   props: {
     navigation: {
       type: Object,
     },
   },
   methods: {
-    goToAmigos() {
-      this.navigation.navigate("amigos");
+    goToCadastrar() {
+      this.navigation.navigate("cadastroHabito");
+    },
+    onPressButton: function () {
+      alert("Clicked Image");
     },
   },
 };
@@ -39,6 +63,7 @@ export default {
 <style scoped>
 .container {
   display: flex;
+  height: 100%;
 }
 
 .header {
@@ -62,16 +87,40 @@ export default {
   width: 187px;
   background-color: rgba(255, 255, 255, 0.8);
   border-radius: 4px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.progress-text {
+}
+
+.progress-fill {
+  position: absolute;
+  left: 0px;
+  z-index: -1;
+  width: 50%;
+  height: 32px;
+  border-bottom-left-radius: 4px;
+  border-top-left-radius: 4px;
+  background-color: #a7c957;
 }
 .tasks {
   height: 32px;
   width: 50px;
-  background-color: red;
+  align-items: center;
+  justify-content: center;
+}
+.tasks-text {
+  color: white;
 }
 .achievements {
   height: 32px;
   width: 50px;
-  background-color: red;
+  align-items: center;
+  justify-content: center;
+}
+.achievements-text {
+  color: white;
 }
 
 .weekbar {
@@ -96,6 +145,7 @@ export default {
   height: 82px;
   background-color: #f0f0f0;
   border-radius: 16px;
+  flex-direction: row;
 }
 
 .check-container {
@@ -114,5 +164,22 @@ export default {
   border-width: 2px;
   border-color: white;
   border-radius: 6px;
+}
+
+.botaoCadastro {
+  position: absolute;
+  right: 20;
+  top: 0;
+}
+
+.botaoVisual {
+  background-color: #386641;
+  width: 88px;
+  height: 88px;
+  border-radius: 44px;
+}
+.botao {
+  position: absolute;
+  bottom: 0px;
 }
 </style>

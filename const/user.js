@@ -6,12 +6,16 @@ export const user = [
       {
         titulo: 'Corrida com cachorro',
         xp: 100,
-        diasCompletados: [],
-        diasSetados: [0, 1, 2, 3, 4, 5, 6], //usa o retorno do método getDay() do objeto Date();
-        notificar: true,
-        notificarHora: 
+        dias: [
+          { //baseado em objetos tipo Date
+            diaSetado: 1, //getDay()     
+            HoraSetada: 23, //getHour()
+            MinutoSetado: 59, //getMinute()
+            notificar: true,
+            completado: false,
+          },
+        ],
       },
     ]
-
   }
 ]

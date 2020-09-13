@@ -11,6 +11,7 @@ import {
 } from "vue-native-router";
 
 import pgInicio from "./pages/inicio.vue";
+import pgCadastroHabito from "./pages/cadastroHabito.vue";
 import pgColecao from "./pages/colecao.vue";
 import pgAmigos from "./pages/amigos.vue";
 import pgExpedicao from "./pages/expedicao.vue";
@@ -100,6 +101,9 @@ const BottomTabNavigator = createBottomTabNavigator(
 const StackNavigator = createStackNavigator(
   {
     AndroidTabs: BottomTabNavigator,
+    cadastroHabito: {
+      screen: pgCadastroHabito,
+    },
   },
   {
     initialRouteName: "AndroidTabs",

@@ -155,7 +155,7 @@ export default {
         if (usuarioParsed) {
           this.user = usuarioParsed;
           console.log(" ");
-          console.log("RECEBIDO USUARIO: " + usuarioParsed);
+          console.log("RECEBIDO USUARIO: " + JSON.stringify((this.user)));
           console.log(" ");
           console.log("Usuario: " + this.user[0].nome);
           console.log(" ");
@@ -287,7 +287,8 @@ export default {
       this.minutoTemp = "";
 
       this.salvarUsuario = JSON.stringify(this.user);
-    /*  console.log("------------Inicio Atualizar Usuario-------------");
+    
+      console.log("------------Inicio Atualizar Usuario-------------");
       
       this.salvarUsuario = JSON.stringify(this.user);
 
@@ -307,11 +308,11 @@ export default {
         console.log(" ");
         console.log(" ");
       })
-      console.log("------------Fim Atualizar Usuario-------------");*/
+      console.log("------------Fim Atualizar Usuario-------------");
       
 
 
-      console.log("------------Inicio Reiniciar Usuario-------------");
+      /*console.log("------------Inicio Reiniciar Usuario-------------");
 
       AsyncStorage.clear().then(()=>{
         console.log(" ");
@@ -330,7 +331,7 @@ export default {
         console.log(" ");
       })
 
-      console.log("------------Fim Reiniciar Usuario-------------");
+      console.log("------------Fim Reiniciar Usuario-------------");*/
 
       this.user = constUser;
       this.habitos=constHabitos;

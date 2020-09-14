@@ -8,29 +8,34 @@
     <text :style="{fontSize: 18, marginTop: 30}">Dias de prática</text>
     <text :style="{fontSize: 12}">Alterar os dias irá zerar sua sequência atual nesse hábito.</text>
 
-    <view class="botao-adicionar-habito">
-      <touchable-opacity :on-press="modalDia">
-        <text :style="{fontSize: 24, textAlign: 'center', textAlignVertical: 'center'}">+</text>
-      </touchable-opacity>
-    </view>
+    <touchable-opacity class="botao-adicionar-habito" :on-press="modalDia">
+      <text :style="{fontSize: 24, color: 'white'}">+</text>
+    </touchable-opacity>
+
     <!-- <text>{{habitos}}</text>
     <text>{{rotinaSemanal}}</text>-->
 
     <!-- <text>modal dia visivel: {{modalDiaVisible}}</text> -->
     <!-- <text>modal hora visivel: {{modalHoraVisible}}</text> -->
     <!-- <text>{{habitos[0].rotinaSemanal}}</text> -->
-    <view v-if="habitos.length >= 0">
-      <view v-for="(habit, key) in rotinaSemanal" :key="key">
-        <HabitScreenBox
-          :dia="habit.diaSetado"
-          :hora="habit.horaSetada"
-          :minuto="habit.minutoSetado"
-        />
-      </view>
+    <view class="scroll-area">
+      <ScrollView :fadingEdgeLength="0" :showsVerticalScrollIndicator="false">
+        <view class="scroll-box">
+          <view v-if="habitos.length > 0">
+            <view v-for="(habit, key) in rotinaSemanal" :key="key">
+              <HabitScreenBox
+                :dia="habit.diaSetado"
+                :hora="habit.horaSetada"
+                :minuto="habit.minutoSetado"
+              />
+            </view>
+          </view>
+        </view>
+      </ScrollView>
     </view>
 
-    <touchable-opacity class="adicionarDia" :on-press="() => definirHabito()">
-      <text>adicionar</text>
+    <touchable-opacity class="confirmar-habito" :on-press="() => definirHabito()">
+      <text class="confirmar-estilo">Confirmar</text>
     </touchable-opacity>
 
     <view class="centered-view">
@@ -66,23 +71,27 @@
       <modal animationType="slide" :transparent="true" :visible="modalHoraVisible">
         <view class="centered-view3">
           <view class="modal-view">
-            <text :style="{fontSize: 24}">Horário</text>
-            <text-input
-              keyboardType="numeric"
-              maxlength="2"
-              :style="{height: 40, padding:10, width: '100%', borderColor: '#6A994E', borderWidth: 2, borderRadius: 8}"
-              v-model="horaTemp"
-            />
-            <text-input
-              keyboardType="numeric"
-              maxlength="2"
-              :style="{height: 40, padding:10, width: '100%', borderColor: '#6A994E', borderWidth: 2, borderRadius: 8}"
-              v-model="minutoTemp"
-            />
+            <text :style="{fontSize: 22}">Horário</text>
+            <view class="box-horario">
+              <text-input
+                keyboardType="numeric"
+                :maxLength="2"
+                :style="{height: 60, width: '30%', borderColor: '#6A994E', borderWidth: 1, borderRadius: 8, textAlign: 'center', fontWeight: 'bold', fontSize: 30}"
+                v-model="horaTemp"
+              />
+              <text :style="{fontSize: 30, fontWeight: 'bold'}">:</text>
+              <text-input
+                keyboardType="numeric"
+                :maxLength="2"
+                :style="{height: 60, width: '30%', borderColor: '#6A994E', borderWidth: 1, borderRadius: 8, textAlign: 'center', fontWeight: 'bold', fontSize: 30}"
+                v-model="minutoTemp"
+              />
+            </view>
+            <!-- <text>{{horaTemp}}</text> -->
+            <touchable-opacity class="adicionarRotina" :on-press="() => definirHora()">
+              <text :style="{fontSize: 16, color: 'white'}">Pronto</text>
+            </touchable-opacity>
           </view>
-          <touchable-opacity class="adicionarRotina" :on-press="() => definirHora()">
-            <text>Adicionar</text>
-          </touchable-opacity>
         </view>
       </modal>
     </view>
@@ -149,6 +158,26 @@ export default {
     this.habitos = constHabitos;
     this.habitos = []; //inicializar zerado na pagina
   },
+  watch: {
+    horaTemp: function () {
+      // this.horaTemp = parseInt(this.horaTemp);
+      if (this.horaTemp > 23) {
+        this.horaTemp = 23;
+      }
+      if (this.horaTemp < 0) {
+        this.horaTemp = 0;
+      }
+    },
+    minutoTemp: function () {
+      // this.horaTemp = parseInt(this.horaTemp);
+      if (this.minutoTemp > 59) {
+        this.minutoTemp = 59;
+      }
+      if (this.minutoTemp < 0) {
+        this.minutoTemp = 0;
+      }
+    },
+  },
   methods: {
     modalDia() {
       this.modalDiaVisible = true;
@@ -204,6 +233,33 @@ export default {
   border-radius: 8px;
   background-color: #386641;
   color: white;
+  align-items: center;
+  justify-content: center;
+}
+
+.scroll-area {
+  padding-left: 15px;
+  padding-right: 15px;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 345px;
+}
+
+.confirmar-habito {
+  position: absolute;
+  right: 20px;
+  bottom: 30px;
+  width: 100%;
+  height: 80px;
+  align-items: center;
+  justify-content: center;
+  background-color: #386641;
+  border-radius: 8px;
+}
+.confirmar-estilo {
+  color: white;
+  font-size: 22px;
 }
 
 .botao-visual {
@@ -236,8 +292,13 @@ export default {
 }
 
 .adicionarRotina {
-  position: absolute;
-  bottom: 20px;
+  margin-top: 20px;
+  width: 100%;
+  height: 30px;
+  align-items: center;
+  justify-content: center;
+  background-color: #386641;
+  border-radius: 8px;
 }
 
 .modal-view {
@@ -246,6 +307,14 @@ export default {
   background-color: white;
   border-radius: 20;
   padding: 35;
+  align-items: center;
+}
+
+.box-horario {
+  margin-top: 20px;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-around;
   align-items: center;
 }
 </style>

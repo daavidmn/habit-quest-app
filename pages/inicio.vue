@@ -13,11 +13,11 @@
         <view class="progress-fill"></view>
       </view>
       <view class="tasks">
-        <text class="tasks-text">
-          <!-- <StarOutlined />20 -->
-        </text>
+        <MaterialCommunityIcons name="calendar-check" :size="24" color="white" />
+        <text class="tasks-text">20</text>
       </view>
       <view class="achievements">
+        <MaterialCommunityIcons name="crown" :size="24" color="white" />
         <text class="achievements-text">15</text>
       </view>
     </view>
@@ -49,17 +49,17 @@
 </template>
 
 <script>
-import { StarOutlined, StarFilled, StarTwoTone } from "@ant-design/icons";
 import Habitviewer from "../components/Habitviewer";
 import ActionButton from "react-native-action-button";
 import { constUser } from "../consts/user";
 import { AsyncStorage } from "react-native";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 export default {
   components: {
     Habitviewer,
     ActionButton,
-    StarOutlined,
+    MaterialCommunityIcons,
   },
   data() {
     return {
@@ -69,18 +69,18 @@ export default {
   },
   created() {
     // EXEMPLO DE ASYNC STORAGE
-    AsyncStorage.getItem("email").then((val) => {
-      if (val) {
-        this.loaded = true;
-        this.navigation.navigate("amigos");
-        store.dispatch("SET_USER", { userObj: { email: val } });
-      } else {
-        //ELE TÁ VINDO PRA O ELSE
-        this.loaded = true;
-        this.navigation.navigate("config");
-      }
-    });
-    console.log(this.loaded);
+    // AsyncStorage.getItem("email").then((val) => {
+    //   if (val) {
+    //     this.loaded = true;
+    //     this.navigation.navigate("amigos");
+    //     store.dispatch("SET_USER", { userObj: { email: val } });
+    //   } else {
+    //     //ELE TÁ VINDO PRA O ELSE
+    //     this.loaded = true;
+    //     this.navigation.navigate("config");
+    //   }
+    // });
+    // console.log(this.loaded);
 
     this.user = constUser;
   },
@@ -151,6 +151,7 @@ export default {
   width: 50px;
   align-items: center;
   justify-content: center;
+  flex-direction: row;
 }
 .tasks-text {
   color: white;
@@ -160,6 +161,7 @@ export default {
   width: 50px;
   align-items: center;
   justify-content: center;
+  flex-direction: row;
 }
 .achievements-text {
   color: white;

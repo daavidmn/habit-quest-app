@@ -13,39 +13,50 @@
         <text :style="{fontSize: 24, textAlign: 'center', textAlignVertical: 'center'}">+</text>
       </touchable-opacity>
     </view>
+    <text>{{habitos}}</text>
+    <text>{{rotinaSemanal}}</text>
 
-    <text>modal dia visivel: {{modalDiaVisible}}</text>
-    <text>modal hora visivel: {{modalHoraVisible}}</text>
+    <!-- <text>modal dia visivel: {{modalDiaVisible}}</text> -->
+    <!-- <text>modal hora visivel: {{modalHoraVisible}}</text> -->
     <!-- <text>{{habitos[0].rotinaSemanal}}</text> -->
-
-    <view v-for="(habit, key) in habitos[0].rotinaSemanal" :key="key">
-      <HabitScreenBox :dia="habit.diaSetado" :hora="habit.horaSetada" :minuto="habit.minutoSetado" />
+    <view v-if="habitos.length >= 0">
+      <view v-for="(habit, key) in rotinaSemanal" :key="key">
+        <HabitScreenBox
+          :dia="habit.diaSetado"
+          :hora="habit.horaSetada"
+          :minuto="habit.minutoSetado"
+        />
+      </view>
     </view>
+
+    <touchable-opacity class="adicionarDia" :on-press="() => definirHabito()">
+      <text>adicionar</text>
+    </touchable-opacity>
 
     <view class="centered-view">
       <modal animationType="slide" :transparent="true" :visible="modalDiaVisible">
         <view class="centered-view2">
           <view class="modal-view">
             <text :style="{fontSize: 24}">Dia da Semana</text>
-            <touchable-opacity class="adicionar" :on-press="() => definirDia(0)">
+            <touchable-opacity class="adicionarDia" :on-press="() => definirDia(0)">
               <text>Domingo</text>
             </touchable-opacity>
-            <touchable-opacity class="adicionar" :on-press="() => definirDia(1)">
+            <touchable-opacity class="adicionarDia" :on-press="() => definirDia(1)">
               <text>Segunda-feira</text>
             </touchable-opacity>
-            <touchable-opacity class="adicionar" :on-press="() => definirDia(2)">
+            <touchable-opacity class="adicionarDia" :on-press="() => definirDia(2)">
               <text>Terça-feira</text>
             </touchable-opacity>
-            <touchable-opacity class="adicionar" :on-press="() => definirDia(3)">
+            <touchable-opacity class="adicionarDia" :on-press="() => definirDia(3)">
               <text>Quarta-feira</text>
             </touchable-opacity>
-            <touchable-opacity class="adicionar" :on-press="() => definirDia(4)">
+            <touchable-opacity class="adicionarDia" :on-press="() => definirDia(4)">
               <text>Quinta-feira</text>
             </touchable-opacity>
-            <touchable-opacity class="adicionar" :on-press="() => definirDia(5)">
+            <touchable-opacity class="adicionarDia" :on-press="() => definirDia(5)">
               <text>Sexta-feira</text>
             </touchable-opacity>
-            <touchable-opacity class="adicionar" :on-press="() => definirDia(6)">
+            <touchable-opacity class="adicionarDia" :on-press="() => definirDia(6)">
               <text>Sábado</text>
             </touchable-opacity>
           </view>
@@ -53,7 +64,7 @@
       </modal>
 
       <modal animationType="slide" :transparent="true" :visible="modalHoraVisible">
-        <view class="centered-view2">
+        <view class="centered-view3">
           <view class="modal-view">
             <text :style="{fontSize: 24}">Horário</text>
             <text-input
@@ -68,10 +79,10 @@
               :style="{height: 40, padding:10, width: '100%', borderColor: '#6A994E', borderWidth: 2, borderRadius: 8}"
               v-model="minutoTemp"
             />
-            <touchable-opacity class="adicionar" :on-press="() => definirHora()">
-              <text>Sábado</text>
-            </touchable-opacity>
           </view>
+          <touchable-opacity class="adicionarRotina" :on-press="() => definirHora()">
+            <text>Adicionar</text>
+          </touchable-opacity>
         </view>
       </modal>
     </view>
@@ -79,15 +90,24 @@
 </template>
 
 <script>
+import { constUser } from "../consts/user";
 import { constHabitos } from "../consts/habitos";
+import { AsyncStorage } from "react-native"
 import HabitScreenBox from "../components/HabitScreenBox";
 export default {
   components: {
     HabitScreenBox,
   },
+  props: {
+    navigation: {
+      type: Object,
+    },
+  },
   data() {
     return {
+      user: "",
       habitos: "",
+      rotinaSemanal: [],
       nomeHabito: "",
       modalDiaVisible: false,
       modalHoraVisible: false,
@@ -97,7 +117,26 @@ export default {
     };
   },
   created() {
-    this.habitos = constHabitos;
+    this.user = constUser;
+    AsyncStorage.setItem('Habitos', JSON.stringify(constHabitos)).then(() =>{
+      console.log("ENVIADO:"+JSON.stringify((constHabitos)));
+    } )
+    .catch( ()=> { console.log('There was an error saving the product')})
+
+    AsyncStorage.getItem('Habitos').then((habitosSalvos) =>{
+      const habitosParsed = JSON.parse(habitosSalvos);
+      if (habitosParsed){
+        this.habitos = habitosParsed;
+        console.log(" ");
+        console.log("RECEBIDO: "+habitosSalvos);
+        console.log(" ");
+        console.log("Habitos: "+habitosParsed);
+        console.log(" ");
+      } else{
+        this.habitos = [];
+        console.log("Nada Recebido");
+      }
+    }).catch(()=>{console.log("Deu errado no Recebimento");})
   },
   methods: {
     modalDia() {
@@ -110,16 +149,29 @@ export default {
     },
     definirHora() {
       this.modalHoraVisible = false;
-      this.habitos[0].rotinaSemanal.push({
+      this.rotinaSemanal.push({
         diaSetado: this.diaTemp,
         horaSetada: this.horaTemp,
         minutoSetado: this.minutoTemp,
         notificar: false,
         completado: false,
       });
+    },
+    definirHabito() {
+      this.user[0].habitos.push({
+        titulo: this.nomeHabito,
+        xp: 100,
+        rotinaSemanal: [],
+      });
+      let tam = this.user[0].habitos.lenght;
+      console.log(this.user[0].habitos);
+
+      // this.user[0].habitos[tam - 1].rotinaSemanal.push(this.rotinaSemanal); //TA BUGANDO
       this.diaTemp = "";
       this.horaTemp = "";
       this.minutoTemp = "";
+
+      this.navigation.navigate("AndroidTabs");
     },
   },
 };
@@ -162,6 +214,19 @@ export default {
   justify-content: center;
   align-items: center;
   margin-top: 22;
+}
+
+.centered-view3 {
+  background-color: rgba(0, 0, 0, 0.8);
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  margin-top: 22;
+}
+
+.adicionarRotina {
+  position: absolute;
+  bottom: 20px;
 }
 
 .modal-view {

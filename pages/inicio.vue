@@ -1,32 +1,44 @@
 <template>
   <view class="container">
     <view class="header">
-      <view class="avatar-mini"></view>
+      <view class="avatar-mini">
+        <image
+          :style="{width: 30, height: 30}"
+          :source="require('../assets/img/avatar/020-superhero-19.png')"
+        />
+      </view>
       <view class="progress-bar">
         <text class="progress-text">LV 150</text>
         <text class="progress-text">1500/3000</text>
         <view class="progress-fill"></view>
       </view>
       <view class="tasks">
-        <text class="tasks-text">20</text>
+        <text class="tasks-text">
+          <!-- <StarOutlined />20 -->
+        </text>
       </view>
       <view class="achievements">
         <text class="achievements-text">15</text>
       </view>
     </view>
+
     <!-- <text :style="{fontSize: 10}">{{user[0].habitos[1]}}</text> -->
     <!-- <text :style="{fontSize: 10}">{{console.log(user[0].habitos)}}</text> -->
     <view class="weekbar"></view>
     <view class="habits">
-      <view v-for="(habito, key) in (user[0].habitos)" :key="key">
-        <view v-for="(rotina, chave) in habito.rotinaSemanal" :key="chave">
-          <Habitviewer :title="habito.titulo" :xp="habito.xp" :hora="rotina.horaSetada" />
+      <ScrollView :fadingEdgeLength="0" :showsVerticalScrollIndicator="false">
+        <view class="scroll-box">
+          <view v-for="(habito, key) in (user[0].habitos)" :key="key">
+            <view v-for="(rotina, chave) in habito.rotinaSemanal" :key="chave">
+              <Habitviewer :title="habito.titulo" :xp="habito.xp" :hora="rotina.horaSetada" />
+            </view>
+          </view>
         </view>
-      </view>
+      </ScrollView>
     </view>
     <ActionButton
       buttonColor="rgba(56,102,65, 1)"
-      :size="88"
+      :size="60"
       class="botao"
       :onPress="goToCadastrar"
     ></ActionButton>
@@ -37,21 +49,39 @@
 </template>
 
 <script>
+import { StarOutlined, StarFilled, StarTwoTone } from "@ant-design/icons";
 import Habitviewer from "../components/Habitviewer";
 import ActionButton from "react-native-action-button";
 import { constUser } from "../consts/user";
+import { AsyncStorage } from "react-native";
 
 export default {
   components: {
     Habitviewer,
     ActionButton,
+    StarOutlined,
   },
   data() {
     return {
+      loaded: false,
       user: "asasdaa",
     };
   },
   created() {
+    // EXEMPLO DE ASYNC STORAGE
+    AsyncStorage.getItem("email").then((val) => {
+      if (val) {
+        this.loaded = true;
+        this.navigation.navigate("amigos");
+        store.dispatch("SET_USER", { userObj: { email: val } });
+      } else {
+        //ELE TÁ VINDO PRA O ELSE
+        this.loaded = true;
+        this.navigation.navigate("config");
+      }
+    });
+    console.log(this.loaded);
+
     this.user = constUser;
   },
   props: {
@@ -91,6 +121,8 @@ export default {
   background-color: #f2e8cf;
   border-color: rgba(0, 0, 0, 0.1);
   border-radius: 4px;
+  align-items: center;
+  justify-content: center;
 }
 .progress-bar {
   height: 32px;
@@ -144,9 +176,12 @@ export default {
   padding-right: 15px;
   flex-direction: column;
   align-items: center;
-  margin-top: 20px;
   width: 100%;
-  height: 100%;
+  height: 430px;
+}
+
+.scroll-box {
+  padding-top: 20;
 }
 
 .habit-box {

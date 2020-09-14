@@ -1,7 +1,7 @@
 <template>
   <view class="app">
     <text>Pagina config</text>
-    <button title="Go to home screen" @press="goToHomeScreen"></button>
+    <button title="ir para o inicio" :on-press="goToPage" :navigation="this.props.navigation" />
   </view>
 </template>
 
@@ -13,8 +13,8 @@ export default {
     },
   },
   methods: {
-    goToHomeScreen() {
-      this.navigation.navigate("Expedicao");
+    goToPage() {
+      this.navigation.navigate("inicio");
     },
   },
 };
@@ -22,7 +22,6 @@ export default {
 
 <style>
 .app {
-  background-color: grey;
   width: 100%;
   height: 100%;
 }

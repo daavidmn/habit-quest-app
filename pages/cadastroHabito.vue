@@ -1,19 +1,26 @@
 <template>
   <view class="container">
-    <text>Nome do hábito</text>
+    <text :style="{fontSize: 18}">Nome do hábito</text>
     <text-input
-      :style="{height: 40, width: 100, borderColor: 'gray', borderWidth: 1}"
+      :style="{height: 40, padding:10, width: '100%', borderColor: '#6A994E', borderWidth: 2, borderRadius: 8}"
       v-model="nomeHabito"
     />
-    <text>Dias de prática</text>
-    <text>Alterar os dias irá zerar sua sequência atual nesse hábito</text>
-    <touchable-opacity class="adicionar" :on-press="modalDia">
-      <view class="botao-visual">
-        <text :style="{fontSize: 24}">+</text>
-      </view>
-    </touchable-opacity>
+    <text :style="{fontSize: 18, marginTop: 30}">Dias de prática</text>
+    <text :style="{fontSize: 12}">Alterar os dias irá zerar sua sequência atual nesse hábito.</text>
+
+    <view class="botao-adicionar-habito">
+      <touchable-opacity :on-press="modalDia">
+        <text :style="{fontSize: 24, textAlign: 'center', textAlignVertical: 'center'}">+</text>
+      </touchable-opacity>
+    </view>
+
     <text>modal dia visivel: {{modalDiaVisible}}</text>
     <text>modal hora visivel: {{modalHoraVisible}}</text>
+    <!-- <text>{{habitos[0].rotinaSemanal}}</text> -->
+
+    <view v-for="(habit, key) in habitos[0].rotinaSemanal" :key="key">
+      <HabitScreenBox :dia="habit.diaSetado" :hora="habit.horaSetada" :minuto="habit.minutoSetado" />
+    </view>
 
     <view class="centered-view">
       <modal animationType="slide" :transparent="true" :visible="modalDiaVisible">
@@ -49,7 +56,19 @@
         <view class="centered-view2">
           <view class="modal-view">
             <text :style="{fontSize: 24}">Horário</text>
-            <touchable-opacity class="adicionar" :on-press="() => definirHora(23)">
+            <text-input
+              keyboardType="numeric"
+              maxlength="2"
+              :style="{height: 40, padding:10, width: '100%', borderColor: '#6A994E', borderWidth: 2, borderRadius: 8}"
+              v-model="horaTemp"
+            />
+            <text-input
+              keyboardType="numeric"
+              maxlength="2"
+              :style="{height: 40, padding:10, width: '100%', borderColor: '#6A994E', borderWidth: 2, borderRadius: 8}"
+              v-model="minutoTemp"
+            />
+            <touchable-opacity class="adicionar" :on-press="() => definirHora()">
               <text>Sábado</text>
             </touchable-opacity>
           </view>
@@ -60,13 +79,25 @@
 </template>
 
 <script>
+import { constHabitos } from "../consts/habitos";
+import HabitScreenBox from "../components/HabitScreenBox";
 export default {
-  data: function () {
+  components: {
+    HabitScreenBox,
+  },
+  data() {
     return {
+      habitos: "",
       nomeHabito: "",
       modalDiaVisible: false,
       modalHoraVisible: false,
+      diaTemp: "",
+      horaTemp: "",
+      minutoTemp: "",
     };
+  },
+  created() {
+    this.habitos = constHabitos;
   },
   methods: {
     modalDia() {
@@ -75,9 +106,20 @@ export default {
     definirDia(dia) {
       this.modalDiaVisible = false;
       this.modalHoraVisible = true;
+      this.diaTemp = dia;
     },
-    definirHora(hora) {
+    definirHora() {
       this.modalHoraVisible = false;
+      this.habitos[0].rotinaSemanal.push({
+        diaSetado: this.diaTemp,
+        horaSetada: this.horaTemp,
+        minutoSetado: this.minutoTemp,
+        notificar: false,
+        completado: false,
+      });
+      this.diaTemp = "";
+      this.horaTemp = "";
+      this.minutoTemp = "";
     },
   },
 };
@@ -85,9 +127,22 @@ export default {
 
 <style scoped>
 .container {
+  margin-top: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
   width: 100%;
   height: 100%;
 }
+
+.botao-adicionar-habito {
+  margin-top: 20px;
+  width: 100%;
+  height: 50px;
+  border-radius: 8px;
+  background-color: #386641;
+  color: white;
+}
+
 .botao-visual {
   width: 50px;
   height: 50px;

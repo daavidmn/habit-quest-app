@@ -1,12 +1,12 @@
-export const habitos = [
+export const constHabitos = [
   {
     titulo: 'Corrida com cachorro',
     xp: 100,
-    dias: [
+    rotinaSemanal: [
       { //baseado em objetos tipo Date
         diaSetado: 1, //getDay()     
-        HoraSetada: 23, //getHour()
-        MinutoSetado: 59, //getMinute()
+        horaSetada: 23, //getHour()
+        minutoSetado: 59, //getMinute()
         notificar: true,
         completado: false,
       },

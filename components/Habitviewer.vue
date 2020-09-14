@@ -31,7 +31,7 @@ export default {
 <style scoped>
 .habit-box {
   margin-bottom: 10px;
-  width: 100%;
+  width: 350px;
   height: 82px;
   background-color: #f0f0f0;
   border-radius: 16px;

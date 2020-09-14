@@ -16,8 +16,9 @@
     </view>
     <view class="weekbar"></view>
     <view class="habits">
-      <Habitbox title="Corrida com cachorro" xp="100" />
-      <Habitbox title="Corrida com cachorro" xp="100" />
+      <view v-for="(habito, key) in user[0].habitos" :key="key">
+        <Habitviewer :title="habito.titulo" :xp="habito.xp" />
+      </view>
     </view>
     <ActionButton
       buttonColor="rgba(56,102,65, 1)"
@@ -33,16 +34,22 @@
 </template>
 
 <script>
-import Habitbox from "../components/Habitbox";
+import Habitviewer from "../components/Habitviewer";
 import ActionButton from "react-native-action-button";
+import { constUser } from "../consts/user";
 
 export default {
   components: {
-    Habitbox,
+    Habitviewer,
     ActionButton,
   },
-  data: function () {
-    return {};
+  data() {
+    return {
+      user: "asasdaa",
+    };
+  },
+  created() {
+    this.user = constUser;
   },
   props: {
     navigation: {

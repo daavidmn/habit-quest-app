@@ -43,27 +43,35 @@
         <view class="centered-view2">
           <view class="modal-view">
             <text :style="{fontSize: 24}">Dia da Semana</text>
+            <view class="line" />
             <touchable-opacity class="adicionarDia" :on-press="() => definirDia(0)">
               <text>Domingo</text>
             </touchable-opacity>
+            <view class="line" />
             <touchable-opacity class="adicionarDia" :on-press="() => definirDia(1)">
               <text>Segunda-feira</text>
             </touchable-opacity>
+            <view class="line" />
             <touchable-opacity class="adicionarDia" :on-press="() => definirDia(2)">
               <text>Terça-feira</text>
             </touchable-opacity>
+            <view class="line" />
             <touchable-opacity class="adicionarDia" :on-press="() => definirDia(3)">
               <text>Quarta-feira</text>
             </touchable-opacity>
+            <view class="line" />
             <touchable-opacity class="adicionarDia" :on-press="() => definirDia(4)">
               <text>Quinta-feira</text>
             </touchable-opacity>
+            <view class="line" />
             <touchable-opacity class="adicionarDia" :on-press="() => definirDia(5)">
               <text>Sexta-feira</text>
             </touchable-opacity>
+            <view class="line" />
             <touchable-opacity class="adicionarDia" :on-press="() => definirDia(6)">
               <text>Sábado</text>
             </touchable-opacity>
+            <view class="line" />
           </view>
         </view>
       </modal>
@@ -123,12 +131,13 @@ export default {
       diaTemp: "",
       horaTemp: "",
       minutoTemp: "",
-      usuarioId:"",
-      habitoId:"",
-      salvarUsuario:"",
+      usuarioId: "",
+      habitoId: "",
+      salvarUsuario: "",
     };
   },
   created() {
+
       console.log("------------Inicializando Informações-------------");
       console.log(" ");
       console.log(" ");
@@ -139,13 +148,14 @@ export default {
       this.rotinaSemanal = this.habitos[this.habitoId].rotinaSemanal;
       this.nomeHabito = this.habitos[0].titulo;
 
+
     AsyncStorage.getItem("Usuario")
       .then((usuarioSalvo) => {
         const usuarioParsed = JSON.parse(usuarioSalvo);
         if (usuarioParsed) {
           this.user = usuarioParsed;
           console.log(" ");
-          console.log("RECEBIDO USUARIO: "+usuarioParsed);
+          console.log("RECEBIDO USUARIO: " + usuarioParsed);
           console.log(" ");
           console.log("Usuario: " + this.user[0].nome);
           console.log(" ");
@@ -153,11 +163,12 @@ export default {
           console.log(" ");
           console.log("Rotina Semanal: " + JSON.stringify(this.rotinaSemanal));
           console.log(" ");
-
         } else {
           console.log(" ");
+
           console.log("USUARIO NÃO RECEBIDO");
           console.log(" ");
+
           this.user = constUser;
           console.log("USARIO PADRÃO CARREGADO: "+JSON.stringify(constUser));
           console.log(" ");
@@ -175,14 +186,8 @@ export default {
         console.log(" ");
       });
 
-
-
-
     //this.habitos = constHabitos;
-   // this.habitos = []; //inicializar zerado na pagina
-
-
-
+    // this.habitos = []; //inicializar zerado na pagina
   },
   watch: {
     horaTemp: function () {
@@ -219,8 +224,10 @@ export default {
       console.log("------------Inicio Teste Rotina Semanal-------------");
       console.log(" ");
       console.log(" ");
+
       console.log("Antiga Rotina Semanal do habito: "+this.nomeHabito);
       console.log(JSON.stringify(this.habitos[this.habitoId].rotinaSemanal));
+
       console.log(" ");
       console.log(" ");
 
@@ -231,10 +238,12 @@ export default {
         notificar: false,
         completado: false,
       });
+
       
 
       console.log("Nova Rotina Semanal do habito: "+this.nomeHabito);
       console.log(JSON.stringify(this.rotinaSemanal));
+
       console.log(" ");
       console.log(" ");
       console.log("------------Fim Teste Rotina Semanal-------------");
@@ -247,7 +256,9 @@ export default {
       console.log(" ");
       console.log(" ");
 
+
       console.log("INFORMAÇÕES DO USUARIO: "+JSON.stringify(this.user[0]));
+
 
       console.log(" ");
       console.log(" ");
@@ -280,6 +291,7 @@ export default {
       
       this.salvarUsuario = JSON.stringify(this.user);
 
+
       AsyncStorage.setItem("Usuario",this.salvarUsuario).then(()=>{
         console.log(" ");
         console.log(" ");
@@ -298,7 +310,9 @@ export default {
       console.log("------------Fim Atualizar Usuario-------------");*/
       
 
+
       console.log("------------Inicio Reiniciar Usuario-------------");
+
       AsyncStorage.clear().then(()=>{
         console.log(" ");
         console.log(" ");
@@ -315,6 +329,7 @@ export default {
         console.log(" ");
         console.log(" ");
       })
+
       console.log("------------Fim Reiniciar Usuario-------------");
 
       this.user = constUser;
@@ -418,6 +433,14 @@ export default {
   border-radius: 20;
   padding: 35;
   align-items: center;
+}
+
+.line {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 100%;
+  border-bottom-color: rgba(0, 0, 0, 0.1);
+  border-bottom-width: 1;
 }
 
 .box-horario {

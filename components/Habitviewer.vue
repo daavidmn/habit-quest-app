@@ -17,13 +17,17 @@
       </view>
     </view>
     <view class="sequence">
-      <text>fogo</text>
+      <MaterialCommunityIcons name="fire" :size="40" color="#d3d3d3" />
     </view>
   </view>
 </template>
 
 <script>
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 export default {
+  components: {
+    MaterialCommunityIcons,
+  },
   props: ["title", "xp", "hora"],
 };
 </script>
@@ -57,8 +61,9 @@ export default {
 }
 
 .texts {
-  margin-left: 20px;
-  margin-right: 20px;
+  width: 60%;
+  padding-left: 20px;
+  padding-right: 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -73,6 +78,8 @@ export default {
 }
 
 .sequence {
+  width: 20%;
+  align-items: center;
   justify-content: center;
 }
 </style>

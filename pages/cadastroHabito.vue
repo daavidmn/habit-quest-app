@@ -133,7 +133,7 @@ export default {
       console.log(" ");
       console.log(" ");
 
-
+      this.user = "";
     this.habitoId = 0;
 
     AsyncStorage.getItem("Usuario")
@@ -145,7 +145,7 @@ export default {
           this.rotinaSemanal = this.habitos.rotinaSemanal;
 
           console.log(" ");
-          console.log("RECEBIDO USUARIO");
+          console.log("RECEBIDO USUARIO: "+usuarioParsed);
           console.log(" ");
           console.log("Usuario: " + this.user[0].nome);
           console.log(" ");
@@ -156,7 +156,7 @@ export default {
 
         } else {
           console.log(" ");
-          console.log("USUARIO NÃO RECEBIDO");
+          console.log("USUARIO NÃO RECEBIDO"+JSON.stringify(constUser));
           this.user = constUser;
           this.habitos = this.user[0].habitos[this.habitoId];
           this.rotinaSemanal = this.habitos.rotinaSemanal;
@@ -181,35 +181,6 @@ export default {
     //this.habitos = constHabitos;
    // this.habitos = []; //inicializar zerado na pagina
 
-    AsyncStorage.setItem("Habitos", JSON.stringify(constHabitos))
-      .then(() => {
-        console.log("ENVIADO:" + JSON.stringify(constHabitos));
-      })
-      .catch(() => {
-        console.log("There was an error saving the product");
-      });
-
-    AsyncStorage.getItem("Habitos")
-      .then((habitosSalvos) => {
-        const habitosParsed = JSON.parse(habitosSalvos);
-        if (habitosParsed) {
-          this.habitos = habitosParsed;
-          console.log(" ");
-          console.log("RECEBIDO: " + habitosSalvos);
-          console.log(" ");
-          console.log("Habitos: " + habitosParsed);
-          console.log(" ");
-        } else {
-          this.habitos = [];
-          console.log("Nada Recebido");
-        }
-      })
-      .catch(() => {
-        console.log("Deu errado no Recebimento");
-      });
-
-    this.habitos = constHabitos;
-    this.habitos = []; //inicializar zerado na pagina
 
 
   },
@@ -312,7 +283,7 @@ export default {
 
     },
     definirHabito() {
-      this.user[0].habitos.push({
+     /*this.user[0].habitos.push({
         titulo: this.nomeHabito,
         xp: 100,
         rotinaSemanal: [],
@@ -323,13 +294,13 @@ export default {
       // this.user[0].habitos[tam - 1].rotinaSemanal.push(this.rotinaSemanal); //TA BUGANDO
       this.diaTemp = "";
       this.horaTemp = "";
-      this.minutoTemp = "";
-
-     /* console.log("------------Inicio Reiniciar Usuario-------------");
-      AsyncStorage.clear().then(()=>{
+      this.minutoTemp = "";*/
+      this.user = constUser;
+      console.log("------------Inicio Reiniciar Usuario-------------");
+      AsyncStorage.removeItem("Usuario").then(()=>{
         console.log(" ");
         console.log(" ");
-        console.log("Usuario: "+this.salvarUsuario);
+        console.log("Usuario: "+JSON.stringify(this.user));
         console.log(" ");
         console.log(" ");
         console.log("Usuário Reiniciado");
@@ -337,11 +308,11 @@ export default {
       .catch(()=>{
         console.log(" ");
         console.log(" ");
-        console.log("Não foi possível atualizar o Usuario")
+        console.log("Não foi possível Reiniciar o Usuario")
         console.log(" ");
         console.log(" ");
       })
-      console.log("------------Fim Reiniciar Usuario-------------");*/
+      console.log("------------Fim Reiniciar Usuario-------------");
 
       this.navigation.navigate("AndroidTabs");
     },

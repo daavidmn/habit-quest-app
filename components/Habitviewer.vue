@@ -12,7 +12,7 @@
       </view>
       <view class="below-text">
         <view>
-          <text>seg ter qua qui sex</text>
+          <text>{{ hora }}:{{hora}}</text>
         </view>
       </view>
     </view>
@@ -24,7 +24,7 @@
 
 <script>
 export default {
-  props: ["title", "xp"],
+  props: ["title", "xp", "hora"],
 };
 </script>
 

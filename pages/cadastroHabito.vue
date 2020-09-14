@@ -118,6 +118,7 @@ export default {
   },
   created() {
     this.user = constUser;
+
     AsyncStorage.setItem('Habitos', JSON.stringify(constHabitos)).then(() =>{
       console.log("ENVIADO:"+JSON.stringify((constHabitos)));
     } )
@@ -137,6 +138,10 @@ export default {
         console.log("Nada Recebido");
       }
     }).catch(()=>{console.log("Deu errado no Recebimento");})
+
+    this.habitos = constHabitos;
+    this.habitos = []; //inicializar zerado na pagina
+
   },
   methods: {
     modalDia() {

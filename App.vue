@@ -18,6 +18,7 @@ import pgExpedicao from "./pages/expedicao.vue";
 import pgConfig from "./pages/config.vue";
 import React from "react";
 import { Ionicons } from "@expo/vector-icons";
+import { AsyncStorage } from "react-native";
 
 const BottomTabNavigator = createBottomTabNavigator(
   {

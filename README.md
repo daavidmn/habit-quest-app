@@ -1,10 +1,11 @@
 # projeto-integrado-2
 
 ## Preparando o ambiente
-Download:
-* [node.js](https://nodejs.org/pt-br/)
-* [GitHub](http://github.com)
-* [Android Studio](https://developer.android.com/studio)
+Downloads:
+* [Git](https://git-scm.com/downloads) - Para clonar o projeto
+* [Node.js](https://nodejs.org/en/download/) - Para instalar dependências
+* [Android Studio](https://developer.android.com/studio) - Emular um sistema android (opcional, pode-se usar um celular com o app Expo instalado)
+
 
 ## Clonar o projeto
 Utilizando o cmd / terminal:
@@ -19,12 +20,18 @@ Instale as dependências utilizando o gerenciador de pacotes do node:
 ```sh
 npm install
 ```
-Inicie o emulador android do Android Studio
-
+Instale o framework Expo para rodar o projeto:
+```sh
+npm install --global expo-cli
+```
 Inicie o servidor do projeto:
 ```sh
 npm start
 ```
-
-A interface visual do expo irá abrir, a partir de lá você pode selecionar para rodar o projeto no android que está sendo emulado.
-Entretando você também pode simplesmente apertar a tecla <kbd>a</kbd> no cmd / terminal.
+ou
+```sh
+expo start
+```
+Inicie o emulador android no Android Studio ou o app Expo no seu celular (Android ou IOS).
+A interface visual do expo irá abrir no navegador, a partir de lá você pode selecionar para rodar o projeto pela sua preferência .
+Entretando você também pode simplesmente apertar o atalho <kbd>a</kbd> no cmd / terminal para iniciar a aplicação no emulador Android.

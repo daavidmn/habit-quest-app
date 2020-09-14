@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "projeto-integrado-2",
-    "slug": "projeto-integrado-2",
+    "name": "Habit Quest",
+    "slug": "habit-quest",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

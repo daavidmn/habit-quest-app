@@ -18,7 +18,6 @@ import pgExpedicao from "./pages/expedicao.vue";
 import pgConfig from "./pages/config.vue";
 import React from "react";
 import { Ionicons } from "@expo/vector-icons";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const BottomTabNavigator = createBottomTabNavigator(
   {
@@ -115,7 +114,6 @@ const AppNavigator = createAppContainer(StackNavigator);
 
 export default {
   components: { AppNavigator },
-  MaterialCommunityIcons,
 };
 </script>
 

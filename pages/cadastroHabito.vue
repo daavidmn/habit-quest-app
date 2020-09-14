@@ -114,11 +114,17 @@ export default {
       diaTemp: "",
       horaTemp: "",
       minutoTemp: "",
+      usuarioId:"",
+      habitoId:"",
+      salvarUsuario:"",
     };
   },
   created() {
-    this.user = constUser;
+      console.log("------------Inicializando Informações-------------");
+      console.log(" ");
+      console.log(" ");
 
+<<<<<<< Updated upstream
     AsyncStorage.setItem('Habitos', JSON.stringify(constHabitos)).then(() =>{
       console.log("ENVIADO:"+JSON.stringify((constHabitos)));
     } )
@@ -142,6 +148,53 @@ export default {
     this.habitos = constHabitos;
     this.habitos = []; //inicializar zerado na pagina
 
+=======
+    this.habitoId = 0;
+
+    AsyncStorage.getItem("Usuario")
+      .then((usuarioSalvo) => {
+        const usuarioParsed = JSON.parse(usuarioSalvo);
+        if (usuarioParsed) {
+          this.user = usuarioParsed;
+          this.habitos = this.user[0].habitos[this.habitoId];
+          this.rotinaSemanal = this.habitos.rotinaSemanal;
+
+          console.log(" ");
+          console.log("RECEBIDO USUARIO: " + usuarioSalvo);
+          console.log(" ");
+          console.log("Usuario: " + this.user[0].nome);
+          console.log(" ");
+          console.log("Habito: " + this.habitos.titulo);
+          console.log(" ");
+          console.log("Rotina Semanal: " + JSON.stringify(this.rotinaSemanal));
+          console.log(" ");
+
+        } else {
+          console.log(" ");
+          console.log("USUARIO NÃO RECEBIDO");
+          this.user = constUser;
+          this.habitos = this.user[0].habitos[this.habitoId];
+          this.rotinaSemanal = this.habitos.rotinaSemanal;
+          console.log(" ");
+          console.log("Usuario: " + this.user[0].nome);
+          console.log(" ");
+          console.log("Habito: " + this.habitos.titulo);
+          console.log(" ");
+          console.log("Rotina Semanal: " + JSON.stringify(this.rotinaSemanal));
+          console.log(" ");
+        }
+      })
+      .catch(() => {
+        console.log(" ");
+        console.log("Deu errado no Recebimento de Usuario");
+        console.log(" ");
+      });
+
+
+
+    //this.habitos = constHabitos;
+   // this.habitos = []; //inicializar zerado na pagina
+>>>>>>> Stashed changes
   },
   methods: {
     modalDia() {
@@ -154,6 +207,15 @@ export default {
     },
     definirHora() {
       this.modalHoraVisible = false;
+
+      console.log("------------Inicio Teste Rotina Semanal-------------");
+      console.log(" ");
+      console.log(" ");
+      console.log("Antiga Rotina Semanal do habito: "+this.habitos.titulo);
+      console.log(JSON.stringify(this.habitos.rotinaSemanal));
+      console.log(" ");
+      console.log(" ");
+
       this.rotinaSemanal.push({
         diaSetado: this.diaTemp,
         horaSetada: this.horaTemp,
@@ -161,6 +223,56 @@ export default {
         notificar: false,
         completado: false,
       });
+      
+      this.habitos.rotinaSemanal=this.rotinaSemanal;
+
+      console.log("Nova Rotina Semanal do habito: "+this.habitos.titulo);
+      console.log(JSON.stringify(this.habitos.rotinaSemanal));
+      console.log(" ");
+      console.log(" ");
+      console.log("------------Fim Teste Rotina Semanal-------------");
+
+      console.log(" ");
+      console.log(" ");
+      console.log(" ");
+
+      console.log("------------Inicio Teste Novos habitos-------------");
+      console.log(" ");
+      console.log(" ");
+
+      this.user[0].habitos[this.habitoId]=this.habitos;
+
+      console.log("INFORMAÇÕES DO USUARIO: "+JSON.stringify(this.user[0]));
+
+      console.log(" ");
+      console.log(" ");
+      console.log("------------Fim Teste Novos habitos-------------");
+
+      console.log(" ");
+      console.log(" ");
+
+      this.salvarUsuario = JSON.stringify(this.user);
+
+      console.log("------------Inicio Atualizar Usuario-------------");
+      AsyncStorage.setItem("Usuario",this.salvarUsuario).then(()=>{
+        console.log(" ");
+        console.log(" ");
+        console.log("Usuario: "+this.salvarUsuario);
+        console.log(" ");
+        console.log(" ");
+        console.log("Usuário Atualizado");
+      })
+      .catch(()=>{
+        console.log(" ");
+        console.log(" ");
+        console.log("Não foi possível atualizar o Usuario")
+        console.log(" ");
+        console.log(" ");
+      })
+      console.log("------------Fim Atualizar Usuario-------------");
+
+
+
     },
     definirHabito() {
       this.user[0].habitos.push({
@@ -175,6 +287,24 @@ export default {
       this.diaTemp = "";
       this.horaTemp = "";
       this.minutoTemp = "";
+
+     /* console.log("------------Inicio Reiniciar Usuario-------------");
+      AsyncStorage.clear().then(()=>{
+        console.log(" ");
+        console.log(" ");
+        console.log("Usuario: "+this.salvarUsuario);
+        console.log(" ");
+        console.log(" ");
+        console.log("Usuário Reiniciado");
+      })
+      .catch(()=>{
+        console.log(" ");
+        console.log(" ");
+        console.log("Não foi possível atualizar o Usuario")
+        console.log(" ");
+        console.log(" ");
+      })
+      console.log("------------Fim Reiniciar Usuario-------------");*/
 
       this.navigation.navigate("AndroidTabs");
     },

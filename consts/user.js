@@ -9,39 +9,26 @@ export const constUser = [
         rotinaSemanal: [
           { //baseado em objetos tipo Date
             diaSetado: 1, //getDay()     
-            HoraSetada: 23, //getHour()
-            MinutoSetado: 59, //getMinute()
+            horaSetada: 10, //getHour()
+            minutoSetado: 15, //getMinute()
             notificar: true,
             completado: false,
           },
         ],
       },
       {
-        titulo: 'futebol',
+        titulo: 'Futebol',
         xp: 100,
         rotinaSemanal: [
           { //baseado em objetos tipo Date
-            diaSetado: 1, //getDay()     
-            HoraSetada: 23, //getHour()
-            MinutoSetado: 59, //getMinute()
+            diaSetado: 3, //getDay()     
+            horaSetada: 13, //getHour()
+            minutoSetado: 18, //getMinute()
             notificar: true,
             completado: false,
           },
         ],
-      },
-      {
-        titulo: 'musculação',
-        xp: 100,
-        rotinaSemanal: [
-          { //baseado em objetos tipo Date
-            diaSetado: 1, //getDay()     
-            HoraSetada: 23, //getHour()
-            MinutoSetado: 59, //getMinute()
-            notificar: true,
-            completado: false,
-          },
-        ],
-      },
-    ]
+      }
+    ],
   }
 ]

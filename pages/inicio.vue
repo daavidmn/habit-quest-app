@@ -14,10 +14,14 @@
         <text class="achievements-text">15</text>
       </view>
     </view>
+    <!-- <text :style="{fontSize: 10}">{{user[0].habitos[1]}}</text> -->
+    <!-- <text :style="{fontSize: 10}">{{console.log(user[0].habitos)}}</text> -->
     <view class="weekbar"></view>
     <view class="habits">
-      <view v-for="(habito, key) in user[0].habitos" :key="key">
-        <Habitviewer :title="habito.titulo" :xp="habito.xp" />
+      <view v-for="(habito, key) in (user[0].habitos)" :key="key">
+        <view v-for="(rotina, chave) in habito.rotinaSemanal" :key="chave">
+          <Habitviewer :title="habito.titulo" :xp="habito.xp" :hora="rotina.horaSetada" />
+        </view>
       </view>
     </view>
     <ActionButton
@@ -29,7 +33,6 @@
     <!-- <touchable-opacity class="botaoCadastro" :on-press="goToCadastrar">      
       <view class="botaoVisual"></view>
     </touchable-opacity>-->
-    <text>asaasdass</text>
   </view>
 </template>
 

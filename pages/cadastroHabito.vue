@@ -92,6 +92,7 @@
 <script>
 import { constUser } from "../consts/user";
 import { constHabitos } from "../consts/habitos";
+import { AsyncStorage } from "react-native"
 import HabitScreenBox from "../components/HabitScreenBox";
 export default {
   components: {
@@ -117,8 +118,30 @@ export default {
   },
   created() {
     this.user = constUser;
+
+    AsyncStorage.setItem('Habitos', JSON.stringify(constHabitos)).then(() =>{
+      console.log("ENVIADO:"+JSON.stringify((constHabitos)));
+    } )
+    .catch( ()=> { console.log('There was an error saving the product')})
+
+    AsyncStorage.getItem('Habitos').then((habitosSalvos) =>{
+      const habitosParsed = JSON.parse(habitosSalvos);
+      if (habitosParsed){
+        this.habitos = habitosParsed;
+        console.log(" ");
+        console.log("RECEBIDO: "+habitosSalvos);
+        console.log(" ");
+        console.log("Habitos: "+habitosParsed);
+        console.log(" ");
+      } else{
+        this.habitos = [];
+        console.log("Nada Recebido");
+      }
+    }).catch(()=>{console.log("Deu errado no Recebimento");})
+
     this.habitos = constHabitos;
     this.habitos = []; //inicializar zerado na pagina
+
   },
   methods: {
     modalDia() {

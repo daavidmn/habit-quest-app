@@ -23,7 +23,25 @@
           </view>
         </view>
       </view>
+      <view class="box-lateral">
+        <text class="texto-box-lateral">Desde:</text>
+        <text class="texto-baixo">Fev. 2020</text>
+      </view>
     </view>
+    <text class="texto-centro">Conquistas Obtidas</text>
+    <view class="conteudo-central-superior">
+      <view class="conquistas">
+        <text>Destemido</text>
+        <text>Popular</text>
+        <text>Mestre</text>
+        <text>Quente</text>
+      </view>
+      <view class="ver-mais">
+        <text class="ver-mais-texto">Ver + 8 conquistas</text>
+      </view>
+    </view>
+    <text class="texto-centro">Estatísticas</text>
+    <view class="estatisticas"></view>
   </view>
 </template>
 
@@ -67,13 +85,14 @@ export default {
 }
 
 .box-centro {
-  width: 60%;
+  width: 50%;
 }
 
 .box-cima {
 }
 
 .box-esquerda {
+  padding-top: 5px;
   align-items: center;
 }
 
@@ -120,10 +139,89 @@ export default {
   color: white;
 }
 .achievements {
+  align-items: center;
   flex-direction: row;
 }
 .texto-baixo {
   padding-right: 10px;
   color: white;
+}
+
+.box-lateral {
+  width: 20%;
+  align-content: center;
+  flex-direction: column;
+}
+
+.texto-box-lateral {
+  height: 32px;
+  left: 0px;
+  top: 0px;
+  font-style: normal;
+  font-size: 22px;
+  line-height: 32px;
+  display: flex;
+  align-items: center;
+  color: white;
+}
+
+.texto-centro {
+  width: 157px;
+  height: 27px;
+  top: 0px;
+  left: 10px;
+  font-style: normal;
+  font-size: 18px;
+  line-height: 32px;
+  display: flex;
+  align-items: center;
+}
+
+.conteudo-central-superior {
+  flex-direction: column;
+  width: 95%;
+  left: 10px;
+  top: 0px;
+}
+
+.conquistas {
+  height: 40%;
+  flex-direction: row;
+  background-color: #f0f0f0;
+  border-color: #386641;
+  border-width: 2px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.ver-mais {
+  background-color: #386641;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+.ver-mais-texto {
+  width: 118px;
+  height: 32px;
+  line-height: 10px;
+  top: 10px;
+  left: 16px;
+  font-style: normal;
+  font-size: 10px;
+  display: flex;
+  color: white;
+}
+
+.estatisticas {
+  height: 10%;
+  width: 95%;
+  left: 10px;
+  flex-direction: row;
+  background-color: #f0f0f0;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  border-color: #386641;
+  border-width: 2px;
 }
 </style>

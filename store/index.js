@@ -9,7 +9,7 @@ export default new Vuex.Store({
   // Like data in component.
   // We are keeping our data in the state.
   state: {
-    storeUsuario: ''
+    storeUsuario: 'a'
   },
   // Like computed properties in component.
   // You can use getters to acess state in the store
@@ -45,16 +45,21 @@ export default new Vuex.Store({
         setTimeout(async () => {
           try {
             const usuarioParsed = await AsyncStorage.getItem("Usuario");
-            let user = '';
+            let user = 'a';
+            console.log("ENTROU NO TRY")
             if (usuarioParsed) {
+              console.log("ENTROU NO if")
               user = usuarioParsed;
             } else {
+              console.log("ENTROU NO else")
               user = constUser;
             }
+            console.log(user)
             commit('setUsuario', user)
             resolve();
             return state.storeUsuario;
           } catch (error) {
+            console.log("ENTROU NO CATCH")
             console.error(error);
             return null;
           }

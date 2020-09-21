@@ -30,7 +30,7 @@
     <view class="habits">
       <ScrollView :fadingEdgeLength="0" :showsVerticalScrollIndicator="false">
         <view class="scroll-box">
-          <view v-for="(habito, key) in (user[0].habitos)" :key="key">
+          <view v-for="(habito, key) in (userr[0].habitos)" :key="key">
             <view v-for="(rotina, chave) in habito.rotinaSemanal" :key="chave">
               <Habitviewer
                 :title="habito.titulo"

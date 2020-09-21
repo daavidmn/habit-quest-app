@@ -112,6 +112,7 @@ import { constHabitos } from "../consts/habitos";
 import { AsyncStorage } from "react-native";
 import { Alert } from "react-native";
 import HabitScreenBox from "../components/HabitScreenBox";
+
 export default {
   components: {
     HabitScreenBox,
@@ -340,8 +341,6 @@ export default {
       console.log("------------Fim Atualizar Usuario-------------");
       
 
-
-     
 
       this.navigation.navigate("AndroidTabs");
     }

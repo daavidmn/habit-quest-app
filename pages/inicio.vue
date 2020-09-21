@@ -30,7 +30,7 @@
         <view class="scroll-box">
           <view v-for="(habito, key) in (user[0].habitos)" :key="key">
             <view v-for="(rotina, chave) in habito.rotinaSemanal" :key="chave">
-              <Habitviewer :title="habito.titulo" :xp="habito.xp" :hora="rotina.horaSetada" />
+              <Habitviewer :title="habito.titulo" :xp="habito.xp" :hora="rotina.horaSetada" :minutos="rotina.minutoSetado"/>
             </view>
           </view>
         </view>

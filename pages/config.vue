@@ -57,6 +57,10 @@ import { constUser } from "../consts/user";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { AsyncStorage } from "react-native";
 import { Alert } from "react-native";
+import store from "../store";
+import Vue from "vue-native-core";
+
+Vue.prototype.$store = store;
 
 export default {
   data: function () {
@@ -178,7 +182,8 @@ this.salvarUsuario = JSON.stringify(this.user);
           console.log(" ");
           console.log(" ");
           console.log("Usuário Atualizado");
-          this.navigation.navigate("inicio","teste");
+          this.$store.dispatch("fetchUsuario");
+          this.navigation.navigate("inicio");
         })
         .catch(() => {
           console.log(" ");
@@ -251,7 +256,8 @@ this.salvarUsuario = JSON.stringify(this.user);
                 'Seu nome foi alterado',
                 'Nome alterado com sucesso',
                 [
-                    {text: 'OK', onPress: () => this.navigation.navigate("inicio","teste")},
+                    {text: 'OK', onPress: () => {this.navigation.navigate("inicio")
+                  this.$store.dispatch("fetchUsuario");}},
                 ],
                 { cancelable: false }
             );

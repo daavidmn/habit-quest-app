@@ -4,11 +4,11 @@
     <text class="subtitulo">Trocar de nome</text>
 
     <text-input
-      class="input"
       :style="{height: 40, padding:10, width: '100%', borderColor: '#6A994E', borderWidth: 2, borderRadius: 8}"
+      v-model="nomeUsuario"
     />
 
-    <touchable-opacity class="confirma-creditos">
+    <touchable-opacity class="confirma-creditos" :on-press="() => trocarNomeUsuario()">
       <text class="text-confirma-creditos">Confirmar</text>
     </touchable-opacity>
 
@@ -33,10 +33,10 @@
       />
     </view>
 
-    <text class="subtitulo2" :style="{marginTop: 40}">Créditos do Aplicativo</text>
-    <text>Veja quem ajudou a produzir esse aplicativo</text>
-    <touchable-opacity class="confirma-creditos">
-      <text class="text-confirma-creditos" :on-press="() => resetarUsuario()">Reset do Usuario</text>
+    <text class="subtitulo2" :style="{marginTop: 40}">Resetar Usuário</text>
+    <text>Apagar dados e reiniciar memória da aplicação</text>
+    <touchable-opacity class="confirma-creditos" :on-press="() => resetarUsuario()">
+      <text class="text-confirma-creditos">Reset do Usuario</text>
     </touchable-opacity>
 
     <text class="subtitulo2" :style="{marginTop: 40}">Gerenciamento de conta</text>
@@ -49,6 +49,7 @@
 </template>
 
 <script>
+import { constUser } from "../consts/user";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import {AsyncStorage} from "react-native";
 import {Alert} from "react-native";
@@ -59,6 +60,9 @@ export default {
       value1: false,
       value2: false,
       resetar: false,
+      nomeUsuario: "",
+      user:constUser,
+      salvarUsuario:"",
     };
   },
   methods: {
@@ -73,22 +77,15 @@ export default {
       Alert.alert(
                 'Reset de Usuario',
                 'Você tem certeza que deseja resetar?',
-                [   {text: 'Cancelar', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
-                    {text: 'Confirmar', onPress: () => this.resetar = true},
-                ],
-                { cancelable: false });
-
-
-      if (this.resetar) {
-      console.log("------------Inicio Reiniciar Usuario-------------");
+                [   {text: 'Cancelar', onPress: () => this.resetar = false, style: 'cancel'},
+                    {text: 'Confirmar', onPress: () => {console.log("------------Inicio Reiniciar Usuario-------------");
 
       AsyncStorage.clear().then(()=>{
         console.log(" ");
         console.log(" ");
-        console.log("Usuario: "+JSON.stringify(this.user));
-        console.log(" ");
-        console.log(" ");
         console.log("Usuário Reiniciado");
+        this.resetar = false;
+        this.navigation.navigate("inicio","teste");
       })
       .catch(()=>{
         console.log(" ");
@@ -97,11 +94,97 @@ export default {
         console.log(" ");
         console.log(" ");
       })
-
+      
       console.log("------------Fim Reiniciar Usuario-------------");
-    }
+
+    }},
+                ],
+                { cancelable: false });
+    },
+    trocarNomeUsuario: function() {
+
+     this.user[0].nome = this.nomeUsuario;
+
+      console.log("------------Inicio Alterar Nome Usuario-------------");
+
+      this.salvarUsuario = JSON.stringify(this.user);
+
+      AsyncStorage.setItem("Usuario", this.salvarUsuario)
+        .then(() => {
+          console.log(" ");
+          console.log(" ");
+          console.log("Usuario: " + this.salvarUsuario);
+          console.log(" ");
+          console.log(" ");
+          console.log("Usuário Atualizado");
+        })
+        .catch(() => {
+          console.log(" ");
+          console.log(" ");
+          console.log("Não foi possível atualizar o Usuario");
+          console.log(" ");
+          console.log(" ");
+        });
+      console.log("------------Fim Alterar Nome Usuario-------------");
+
+       Alert.alert(
+                'Seu nome foi alterado',
+                'Nome alterado com sucesso',
+                [
+                    {text: 'OK', onPress: () => console.log('OK Pressed')},
+                ],
+                { cancelable: false }
+            );
+
+      //this.navigation.navigate("inicio","teste");
+
 
     }
+  },
+  created() {
+
+      console.log("------------Tela de Configurações-------------");
+      console.log(" ");
+      console.log(" ");
+      
+
+
+    AsyncStorage.getItem("Usuario")
+      .then((usuarioSalvo) => {
+        const usuarioParsed = JSON.parse(usuarioSalvo);
+        if (usuarioParsed) {
+
+          this.user = usuarioParsed;
+          this.nomeUsuario = this.user[0].nome;
+
+          console.log(" ");
+          console.log("RECEBIDO USUARIO: " + JSON.stringify(this.user));
+          console.log(" ");
+          console.log("Usuario: " + this.user[0].nome);
+          console.log(" ");
+
+        } else {
+
+          console.log(" ");
+          console.log("USUARIO NÃO RECEBIDO");
+          console.log(" ");
+
+         
+         this.nomeUsuario = this.user[0].nome;
+
+          console.log("USARIO PADRÃO CARREGADO: "+JSON.stringify(this.user));
+
+          console.log(" ");
+          console.log("Usuario: " + this.user[0].nome);
+          console.log(" ");
+        }
+      })
+      .catch(() => {
+        console.log(" ");
+        console.log("Deu errado no Recebimento de Usuario");
+        console.log(" ");
+      });
+
   },
   props: {
     navigation: {

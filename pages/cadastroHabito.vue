@@ -118,8 +118,8 @@ export default {
   },
   data() {
     return {
-      user: "",
-      habitos: "",
+      user: constUser,
+      habitos: constHabitos,
       rotinaSemanal: [],
       nomeHabito: "",
       modalDiaVisible: false,
@@ -145,8 +145,6 @@ export default {
 
       this.habitoId=0;
 
-      
-      this.habitos = constHabitos;
       this.rotinaSemanal = [];
       this.nomeHabito = this.habitos[0].titulo;
 
@@ -173,9 +171,6 @@ export default {
           console.log(" ");
           console.log("USUARIO NÃO RECEBIDO");
           console.log(" ");
-
-          this.user = constUser;
-
 
           console.log("USARIO PADRÃO CARREGADO: "+JSON.stringify(this.user));
 
@@ -304,7 +299,7 @@ export default {
         xp: 100,
         rotinaSemanal: this.rotinaSemanal,
       });
-      let tam = this.user[0].habitos.lenght;
+      //let tam = this.user[0].habitos.lenght;
       console.log(this.user[0].habitos);
 
       // this.user[0].habitos[tam - 1].rotinaSemanal.push(this.rotinaSemanal); //TA BUGANDO
@@ -334,7 +329,7 @@ export default {
         });
       console.log("------------Fim Atualizar Usuario-------------");
 
-      this.navigation.navigate("AndroidTabs");
+      this.navigation.navigate("inicio","teste");
     }
     },
   },

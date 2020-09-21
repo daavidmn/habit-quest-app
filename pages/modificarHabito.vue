@@ -135,6 +135,7 @@ export default {
 
       this.user = "";
     this.habitoId = 0;
+    this.nomeHabito = "teste"
 
     AsyncStorage.getItem("Usuario")
       .then((usuarioSalvo) => {

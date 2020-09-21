@@ -67,11 +67,15 @@ export default {
     return {
       value1: false,
       value2: false,
-      resetar: false,
       nomeUsuario: "",
       user:constUser,
       salvarUsuario:"",
     };
+  },
+  computed: {
+    userr() {
+      return this.$store.state.storeUsuario;
+    },
   },
   methods: {
     valueChange() {
@@ -88,111 +92,20 @@ export default {
 
                 'Reset de Usuario',
                 'Você tem certeza que deseja resetar?',
-                [   {text: 'Cancelar', onPress: () => this.resetar = false, style: 'cancel'},
-                    {text: 'Confirmar', onPress: () => {
+                [   {text: 'Cancelar', onPress: () => console.log("Cancelar"), style: 'cancel'},
+                    {text: 'Confirmar', onPress: () => { 
 
                       console.log("------------Inicio Reiniciar Usuario-------------");
 
-      AsyncStorage.clear().then(()=>{
-        console.log(" ");
-        console.log(" ");
-        console.log("Usuário Reiniciado");
-        this.resetar = false;
-        
-      })
-      .catch(()=>{
-        console.log(" ");
-        console.log(" ");
-        console.log("Não foi possível Reiniciar o Usuario")
-        console.log(" ");
-        console.log(" ");
-      })
-      
-      console.log("------------Fim Reiniciar Usuario-------------");
+                      this.$store.dispatch("resetarDados");
 
-      this.user = [
-  {
-    nome: 'Zé Monstrão',
-    xpTotal: '1500',
-    habitos: [
-      {
-        titulo: 'Corrida com cachorro',
-        xp: 100,
-        rotinaSemanal: [
-          { //baseado em objetos tipo Date
-            diaSetado: 1, //getDay()     
-            horaSetada: 10, //getHour()
-            minutoSetado: 15, //getMinute()
-            notificar: true,
-            completado: false,
-          },
-          { //baseado em objetos tipo Date
-            diaSetado: 3, //getDay()     
-            horaSetada: 13, //getHour()
-            minutoSetado: 18, //getMinute()
-            notificar: true,
-            completado: false,
-          },
-          { //baseado em objetos tipo Date
-            diaSetado: 4, //getDay()     
-            horaSetada: 15, //getHour()
-            minutoSetado: 19, //getMinute()
-            notificar: true,
-            completado: false,
-          },
-        ],
-      },
-      {
-        titulo: 'Futebol',
-        xp: 100,
-        rotinaSemanal: [
-          { //baseado em objetos tipo Date
-            diaSetado: 1, //getDay()     
-            horaSetada: 10, //getHour()
-            minutoSetado: 15, //getMinute()
-            notificar: true,
-            completado: false,
-          },
-          { //baseado em objetos tipo Date
-            diaSetado: 3, //getDay()     
-            horaSetada: 13, //getHour()
-            minutoSetado: 18, //getMinute()
-            notificar: true,
-            completado: false,
-          },
-          { //baseado em objetos tipo Date
-            diaSetado: 4, //getDay()     
-            horaSetada: 15, //getHour()
-            minutoSetado: 19, //getMinute()
-            notificar: true,
-            completado: false,
-          },
-        ],
-      }
-    ],
-  }
-]
-this.salvarUsuario = JSON.stringify(this.user);
+                      this.$store.dispatch("fetchUsuario");
 
-      AsyncStorage.setItem("Usuario", this.salvarUsuario)
-        .then(() => {
-          console.log(" ");
-          console.log(" ");
-          console.log("Usuario: " + this.salvarUsuario);
-          console.log(" ");
-          console.log(" ");
-          console.log("Usuário Atualizado");
-          this.$store.dispatch("fetchUsuario");
-          this.navigation.navigate("inicio");
-        })
-        .catch(() => {
-          console.log(" ");
-          console.log(" ");
-          console.log("Não foi possível atualizar o Usuario");
-          console.log(" ");
-          console.log(" ");
-        });
-        
+                      this.nomeUsuario = this.userr[0].nome;
+                      
+                      console.log("------------Fim Reiniciar Usuario-------------");
+
+
     }},
                 ],
                 { cancelable: false });
@@ -201,66 +114,47 @@ this.salvarUsuario = JSON.stringify(this.user);
 
     trocarNomeUsuario: function() {
 
-      AsyncStorage.getItem("Usuario")
-      .then((usuarioSalvo) => {
-        const usuarioParsed = JSON.parse(usuarioSalvo);
-        if (usuarioParsed) {
 
-          this.user = usuarioParsed;
+console.log("------------Inicio Alterar Nome Usuario-------------");
 
-          
+      this.$store.dispatch("fetchUsuario");
 
-        } else {
+      this.userr[0].nome = this.nomeUsuario;
 
-          console.log(" ");
-          console.log("USUARIO NÃO RECEBIDO");
-          console.log(" ");
-
-         
-        }
-      })
-      .catch(() => {
-        console.log(" ");
-        console.log("Deu errado no Recebimento de Usuario");
-        console.log(" ");
-      });
-
-     this.user[0].nome = this.nomeUsuario;
-
-      console.log("------------Inicio Alterar Nome Usuario-------------");
-
-
-
-      this.salvarUsuario = JSON.stringify(this.user);
+      this.salvarUsuario = JSON.stringify(this.userr);
 
       AsyncStorage.setItem("Usuario", this.salvarUsuario)
         .then(() => {
-          console.log(" ");
-          console.log(" ");
-          console.log("Usuario: " + this.salvarUsuario);
-          console.log(" ");
-          console.log(" ");
-          console.log("Usuário Atualizado");
-          
-        })
-        .catch(() => {
-          console.log(" ");
-          console.log(" ");
-          console.log("Não foi possível atualizar o Usuario");
-          console.log(" ");
-          console.log(" ");
-        });
-      console.log("------------Fim Alterar Nome Usuario-------------");
-
-       Alert.alert(
+          Alert.alert(
                 'Seu nome foi alterado',
                 'Nome alterado com sucesso',
                 [
-                    {text: 'OK', onPress: () => {this.navigation.navigate("inicio")
-                  this.$store.dispatch("fetchUsuario");}},
+                    {text: 'OK', onPress: () => {
+                  this.$store.dispatch("fetchUsuario");
+                this.nomeUsuario = this.userr[0].nome;
+              this.navigation.navigate("inicio")}},
                 ],
                 { cancelable: false }
             );
+          
+        })
+        .catch(() => {
+          Alert.alert(
+                'Erro',
+                'Ocorreu um erro ao alterar seu nome',
+                [
+                    {text: 'OK', onPress: () => {
+                  this.$store.dispatch("fetchUsuario");
+                this.nomeUsuario = this.userr[0].nome;
+              this.navigation.navigate("inicio")}},
+                ],
+                { cancelable: false }
+            );
+        });
+
+      console.log("------------Fim Alterar Nome Usuario-------------");
+
+       
 
       //this.navigation.navigate("inicio","teste");
 
@@ -270,47 +164,9 @@ this.salvarUsuario = JSON.stringify(this.user);
   },
   created() {
 
-      console.log("------------Tela de Configurações-------------");
-      console.log(" ");
-      console.log(" ");
-      
+      this.$store.dispatch("fetchUsuario");
 
-
-    AsyncStorage.getItem("Usuario")
-      .then((usuarioSalvo) => {
-        const usuarioParsed = JSON.parse(usuarioSalvo);
-        if (usuarioParsed) {
-
-          this.user = usuarioParsed;
-          this.nomeUsuario = this.user[0].nome;
-
-          console.log(" ");
-          console.log("RECEBIDO USUARIO: " + JSON.stringify(this.user));
-          console.log(" ");
-          console.log("Usuario: " + this.user[0].nome);
-          console.log(" ");
-
-        } else {
-
-          console.log(" ");
-          console.log("USUARIO NÃO RECEBIDO");
-          console.log(" ");
-
-         
-         this.nomeUsuario = this.user[0].nome;
-
-          console.log("USARIO PADRÃO CARREGADO: "+JSON.stringify(this.user));
-
-          console.log(" ");
-          console.log("Usuario: " + this.user[0].nome);
-          console.log(" ");
-        }
-      })
-      .catch(() => {
-        console.log(" ");
-        console.log("Deu errado no Recebimento de Usuario");
-        console.log(" ");
-      });
+      this.nomeUsuario = this.userr[0].nome;
 
   },
   props: {

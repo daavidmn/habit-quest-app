@@ -65,6 +65,40 @@ export default new Vuex.Store({
           }
         }, 1000)
       })
+    },
+
+    async resetarDados({ commit, state }) {
+      return new Promise(function (resolve, reject) {
+        setTimeout(async () => {
+          try {
+
+            await AsyncStorage.clear();
+            alert("RESET Deu certo");
+
+          } catch (error) {
+            console.log("ENTROU NO CATCH")
+            console.error(error);
+            return null;
+          }
+        }, 1000)
+      })
+    },
+
+    async salvarUsuario({ commit, state }) {
+      return new Promise(function (resolve, reject) {
+        setTimeout(async () => {
+          try {
+
+            await AsyncStorage.clear();
+            alert("RESET Deu certo");
+
+          } catch (error) {
+            console.log("ENTROU NO CATCH")
+            console.error(error);
+            return null;
+          }
+        }, 1000)
+      })
     }
 
   },

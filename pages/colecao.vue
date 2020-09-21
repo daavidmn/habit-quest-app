@@ -84,9 +84,6 @@ export default {
   width: 50%;
 }
 
-.box-cima {
-}
-
 .box-esquerda {
   padding-top: 5px;
   align-items: center;

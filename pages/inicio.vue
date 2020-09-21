@@ -8,8 +8,8 @@
         />
       </view>
       <view class="progress-bar">
-        <text class="progress-text">LV 150</text>
-        <text class="progress-text">{{user[0].xpTotal}} /3000</text>
+        <text>LV 150</text>
+        <text>{{user[0].xpTotal}} /3000</text>
         <view class="progress-fill"></view>
       </view>
       <view class="tasks">
@@ -80,6 +80,7 @@ export default {
     // console.log(this.loaded);
 
     this.user = constUser;
+    console.log("teste");
   },
   props: {
     navigation: {
@@ -129,8 +130,6 @@ export default {
   flex-direction: row;
   align-items: center;
   justify-content: space-evenly;
-}
-.progress-text {
 }
 
 .progress-fill {

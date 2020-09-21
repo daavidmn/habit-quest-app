@@ -18,6 +18,7 @@ import pgExpedicao from "./pages/expedicao.vue";
 import pgConfig from "./pages/config.vue";
 import React from "react";
 import { Ionicons } from "@expo/vector-icons";
+import { StatusBar } from "react-native";
 
 const BottomTabNavigator = createBottomTabNavigator(
   {
@@ -74,7 +75,9 @@ const BottomTabNavigator = createBottomTabNavigator(
   },
   {
     navigationOptions: {
-      header: null,
+      headerStyle: {
+        height: 0,
+      },
     },
     initialRouteName: "inicio",
     tabBarOptions: {
@@ -106,6 +109,9 @@ const StackNavigator = createStackNavigator(
     AndroidTabs: BottomTabNavigator,
     cadastroHabito: {
       screen: pgCadastroHabito,
+      navigationOptions: {
+        title: "Criar Hábito",
+      },
     },
   },
   {
@@ -117,6 +123,11 @@ const AppNavigator = createAppContainer(StackNavigator);
 
 export default {
   components: { AppNavigator },
+  created() {
+    console.log("======");
+    console.log(StatusBar.currentHeight);
+    console.log("======");
+  },
 };
 </script>
 

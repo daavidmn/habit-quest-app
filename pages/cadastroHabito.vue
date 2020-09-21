@@ -12,12 +12,6 @@
       <text :style="{fontSize: 24, color: 'white'}">+</text>
     </touchable-opacity>
 
-    <!-- <text>{{habitos}}</text>
-    <text>{{rotinaSemanal}}</text>-->
-
-    <!-- <text>modal dia visivel: {{modalDiaVisible}}</text> -->
-    <!-- <text>modal hora visivel: {{modalHoraVisible}}</text> -->
-    <!-- <text>{{habitos[0].rotinaSemanal}}</text> -->
     <view class="scroll-area">
       <ScrollView :fadingEdgeLength="0" :showsVerticalScrollIndicator="false">
         <view class="scroll-box">
@@ -95,7 +89,7 @@
                 v-model="minutoTemp"
               />
             </view>
-            <!-- <text>{{horaTemp}}</text> -->
+
             <touchable-opacity class="adicionarRotina" :on-press="() => definirHora()">
               <text :style="{fontSize: 16, color: 'white'}">Pronto</text>
             </touchable-opacity>
@@ -137,17 +131,15 @@ export default {
     };
   },
   created() {
+    console.log("------------Inicializando Informações-------------");
+    console.log(" ");
+    console.log(" ");
+    this.habitoId = 0;
 
-      console.log("------------Inicializando Informações-------------");
-      console.log(" ");
-      console.log(" ");
-      this.habitoId=0;
-
-      this.user = constUser;
-      this.habitos = constHabitos;
-      this.rotinaSemanal = this.habitos[this.habitoId].rotinaSemanal;
-      this.nomeHabito = this.habitos[0].titulo;
-
+    this.user = constUser;
+    this.habitos = constHabitos;
+    this.rotinaSemanal = this.habitos[this.habitoId].rotinaSemanal;
+    this.nomeHabito = this.habitos[0].titulo;
 
     AsyncStorage.getItem("Usuario")
       .then((usuarioSalvo) => {
@@ -155,7 +147,7 @@ export default {
         if (usuarioParsed) {
           this.user = usuarioParsed;
           console.log(" ");
-          console.log("RECEBIDO USUARIO: " + JSON.stringify((this.user)));
+          console.log("RECEBIDO USUARIO: " + JSON.stringify(this.user));
           console.log(" ");
           console.log("Usuario: " + this.user[0].nome);
           console.log(" ");
@@ -170,7 +162,7 @@ export default {
           console.log(" ");
 
           this.user = constUser;
-          console.log("USARIO PADRÃO CARREGADO: "+JSON.stringify(constUser));
+          console.log("USARIO PADRÃO CARREGADO: " + JSON.stringify(constUser));
           console.log(" ");
           console.log("Usuario: " + this.user[0].nome);
           console.log(" ");
@@ -225,7 +217,7 @@ export default {
       console.log(" ");
       console.log(" ");
 
-      console.log("Antiga Rotina Semanal do habito: "+this.nomeHabito);
+      console.log("Antiga Rotina Semanal do habito: " + this.nomeHabito);
       console.log(JSON.stringify(this.habitos[this.habitoId].rotinaSemanal));
 
       console.log(" ");
@@ -239,9 +231,7 @@ export default {
         completado: false,
       });
 
-      
-
-      console.log("Nova Rotina Semanal do habito: "+this.nomeHabito);
+      console.log("Nova Rotina Semanal do habito: " + this.nomeHabito);
       console.log(JSON.stringify(this.rotinaSemanal));
 
       console.log(" ");
@@ -256,9 +246,7 @@ export default {
       console.log(" ");
       console.log(" ");
 
-
-      console.log("INFORMAÇÕES DO USUARIO: "+JSON.stringify(this.user[0]));
-
+      console.log("INFORMAÇÕES DO USUARIO: " + JSON.stringify(this.user[0]));
 
       console.log(" ");
       console.log(" ");
@@ -266,14 +254,9 @@ export default {
 
       console.log(" ");
       console.log(" ");
-
-      
-
-
-
     },
     definirHabito() {
-     this.user[0].habitos.push({
+      this.user[0].habitos.push({
         titulo: this.nomeHabito,
         xp: 100,
         rotinaSemanal: this.rotinaSemanal,
@@ -287,30 +270,28 @@ export default {
       this.minutoTemp = "";
 
       this.salvarUsuario = JSON.stringify(this.user);
-    
+
       console.log("------------Inicio Atualizar Usuario-------------");
-      
+
       this.salvarUsuario = JSON.stringify(this.user);
 
-
-      AsyncStorage.setItem("Usuario",this.salvarUsuario).then(()=>{
-        console.log(" ");
-        console.log(" ");
-        console.log("Usuario: "+this.salvarUsuario);
-        console.log(" ");
-        console.log(" ");
-        console.log("Usuário Atualizado");
-      })
-      .catch(()=>{
-        console.log(" ");
-        console.log(" ");
-        console.log("Não foi possível atualizar o Usuario")
-        console.log(" ");
-        console.log(" ");
-      })
+      AsyncStorage.setItem("Usuario", this.salvarUsuario)
+        .then(() => {
+          console.log(" ");
+          console.log(" ");
+          console.log("Usuario: " + this.salvarUsuario);
+          console.log(" ");
+          console.log(" ");
+          console.log("Usuário Atualizado");
+        })
+        .catch(() => {
+          console.log(" ");
+          console.log(" ");
+          console.log("Não foi possível atualizar o Usuario");
+          console.log(" ");
+          console.log(" ");
+        });
       console.log("------------Fim Atualizar Usuario-------------");
-      
-
 
       /*console.log("------------Inicio Reiniciar Usuario-------------");
 
@@ -334,8 +315,8 @@ export default {
       console.log("------------Fim Reiniciar Usuario-------------");*/
 
       this.user = constUser;
-      this.habitos=constHabitos;
-      this.rotinaSemanal=constHabitos[this.habitoId].rotinaSemanal;
+      this.habitos = constHabitos;
+      this.rotinaSemanal = constHabitos[this.habitoId].rotinaSemanal;
 
       this.navigation.navigate("AndroidTabs");
     },

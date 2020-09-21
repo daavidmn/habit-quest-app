@@ -12,12 +12,6 @@
       <text :style="{fontSize: 24, color: 'white'}">+</text>
     </touchable-opacity>
 
-    <!-- <text>{{habitos}}</text>
-    <text>{{rotinaSemanal}}</text>-->
-
-    <!-- <text>modal dia visivel: {{modalDiaVisible}}</text> -->
-    <!-- <text>modal hora visivel: {{modalHoraVisible}}</text> -->
-    <!-- <text>{{habitos[0].rotinaSemanal}}</text> -->
     <view class="scroll-area">
       <ScrollView :fadingEdgeLength="0" :showsVerticalScrollIndicator="false">
         <view class="scroll-box">
@@ -95,7 +89,7 @@
                 v-model="minutoTemp"
               />
             </view>
-            <!-- <text>{{horaTemp}}</text> -->
+
             <touchable-opacity class="adicionarRotina" :on-press="() => definirHora()">
               <text :style="{fontSize: 16, color: 'white'}">Pronto</text>
             </touchable-opacity>
@@ -139,6 +133,11 @@ export default {
     };
   },
   created() {
+    console.log("------------Inicializando Informações-------------");
+    console.log(" ");
+    console.log(" ");
+    this.habitoId = 0;
+
 
       console.log("------------Inicializando Informações-------------");
       console.log(" ");
@@ -160,7 +159,7 @@ export default {
           this.user = usuarioParsed;
 
           console.log(" ");
-          console.log("RECEBIDO USUARIO: " + JSON.stringify((this.user)));
+          console.log("RECEBIDO USUARIO: " + JSON.stringify(this.user));
           console.log(" ");
           console.log("Usuario: " + this.user[0].nome);
           console.log(" ");
@@ -177,7 +176,9 @@ export default {
 
           this.user = constUser;
 
+
           console.log("USARIO PADRÃO CARREGADO: "+JSON.stringify(this.user));
+
           console.log(" ");
           console.log("Usuario: " + this.user[0].nome);
           console.log(" ");
@@ -232,7 +233,8 @@ export default {
       console.log(" ");
       console.log(" ");
 
-      console.log("Antiga Rotina Semanal do habito: "+this.nomeHabito);
+
+      console.log("Antiga Rotina Semanal do habito: " + this.nomeHabito);
 
       console.log(JSON.stringify(this.habitos[this.habitoId].rotinaSemanal));
 
@@ -258,9 +260,7 @@ export default {
         completado: false,
       });}
 
-      
-
-      console.log("Nova Rotina Semanal do habito: "+this.nomeHabito);
+      console.log("Nova Rotina Semanal do habito: " + this.nomeHabito);
       console.log(JSON.stringify(this.rotinaSemanal));
 
       console.log(" ");
@@ -275,9 +275,7 @@ export default {
       console.log(" ");
       console.log(" ");
 
-
-      console.log("INFORMAÇÕES DO USUARIO: "+JSON.stringify(this.user[0]));
-
+      console.log("INFORMAÇÕES DO USUARIO: " + JSON.stringify(this.user[0]));
 
       console.log(" ");
       console.log(" ");
@@ -285,13 +283,9 @@ export default {
 
       console.log(" ");
       console.log(" ");
-
-      
-
-
-
     },
     definirHabito() {
+
 
        if (this.rotinaSemanal==""){
 
@@ -305,6 +299,7 @@ export default {
       }
       else{
      this.user[0].habitos.push({
+
         titulo: this.nomeHabito,
         xp: 100,
         rotinaSemanal: this.rotinaSemanal,
@@ -317,30 +312,27 @@ export default {
       this.horaTemp = "";
       this.minutoTemp = "";
 
-          
       console.log("------------Inicio Atualizar Usuario-------------");
-      
+
       this.salvarUsuario = JSON.stringify(this.user);
 
-
-      AsyncStorage.setItem("Usuario",this.salvarUsuario).then(()=>{
-        console.log(" ");
-        console.log(" ");
-        console.log("Usuario: "+this.salvarUsuario);
-        console.log(" ");
-        console.log(" ");
-        console.log("Usuário Atualizado");
-      })
-      .catch(()=>{
-        console.log(" ");
-        console.log(" ");
-        console.log("Não foi possível atualizar o Usuario")
-        console.log(" ");
-        console.log(" ");
-      })
+      AsyncStorage.setItem("Usuario", this.salvarUsuario)
+        .then(() => {
+          console.log(" ");
+          console.log(" ");
+          console.log("Usuario: " + this.salvarUsuario);
+          console.log(" ");
+          console.log(" ");
+          console.log("Usuário Atualizado");
+        })
+        .catch(() => {
+          console.log(" ");
+          console.log(" ");
+          console.log("Não foi possível atualizar o Usuario");
+          console.log(" ");
+          console.log(" ");
+        });
       console.log("------------Fim Atualizar Usuario-------------");
-      
-
 
       this.navigation.navigate("AndroidTabs");
     }

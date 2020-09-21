@@ -9,7 +9,7 @@
       </view>
       <view class="progress-bar">
         <text class="progress-text">LV 150</text>
-        <text class="progress-text">{{user[0].xpTotal}}/3000</text>
+        <text class="progress-text">{{user[0].xpTotal}} /3000</text>
         <view class="progress-fill"></view>
       </view>
       <view class="tasks">
@@ -42,9 +42,6 @@
       class="botao"
       :onPress="goToCadastrar"
     ></ActionButton>
-    <!-- <touchable-opacity class="botaoCadastro" :on-press="goToCadastrar">      
-      <view class="botaoVisual"></view>
-    </touchable-opacity>-->
   </view>
 </template>
 

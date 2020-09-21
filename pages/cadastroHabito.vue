@@ -110,6 +110,7 @@
 import { constUser } from "../consts/user";
 import { constHabitos } from "../consts/habitos";
 import { AsyncStorage } from "react-native";
+import { Alert } from "react-native";
 import HabitScreenBox from "../components/HabitScreenBox";
 export default {
   components: {
@@ -141,11 +142,12 @@ export default {
       console.log("------------Inicializando Informações-------------");
       console.log(" ");
       console.log(" ");
+
       this.habitoId=0;
 
-      this.user = constUser;
+      
       this.habitos = constHabitos;
-      this.rotinaSemanal = this.habitos[this.habitoId].rotinaSemanal;
+      this.rotinaSemanal = [];
       this.nomeHabito = this.habitos[0].titulo;
 
 
@@ -153,7 +155,9 @@ export default {
       .then((usuarioSalvo) => {
         const usuarioParsed = JSON.parse(usuarioSalvo);
         if (usuarioParsed) {
+
           this.user = usuarioParsed;
+
           console.log(" ");
           console.log("RECEBIDO USUARIO: " + JSON.stringify((this.user)));
           console.log(" ");
@@ -163,14 +167,16 @@ export default {
           console.log(" ");
           console.log("Rotina Semanal: " + JSON.stringify(this.rotinaSemanal));
           console.log(" ");
-        } else {
-          console.log(" ");
 
+        } else {
+
+          console.log(" ");
           console.log("USUARIO NÃO RECEBIDO");
           console.log(" ");
 
           this.user = constUser;
-          console.log("USARIO PADRÃO CARREGADO: "+JSON.stringify(constUser));
+
+          console.log("USARIO PADRÃO CARREGADO: "+JSON.stringify(this.user));
           console.log(" ");
           console.log("Usuario: " + this.user[0].nome);
           console.log(" ");
@@ -226,18 +232,30 @@ export default {
       console.log(" ");
 
       console.log("Antiga Rotina Semanal do habito: "+this.nomeHabito);
+
       console.log(JSON.stringify(this.habitos[this.habitoId].rotinaSemanal));
 
       console.log(" ");
-      console.log(" ");
+      console.log(" "); 
+      
+      if (this.diaTemp==""||this.horaTemp==""||this.minutoTemp==""){
 
+        Alert.alert(
+                'Valor Invalido',
+                'Adicione valores validos para o habito',
+                [
+                    {text: 'OK', onPress: () => console.log('OK Pressed')},
+                ],
+                { cancelable: false });
+      }
+      else{
       this.rotinaSemanal.push({
         diaSetado: this.diaTemp,
         horaSetada: this.horaTemp,
         minutoSetado: this.minutoTemp,
         notificar: false,
         completado: false,
-      });
+      });}
 
       
 
@@ -273,6 +291,18 @@ export default {
 
     },
     definirHabito() {
+
+       if (this.rotinaSemanal==""){
+
+        Alert.alert(
+                'Você não cadastrou dias para seu habito',
+                'Adicione um dia e horario para seu habito',
+                [
+                    {text: 'OK', onPress: () => console.log('OK Pressed')},
+                ],
+                { cancelable: false });
+      }
+      else{
      this.user[0].habitos.push({
         titulo: this.nomeHabito,
         xp: 100,
@@ -286,8 +316,7 @@ export default {
       this.horaTemp = "";
       this.minutoTemp = "";
 
-      this.salvarUsuario = JSON.stringify(this.user);
-    
+          
       console.log("------------Inicio Atualizar Usuario-------------");
       
       this.salvarUsuario = JSON.stringify(this.user);
@@ -312,32 +341,10 @@ export default {
       
 
 
-      /*console.log("------------Inicio Reiniciar Usuario-------------");
-
-      AsyncStorage.clear().then(()=>{
-        console.log(" ");
-        console.log(" ");
-        console.log("Usuario: "+JSON.stringify(this.user));
-        console.log(" ");
-        console.log(" ");
-        this.user = constUser;
-        console.log("Usuário Reiniciado");
-      })
-      .catch(()=>{
-        console.log(" ");
-        console.log(" ");
-        console.log("Não foi possível Reiniciar o Usuario")
-        console.log(" ");
-        console.log(" ");
-      })
-
-      console.log("------------Fim Reiniciar Usuario-------------");*/
-
-      this.user = constUser;
-      this.habitos=constHabitos;
-      this.rotinaSemanal=constHabitos[this.habitoId].rotinaSemanal;
+     
 
       this.navigation.navigate("AndroidTabs");
+    }
     },
   },
 };

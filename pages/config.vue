@@ -13,17 +13,19 @@
     </touchable-opacity>
 
     <text class="subtitulo">Notificações</text>
-    <view class="notificacoes">
-      <text>Permitir Notificações</text>
-      <switch
-        :on-value-change="handleChange1"
-        :value="value1"
-        :track-color="{ false: '#F0F0F0', true: '#A7C957' }"
-        thumb-color="#386641"
-      />
-    </view>
+    <touchable-without-feedback :on-press="() => valueChange()">
+      <view class="notificacoes">
+        <text>Permitir Notificações</text>
+        <switch
+          :on-value-change="handleChange1"
+          :value="value1"
+          :track-color="{ false: '#F0F0F0', true: '#A7C957' }"
+          thumb-color="#386641"
+        />
+      </view>
+    </touchable-without-feedback>
 
-    <view class="notificacoes">
+    <!-- <view class="notificacoes">
       <text>Permitir Roubo de Dados</text>
       <switch
         :on-value-change="handleChange2"
@@ -31,18 +33,18 @@
         :track-color="{ false: '#F0F0F0', true: '#A7C957' }"
         thumb-color="#386641"
       />
-    </view>
+    </view>-->
 
     <text class="subtitulo2" :style="{marginTop: 40}">Créditos do Aplicativo</text>
     <text>Veja quem ajudou a produzir esse aplicativo</text>
     <touchable-opacity class="confirma-creditos">
-      <text class="text-confirma-creditos" :on-press="() => resetarUsuario()">Reset do Usuario</text>
+      <text class="text-confirma-creditos">Ver créditos</text>
     </touchable-opacity>
 
     <text class="subtitulo2" :style="{marginTop: 40}">Gerenciamento de conta</text>
 
     <text>Cuidado, essas ação é irreversível</text>
-    <touchable-opacity class="resetar">
+    <touchable-opacity class="resetar" :on-press="() => resetarUsuario()">
       <text class="text-confirma-creditos">Resetar progresso</text>
     </touchable-opacity>
   </view>
@@ -50,8 +52,8 @@
 
 <script>
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import {AsyncStorage} from "react-native";
-import {Alert} from "react-native";
+import { AsyncStorage } from "react-native";
+import { Alert } from "react-native";
 
 export default {
   data: function () {
@@ -62,46 +64,53 @@ export default {
     };
   },
   methods: {
+    valueChange() {
+      this.value1 = !this.value1;
+    },
     handleChange1: function (val) {
       this.value1 = val;
     },
     handleChange2: function (val) {
       this.value2 = val;
     },
-    resetarUsuario: function() {
-
+    resetarUsuario: function () {
       Alert.alert(
-                'Reset de Usuario',
-                'Você tem certeza que deseja resetar?',
-                [   {text: 'Cancelar', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
-                    {text: 'Confirmar', onPress: () => this.resetar = true},
-                ],
-                { cancelable: false });
-
+        "Resetar progresso",
+        "Você tem certeza que deseja resetar?",
+        [
+          {
+            text: "Cancelar",
+            onPress: () => console.log("Cancel Pressed"),
+            style: "cancel",
+          },
+          { text: "Confirmar", onPress: () => (this.resetar = true) },
+        ],
+        { cancelable: false }
+      );
 
       if (this.resetar) {
-      console.log("------------Inicio Reiniciar Usuario-------------");
+        console.log("------------Inicio Reiniciar Usuario-------------");
 
-      AsyncStorage.clear().then(()=>{
-        console.log(" ");
-        console.log(" ");
-        console.log("Usuario: "+JSON.stringify(this.user));
-        console.log(" ");
-        console.log(" ");
-        console.log("Usuário Reiniciado");
-      })
-      .catch(()=>{
-        console.log(" ");
-        console.log(" ");
-        console.log("Não foi possível Reiniciar o Usuario")
-        console.log(" ");
-        console.log(" ");
-      })
+        AsyncStorage.clear()
+          .then(() => {
+            console.log(" ");
+            console.log(" ");
+            console.log("Usuario: " + JSON.stringify(this.user));
+            console.log(" ");
+            console.log(" ");
+            console.log("Usuário Reiniciado");
+          })
+          .catch(() => {
+            console.log(" ");
+            console.log(" ");
+            console.log("Não foi possível Reiniciar o Usuario");
+            console.log(" ");
+            console.log(" ");
+          });
 
-      console.log("------------Fim Reiniciar Usuario-------------");
-    }
-
-    }
+        console.log("------------Fim Reiniciar Usuario-------------");
+      }
+    },
   },
   props: {
     navigation: {
@@ -118,6 +127,7 @@ export default {
   height: 100%;
   padding-right: 16px;
   padding-left: 16px;
+  padding-top: 20px;
   background-color: #e5e5e5;
 }
 

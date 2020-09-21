@@ -1,6 +1,7 @@
 import Vuex from 'vuex'
 import Vue from 'vue-native-core'
 import { AsyncStorage } from "react-native";
+import { constUser } from "../consts/user";
 
 Vue.use(Vuex)
 
@@ -18,28 +19,55 @@ export default new Vuex.Store({
   // Like method in component.
   // To perform actions that usually results in data
   actions: {
-    fetchUsuario() {
-      AsyncStorage.getItem("Usuario")
-        .then((usuarioSalvo) => {
-          const usuarioParsed = JSON.parse(usuarioSalvo);
-          const user = ''
-          if (usuarioParsed) {
-            user = usuarioParsed;
-          } else {
-            user = 'teste'
+    // fetchUsuario({ commit, state }) {
+    //   AsyncStorage.getItem("Usuario")
+    //     .then((usuarioSalvo) => {
+    //       const usuarioParsed = JSON.parse(usuarioSalvo);
+    //       const user = '';
+    //       if (usuarioParsed) {
+    //         user = usuarioParsed;
+    //       } else {
+    //         user = constUser;
+    //       }
+    //       console.log('ENTROU NO THEN')
+    //       commit('setUsuario', user);
+    //       return state.storeUsuario;
+    //     })
+    //     .catch(() => {
+    //       commit('setUsuario', 'oia');
+    //       console.log('ENTROU NO CATCH')
+    //       console.log(usuarioSalvo)
+    //     });
+    // }
+
+    async fetchUsuario({ commit, state }) {
+      return new Promise(function (resolve, reject) {
+        setTimeout(async () => {
+          try {
+            const usuarioParsed = await AsyncStorage.getItem("Usuario");
+            let user = '';
+            if (usuarioParsed) {
+              user = usuarioParsed;
+            } else {
+              user = constUser;
+            }
+            commit('setUsuario', user)
+            resolve();
+            return state.storeUsuario;
+          } catch (error) {
+            console.error(error);
+            return null;
           }
-          commit('setUsuario', user)
-          return state.user
-        })
-        .catch(() => { });
+        }, 1000)
+      })
     }
 
   },
   // Like method in component.
   // To save data to the state.
   mutations: {
-    setUsuario(state, user) {
-      Vue.set(state, 'user', user)
+    setUsuario(state, storeUsuario) {
+      Vue.set(state, 'storeUsuario', storeUsuario)
     }
 
   }

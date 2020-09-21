@@ -291,6 +291,18 @@ export default {
 
     },
     definirHabito() {
+
+       if (this.rotinaSemanal==""){
+
+        Alert.alert(
+                'Você não cadastrou dias para seu habito',
+                'Adicione um dia e horario para seu habito',
+                [
+                    {text: 'OK', onPress: () => console.log('OK Pressed')},
+                ],
+                { cancelable: false });
+      }
+      else{
      this.user[0].habitos.push({
         titulo: this.nomeHabito,
         xp: 100,
@@ -329,29 +341,10 @@ export default {
       
 
 
-      /*console.log("------------Inicio Reiniciar Usuario-------------");
-
-      AsyncStorage.clear().then(()=>{
-        console.log(" ");
-        console.log(" ");
-        console.log("Usuario: "+JSON.stringify(this.user));
-        console.log(" ");
-        console.log(" ");
-        this.user = constUser;
-        console.log("Usuário Reiniciado");
-      })
-      .catch(()=>{
-        console.log(" ");
-        console.log(" ");
-        console.log("Não foi possível Reiniciar o Usuario")
-        console.log(" ");
-        console.log(" ");
-      })
-
-      console.log("------------Fim Reiniciar Usuario-------------");*/
-
+     
 
       this.navigation.navigate("AndroidTabs");
+    }
     },
   },
 };

@@ -78,14 +78,16 @@ export default {
                 'Reset de Usuario',
                 'Você tem certeza que deseja resetar?',
                 [   {text: 'Cancelar', onPress: () => this.resetar = false, style: 'cancel'},
-                    {text: 'Confirmar', onPress: () => {console.log("------------Inicio Reiniciar Usuario-------------");
+                    {text: 'Confirmar', onPress: () => {
+
+                      console.log("------------Inicio Reiniciar Usuario-------------");
 
       AsyncStorage.clear().then(()=>{
         console.log(" ");
         console.log(" ");
         console.log("Usuário Reiniciado");
         this.resetar = false;
-        this.navigation.navigate("inicio","teste");
+        
       })
       .catch(()=>{
         console.log(" ");
@@ -97,10 +99,94 @@ export default {
       
       console.log("------------Fim Reiniciar Usuario-------------");
 
+      this.user = [
+  {
+    nome: 'Zé Monstrão',
+    xpTotal: '1500',
+    habitos: [
+      {
+        titulo: 'Corrida com cachorro',
+        xp: 100,
+        rotinaSemanal: [
+          { //baseado em objetos tipo Date
+            diaSetado: 1, //getDay()     
+            horaSetada: 10, //getHour()
+            minutoSetado: 15, //getMinute()
+            notificar: true,
+            completado: false,
+          },
+          { //baseado em objetos tipo Date
+            diaSetado: 3, //getDay()     
+            horaSetada: 13, //getHour()
+            minutoSetado: 18, //getMinute()
+            notificar: true,
+            completado: false,
+          },
+          { //baseado em objetos tipo Date
+            diaSetado: 4, //getDay()     
+            horaSetada: 15, //getHour()
+            minutoSetado: 19, //getMinute()
+            notificar: true,
+            completado: false,
+          },
+        ],
+      },
+      {
+        titulo: 'Futebol',
+        xp: 100,
+        rotinaSemanal: [
+          { //baseado em objetos tipo Date
+            diaSetado: 1, //getDay()     
+            horaSetada: 10, //getHour()
+            minutoSetado: 15, //getMinute()
+            notificar: true,
+            completado: false,
+          },
+          { //baseado em objetos tipo Date
+            diaSetado: 3, //getDay()     
+            horaSetada: 13, //getHour()
+            minutoSetado: 18, //getMinute()
+            notificar: true,
+            completado: false,
+          },
+          { //baseado em objetos tipo Date
+            diaSetado: 4, //getDay()     
+            horaSetada: 15, //getHour()
+            minutoSetado: 19, //getMinute()
+            notificar: true,
+            completado: false,
+          },
+        ],
+      }
+    ],
+  }
+]
+this.salvarUsuario = JSON.stringify(this.user);
+
+      AsyncStorage.setItem("Usuario", this.salvarUsuario)
+        .then(() => {
+          console.log(" ");
+          console.log(" ");
+          console.log("Usuario: " + this.salvarUsuario);
+          console.log(" ");
+          console.log(" ");
+          console.log("Usuário Atualizado");
+          this.navigation.navigate("inicio","teste");
+        })
+        .catch(() => {
+          console.log(" ");
+          console.log(" ");
+          console.log("Não foi possível atualizar o Usuario");
+          console.log(" ");
+          console.log(" ");
+        });
+        
     }},
                 ],
                 { cancelable: false });
     },
+
+
     trocarNomeUsuario: function() {
 
      this.user[0].nome = this.nomeUsuario;
@@ -117,6 +203,7 @@ export default {
           console.log(" ");
           console.log(" ");
           console.log("Usuário Atualizado");
+          this.navigation.navigate("inicio","teste");
         })
         .catch(() => {
           console.log(" ");

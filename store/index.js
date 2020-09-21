@@ -44,7 +44,7 @@ export default new Vuex.Store({
       return new Promise(function (resolve, reject) {
         setTimeout(async () => {
           try {
-            const usuarioParsed = await AsyncStorage.getItem("Usuario");
+            const usuarioParsed = JSON.parse(await AsyncStorage.getItem("Usuario"));
             let user = 'a';
             console.log("ENTROU NO TRY")
             if (usuarioParsed) {

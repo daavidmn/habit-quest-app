@@ -46,10 +46,6 @@
 </template>
 
 <script>
-//import Habitviewer from "../components/Habitviewer";
-//import ActionButton from "react-native-action-button";
-//import { constUser } from "../consts/user";
-//import { AsyncStorage } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 export default {

@@ -73,6 +73,9 @@ const BottomTabNavigator = createBottomTabNavigator(
     },
   },
   {
+    navigationOptions: {
+      header: null,
+    },
     initialRouteName: "inicio",
     tabBarOptions: {
       activeTintColor: "#fff",

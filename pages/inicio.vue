@@ -30,7 +30,7 @@
         <view class="scroll-box">
           <view v-for="(habito, key) in (user[0].habitos)" :key="key">
             <view v-for="(rotina, chave) in habito.rotinaSemanal" :key="chave">
-              <Habitviewer :title="habito.titulo" :xp="habito.xp" :hora="rotina.horaSetada" />
+              <Habitviewer :title="habito.titulo" :xp="habito.xp" :hora="rotina.horaSetada" :minutos="rotina.minutoSetado"/>
             </view>
           </view>
         </view>
@@ -65,22 +65,50 @@ export default {
     };
   },
   created() {
-    // EXEMPLO DE ASYNC STORAGE
-    // AsyncStorage.getItem("email").then((val) => {
-    //   if (val) {
-    //     this.loaded = true;
-    //     this.navigation.navigate("amigos");
-    //     store.dispatch("SET_USER", { userObj: { email: val } });
-    //   } else {
-    //     //ELE TÁ VINDO PRA O ELSE
-    //     this.loaded = true;
-    //     this.navigation.navigate("config");
-    //   }
-    // });
-    // console.log(this.loaded);
 
-    this.user = constUser;
-    console.log("teste");
+
+    AsyncStorage.getItem("Usuario")
+      .then((usuarioSalvo) => {
+        const usuarioParsed = JSON.parse(usuarioSalvo);
+        if (usuarioParsed) {
+
+          this.user = usuarioParsed;
+
+          console.log(" ");
+          console.log("RECEBIDO USUARIO: " + JSON.stringify((this.user)));
+          console.log(" ");
+          console.log("Usuario: " + this.user[0].nome);
+          console.log(" ");
+          console.log("Habito: " + JSON.stringify(this.habitos));
+          console.log(" ");
+          console.log("Rotina Semanal: " + JSON.stringify(this.rotinaSemanal));
+          console.log(" ");
+
+        } else {
+
+          console.log(" ");
+          console.log("USUARIO NÃO RECEBIDO");
+          console.log(" ");
+
+          this.user = constUser;
+
+          console.log("USARIO PADRÃO CARREGADO: "+JSON.stringify(this.user));
+          console.log(" ");
+          console.log("Usuario: " + this.user[0].nome);
+          console.log(" ");
+          console.log("Habito: " + JSON.stringify(this.habitos));
+          console.log(" ");
+          console.log("Rotina Semanal: " + JSON.stringify(this.rotinaSemanal));
+          console.log(" ");
+        }
+      })
+      .catch(() => {
+        console.log(" ");
+        console.log("Deu errado no Recebimento de Usuario");
+        console.log(" ");
+      });
+      
+
   },
   props: {
     navigation: {

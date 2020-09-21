@@ -12,7 +12,7 @@
       </view>
       <view class="below-text">
         <view>
-          <text>{{ hora }}:{{hora}}</text>
+          <text>{{ hora }}:{{minutos}}</text>
         </view>
       </view>
     </view>
@@ -28,7 +28,7 @@ export default {
   components: {
     MaterialCommunityIcons,
   },
-  props: ["title", "xp", "hora"],
+  props: ["title", "xp", "hora", "minutos"],
 };
 </script>
 

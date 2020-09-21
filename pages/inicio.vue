@@ -69,7 +69,47 @@ export default {
   },
   created() {
 
-    this.user = constUser;
+    AsyncStorage.getItem("Usuario")
+      .then((usuarioSalvo) => {
+        const usuarioParsed = JSON.parse(usuarioSalvo);
+        if (usuarioParsed) {
+
+          this.user = usuarioParsed;
+
+          console.log(" ");
+          console.log("RECEBIDO USUARIO: " + JSON.stringify((this.user)));
+          console.log(" ");
+          console.log("Usuario: " + this.user[0].nome);
+          console.log(" ");
+          console.log("Habito: " + JSON.stringify(this.habitos));
+          console.log(" ");
+          console.log("Rotina Semanal: " + JSON.stringify(this.rotinaSemanal));
+          console.log(" ");
+
+        } else {
+
+          console.log(" ");
+          console.log("USUARIO NÃO RECEBIDO");
+          console.log(" ");
+
+          this.user = constUser;
+
+          console.log("USARIO PADRÃO CARREGADO: "+JSON.stringify(this.user));
+          console.log(" ");
+          console.log("Usuario: " + this.user[0].nome);
+          console.log(" ");
+          console.log("Habito: " + JSON.stringify(this.habitos));
+          console.log(" ");
+          console.log("Rotina Semanal: " + JSON.stringify(this.rotinaSemanal));
+          console.log(" ");
+        }
+      })
+      .catch(() => {
+        console.log(" ");
+        console.log("Deu errado no Recebimento de Usuario");
+        console.log(" ");
+      });
+      
   },
   props: {
     navigation: {

@@ -145,7 +145,7 @@ export default {
 
       
       this.habitos = constHabitos;
-      this.rotinaSemanal = this.habitos[this.habitoId].rotinaSemanal;
+      this.rotinaSemanal = [];
       this.nomeHabito = this.habitos[0].titulo;
 
 
@@ -153,7 +153,9 @@ export default {
       .then((usuarioSalvo) => {
         const usuarioParsed = JSON.parse(usuarioSalvo);
         if (usuarioParsed) {
+
           this.user = usuarioParsed;
+
           console.log(" ");
           console.log("RECEBIDO USUARIO: " + JSON.stringify((this.user)));
           console.log(" ");
@@ -163,7 +165,9 @@ export default {
           console.log(" ");
           console.log("Rotina Semanal: " + JSON.stringify(this.rotinaSemanal));
           console.log(" ");
+
         } else {
+
           console.log(" ");
           console.log("USUARIO NÃO RECEBIDO");
           console.log(" ");
@@ -226,6 +230,7 @@ export default {
       console.log(" ");
 
       console.log("Antiga Rotina Semanal do habito: "+this.nomeHabito);
+
       console.log(JSON.stringify(this.habitos[this.habitoId].rotinaSemanal));
 
       console.log(" ");
@@ -292,7 +297,7 @@ export default {
       this.salvarUsuario = JSON.stringify(this.user);
 
 
-      AsyncStorage.setItem("Usuario",this.salvarUsuario).then(()=>{
+      /*AsyncStorage.setItem("Usuario",this.salvarUsuario).then(()=>{
         console.log(" ");
         console.log(" ");
         console.log("Usuario: "+this.salvarUsuario);
@@ -307,7 +312,7 @@ export default {
         console.log(" ");
         console.log(" ");
       })
-      console.log("------------Fim Atualizar Usuario-------------");
+      console.log("------------Fim Atualizar Usuario-------------");*/
       
 
 

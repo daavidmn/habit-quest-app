@@ -16,6 +16,7 @@ import pgColecao from "./pages/colecao.vue";
 import pgAmigos from "./pages/amigos.vue";
 import pgExpedicao from "./pages/expedicao.vue";
 import pgConfig from "./pages/config.vue";
+import pgModificarHabito from "./pages/modificarHabito.vue";
 import React from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { StatusBar } from "react-native";
@@ -111,7 +112,20 @@ const StackNavigator = createStackNavigator(
       screen: pgCadastroHabito,
       navigationOptions: {
         title: "Criar Hábito",
-      },
+      },},
+      modificarHabito: {
+      screen: pgModificarHabito,
+      navigationOptions: {
+        title: "Modificar Hábito",
+        
+              },
+    },
+          inicio: {
+      screen: pgInicio,
+      navigationOptions: {
+        title: "Início",
+        
+              },
     },
   },
   {

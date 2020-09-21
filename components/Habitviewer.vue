@@ -3,7 +3,9 @@
     <view class="check-container">
       <view class="check-box"></view>
     </view>
+
     <view class="texts">
+      <touchable-opacity :on-press="() => goToModificar()">
       <view class="above-text">
         <view class="description">
           <text class="title">{{ title }}</text>
@@ -12,10 +14,13 @@
       </view>
       <view class="below-text">
         <view>
-          <text>{{ hora }}:{{minutos}}</text>
+          <text>{{ hora }}:{{minutos}}         Dia: {{dia}}</text>
         </view>
       </view>
+      </touchable-opacity>
     </view>
+  
+
     <view class="sequence">
       <MaterialCommunityIcons name="fire" :size="40" color="#d3d3d3" />
     </view>
@@ -28,7 +33,14 @@ export default {
   components: {
     MaterialCommunityIcons,
   },
-  props: ["title", "xp", "hora", "minutos"],
+  methods: {
+        goToModificar() {
+      this.navigation.push("modificarHabito");
+    },
+
+  },
+  props: ["title", "xp", "hora", "minutos", "dia", "rotinaId", "navigation"],
+
 };
 </script>
 
@@ -37,7 +49,7 @@ export default {
   margin-bottom: 10px;
   width: 350px;
   height: 82px;
-  background-color: #f0f0f0;
+  background-color: #f0f0f0; 
   border-radius: 16px;
   flex-direction: row;
 }

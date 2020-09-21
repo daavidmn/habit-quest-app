@@ -68,19 +68,6 @@ export default {
     };
   },
   created() {
-    // EXEMPLO DE ASYNC STORAGE
-    // AsyncStorage.getItem("email").then((val) => {
-    //   if (val) {
-    //     this.loaded = true;
-    //     this.navigation.navigate("amigos");
-    //     store.dispatch("SET_USER", { userObj: { email: val } });
-    //   } else {
-    //     //ELE TÁ VINDO PRA O ELSE
-    //     this.loaded = true;
-    //     this.navigation.navigate("config");
-    //   }
-    // });
-    // console.log(this.loaded);
 
     this.user = constUser;
   },

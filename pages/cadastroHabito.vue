@@ -143,7 +143,7 @@ export default {
       console.log(" ");
       this.habitoId=0;
 
-      this.user = constUser;
+      
       this.habitos = constHabitos;
       this.rotinaSemanal = this.habitos[this.habitoId].rotinaSemanal;
       this.nomeHabito = this.habitos[0].titulo;
@@ -165,12 +165,12 @@ export default {
           console.log(" ");
         } else {
           console.log(" ");
-
           console.log("USUARIO NÃO RECEBIDO");
           console.log(" ");
 
           this.user = constUser;
-          console.log("USARIO PADRÃO CARREGADO: "+JSON.stringify(constUser));
+
+          console.log("USARIO PADRÃO CARREGADO: "+JSON.stringify(this.user));
           console.log(" ");
           console.log("Usuario: " + this.user[0].nome);
           console.log(" ");
@@ -286,8 +286,7 @@ export default {
       this.horaTemp = "";
       this.minutoTemp = "";
 
-      this.salvarUsuario = JSON.stringify(this.user);
-    
+          
       console.log("------------Inicio Atualizar Usuario-------------");
       
       this.salvarUsuario = JSON.stringify(this.user);
@@ -333,9 +332,6 @@ export default {
 
       console.log("------------Fim Reiniciar Usuario-------------");*/
 
-      this.user = constUser;
-      this.habitos=constHabitos;
-      this.rotinaSemanal=constHabitos[this.habitoId].rotinaSemanal;
 
       this.navigation.navigate("AndroidTabs");
     },

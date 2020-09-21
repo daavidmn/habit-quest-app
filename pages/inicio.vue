@@ -25,12 +25,12 @@
     <!-- <text :style="{fontSize: 10}">{{user[0].habitos[1]}}</text> -->
     <!-- <text :style="{fontSize: 10}">{{console.log(user[0].habitos)}}</text> -->
 
-    <view class="weekbar"><text>{{user[0].nome}}</text></view>
+    <view class="weekbar"><text>{{userr[0].nome}}</text></view>
 
     <view class="habits">
       <ScrollView :fadingEdgeLength="0" :showsVerticalScrollIndicator="false">
         <view class="scroll-box">
-          <view v-for="(habito, key) in (userr[0].habitos)" :key="key">
+          <view v-for="(habito, key) in (user[0].habitos)" :key="key">
             <view v-for="(rotina, chave) in habito.rotinaSemanal" :key="chave">
 
               
@@ -84,6 +84,7 @@ export default {
 
 
   created() {
+
     this.$store.dispatch("fetchUsuario");
 
     AsyncStorage.getItem("Usuario")

@@ -196,9 +196,35 @@ this.salvarUsuario = JSON.stringify(this.user);
 
     trocarNomeUsuario: function() {
 
+      AsyncStorage.getItem("Usuario")
+      .then((usuarioSalvo) => {
+        const usuarioParsed = JSON.parse(usuarioSalvo);
+        if (usuarioParsed) {
+
+          this.user = usuarioParsed;
+
+          
+
+        } else {
+
+          console.log(" ");
+          console.log("USUARIO NÃO RECEBIDO");
+          console.log(" ");
+
+         
+        }
+      })
+      .catch(() => {
+        console.log(" ");
+        console.log("Deu errado no Recebimento de Usuario");
+        console.log(" ");
+      });
+
      this.user[0].nome = this.nomeUsuario;
 
       console.log("------------Inicio Alterar Nome Usuario-------------");
+
+
 
       this.salvarUsuario = JSON.stringify(this.user);
 
@@ -210,7 +236,7 @@ this.salvarUsuario = JSON.stringify(this.user);
           console.log(" ");
           console.log(" ");
           console.log("Usuário Atualizado");
-          this.navigation.navigate("inicio","teste");
+          
         })
         .catch(() => {
           console.log(" ");
@@ -225,7 +251,7 @@ this.salvarUsuario = JSON.stringify(this.user);
                 'Seu nome foi alterado',
                 'Nome alterado com sucesso',
                 [
-                    {text: 'OK', onPress: () => console.log('OK Pressed')},
+                    {text: 'OK', onPress: () => this.navigation.navigate("inicio","teste")},
                 ],
                 { cancelable: false }
             );

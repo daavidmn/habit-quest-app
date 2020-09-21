@@ -34,4 +34,4 @@ expo start
 ```
 Inicie o emulador android no Android Studio ou o app Expo no seu celular (Android ou IOS).
 A interface visual do expo irá abrir no navegador, a partir de lá você pode selecionar para rodar o projeto pela sua preferência .
-Entretando você também pode simplesmente apertar o atalho <kbd>a</kbd> no cmd / terminal para iniciar a aplicação no emulador Android.
+Entretanto, você também pode simplesmente apertar o atalho <kbd>a</kbd> no cmd / terminal para iniciar a aplicação no emulador Android.

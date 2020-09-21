@@ -23,7 +23,8 @@
     "react-native-web": "~0.11.7",
     "vue-native-core": "^0.1.4",
     "vue-native-helper": "^0.1.4",
-    "vue-native-router": "^0.1.1"
+    "vue-native-router": "^0.1.1",
+    "vuex": "^3.5.1"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",

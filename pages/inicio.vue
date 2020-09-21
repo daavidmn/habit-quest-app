@@ -24,13 +24,20 @@
 
     <!-- <text :style="{fontSize: 10}">{{user[0].habitos[1]}}</text> -->
     <!-- <text :style="{fontSize: 10}">{{console.log(user[0].habitos)}}</text> -->
-    <view class="weekbar"></view>
+    <view class="weekbar">
+      <text>{{ userr }}</text>
+    </view>
     <view class="habits">
       <ScrollView :fadingEdgeLength="0" :showsVerticalScrollIndicator="false">
         <view class="scroll-box">
           <view v-for="(habito, key) in (user[0].habitos)" :key="key">
             <view v-for="(rotina, chave) in habito.rotinaSemanal" :key="chave">
-              <Habitviewer :title="habito.titulo" :xp="habito.xp" :hora="rotina.horaSetada" :minutos="rotina.minutoSetado"/>
+              <Habitviewer
+                :title="habito.titulo"
+                :xp="habito.xp"
+                :hora="rotina.horaSetada"
+                :minutos="rotina.minutoSetado"
+              />
             </view>
           </view>
         </view>
@@ -52,6 +59,11 @@ import { constUser } from "../consts/user";
 import { AsyncStorage } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
+import store from "../store";
+import Vue from "vue-native-core";
+
+Vue.prototype.$store = store;
+
 export default {
   components: {
     Habitviewer,
@@ -64,51 +76,23 @@ export default {
       user: "asasdaa",
     };
   },
+  computed: {
+    userr() {
+      return this.$store.state.user;
+    },
+  },
   created() {
-
-
-    AsyncStorage.getItem("Usuario")
-      .then((usuarioSalvo) => {
-        const usuarioParsed = JSON.parse(usuarioSalvo);
-        if (usuarioParsed) {
-
-          this.user = usuarioParsed;
-
-          console.log(" ");
-          console.log("RECEBIDO USUARIO: " + JSON.stringify((this.user)));
-          console.log(" ");
-          console.log("Usuario: " + this.user[0].nome);
-          console.log(" ");
-          console.log("Habito: " + JSON.stringify(this.habitos));
-          console.log(" ");
-          console.log("Rotina Semanal: " + JSON.stringify(this.rotinaSemanal));
-          console.log(" ");
-
-        } else {
-
-          console.log(" ");
-          console.log("USUARIO NÃO RECEBIDO");
-          console.log(" ");
-
-          this.user = constUser;
-
-          console.log("USARIO PADRÃO CARREGADO: "+JSON.stringify(this.user));
-          console.log(" ");
-          console.log("Usuario: " + this.user[0].nome);
-          console.log(" ");
-          console.log("Habito: " + JSON.stringify(this.habitos));
-          console.log(" ");
-          console.log("Rotina Semanal: " + JSON.stringify(this.rotinaSemanal));
-          console.log(" ");
-        }
-      })
-      .catch(() => {
-        console.log(" ");
-        console.log("Deu errado no Recebimento de Usuario");
-        console.log(" ");
-      });
-      
-
+    this.$store.dispatch("fetchUsuario");
+    // AsyncStorage.getItem("Usuario")
+    //   .then((usuarioSalvo) => {
+    //     const usuarioParsed = JSON.parse(usuarioSalvo);
+    //     if (usuarioParsed) {
+    //       this.user = usuarioParsed;
+    //     } else {
+    //       this.user = constUser;
+    //     }
+    //   })
+    //   .catch(() => {});
   },
   props: {
     navigation: {

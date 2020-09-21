@@ -1,7 +1,7 @@
 <template>
   <view class="app">
     <text>Pagina amigos</text>
-    <button title="ir para o inicio" :on-press="goToPage" :navigation="this.props.navigation" />
+    <button title="ir para expedicao" :on-press="goToPage" :navigation="this.props.navigation" />
   </view>
 </template>
 
@@ -14,7 +14,7 @@ export default {
   },
   methods: {
     goToPage() {
-      this.navigation.navigate("inicio");
+      this.navigation.navigate("expedicao", "teste");
     },
   },
 };

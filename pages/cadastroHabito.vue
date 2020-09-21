@@ -110,6 +110,7 @@
 import { constUser } from "../consts/user";
 import { constHabitos } from "../consts/habitos";
 import { AsyncStorage } from "react-native";
+import { Alert } from "react-native";
 import HabitScreenBox from "../components/HabitScreenBox";
 export default {
   components: {
@@ -141,6 +142,7 @@ export default {
       console.log("------------Inicializando Informações-------------");
       console.log(" ");
       console.log(" ");
+
       this.habitoId=0;
 
       
@@ -234,15 +236,26 @@ export default {
       console.log(JSON.stringify(this.habitos[this.habitoId].rotinaSemanal));
 
       console.log(" ");
-      console.log(" ");
+      console.log(" "); 
+      
+      if (this.diaTemp==""||this.horaTemp==""||this.minutoTemp==""){
 
+        Alert.alert(
+                'Valor Invalido',
+                'Adicione valores validos para o habito',
+                [
+                    {text: 'OK', onPress: () => console.log('OK Pressed')},
+                ],
+                { cancelable: false });
+      }
+      else{
       this.rotinaSemanal.push({
         diaSetado: this.diaTemp,
         horaSetada: this.horaTemp,
         minutoSetado: this.minutoTemp,
         notificar: false,
         completado: false,
-      });
+      });}
 
       
 
@@ -297,7 +310,7 @@ export default {
       this.salvarUsuario = JSON.stringify(this.user);
 
 
-      /*AsyncStorage.setItem("Usuario",this.salvarUsuario).then(()=>{
+      AsyncStorage.setItem("Usuario",this.salvarUsuario).then(()=>{
         console.log(" ");
         console.log(" ");
         console.log("Usuario: "+this.salvarUsuario);
@@ -312,7 +325,7 @@ export default {
         console.log(" ");
         console.log(" ");
       })
-      console.log("------------Fim Atualizar Usuario-------------");*/
+      console.log("------------Fim Atualizar Usuario-------------");
       
 
 

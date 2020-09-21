@@ -73,22 +73,15 @@ export default {
       Alert.alert(
                 'Reset de Usuario',
                 'Você tem certeza que deseja resetar?',
-                [   {text: 'Cancelar', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
-                    {text: 'Confirmar', onPress: () => this.resetar = true},
-                ],
-                { cancelable: false });
-
-
-      if (this.resetar) {
-      console.log("------------Inicio Reiniciar Usuario-------------");
+                [   {text: 'Cancelar', onPress: () => this.resetar = false, style: 'cancel'},
+                    {text: 'Confirmar', onPress: () => {console.log("------------Inicio Reiniciar Usuario-------------");
 
       AsyncStorage.clear().then(()=>{
         console.log(" ");
         console.log(" ");
-        console.log("Usuario: "+JSON.stringify(this.user));
-        console.log(" ");
-        console.log(" ");
         console.log("Usuário Reiniciado");
+        this.resetar = false;
+        this.navigation.navigate("inicio","teste");
       })
       .catch(()=>{
         console.log(" ");
@@ -97,9 +90,15 @@ export default {
         console.log(" ");
         console.log(" ");
       })
-
+      
       console.log("------------Fim Reiniciar Usuario-------------");
-    }
+
+    }},
+                ],
+                { cancelable: false });
+
+
+
 
     }
   },

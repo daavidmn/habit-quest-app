@@ -30,7 +30,9 @@
         <view class="scroll-box">
           <view v-for="(habito, key) in (user[0].habitos)" :key="key">
             <view v-for="(rotina, chave) in habito.rotinaSemanal" :key="chave">
-              <Habitviewer :title="habito.titulo" :xp="habito.xp" :hora="rotina.horaSetada" :minutos="rotina.minutoSetado"/>
+              
+              <Habitviewer :title="habito.titulo" :xp="habito.xp" :hora="rotina.horaSetada" :minutos="rotina.minutoSetado" :dia="rotina.diaSetado" :rotinaId="key" :navigation="navigation" />
+            
             </view>
           </view>
         </view>
@@ -58,13 +60,15 @@ export default {
     ActionButton,
     MaterialCommunityIcons,
   },
+  
   data() {
     return {
       loaded: false,
       user: "asasdaa",
     };
   },
-  created() {
+
+  mounted() {
 
 
     AsyncStorage.getItem("Usuario")
@@ -90,7 +94,68 @@ export default {
           console.log("USUARIO NÃO RECEBIDO");
           console.log(" ");
 
-          this.user = constUser;
+          this.user = [
+  {
+    nome: 'Zé Monstrão',
+    xpTotal: '1500',
+    habitos: [
+      {
+        titulo: 'Corrida com cachorro',
+        xp: 100,
+        rotinaSemanal: [
+          { //baseado em objetos tipo Date
+            diaSetado: 1, //getDay()     
+            horaSetada: 10, //getHour()
+            minutoSetado: 15, //getMinute()
+            notificar: true,
+            completado: false,
+          },
+          { //baseado em objetos tipo Date
+            diaSetado: 3, //getDay()     
+            horaSetada: 13, //getHour()
+            minutoSetado: 18, //getMinute()
+            notificar: true,
+            completado: false,
+          },
+          { //baseado em objetos tipo Date
+            diaSetado: 4, //getDay()     
+            horaSetada: 15, //getHour()
+            minutoSetado: 19, //getMinute()
+            notificar: true,
+            completado: false,
+          },
+        ],
+      },
+      {
+        titulo: 'Futebol',
+        xp: 100,
+        rotinaSemanal: [
+          { //baseado em objetos tipo Date
+            diaSetado: 1, //getDay()     
+            horaSetada: 10, //getHour()
+            minutoSetado: 15, //getMinute()
+            notificar: true,
+            completado: false,
+          },
+          { //baseado em objetos tipo Date
+            diaSetado: 3, //getDay()     
+            horaSetada: 13, //getHour()
+            minutoSetado: 18, //getMinute()
+            notificar: true,
+            completado: false,
+          },
+          { //baseado em objetos tipo Date
+            diaSetado: 4, //getDay()     
+            horaSetada: 15, //getHour()
+            minutoSetado: 19, //getMinute()
+            notificar: true,
+            completado: false,
+          },
+        ],
+      }
+    ],
+  }
+];
 
           console.log("USARIO PADRÃO CARREGADO: "+JSON.stringify(this.user));
           console.log(" ");
@@ -109,6 +174,113 @@ export default {
       });
       
 
+  },
+  watch: {
+    navigation() {
+      // watch it
+      console.log("MUDOU");
+      AsyncStorage.getItem("Usuario")
+      .then((usuarioSalvo) => {
+        const usuarioParsed = JSON.parse(usuarioSalvo);
+        if (usuarioParsed) {
+
+          this.user = usuarioParsed;
+
+          console.log(" ");
+          console.log("RECEBIDO USUARIO: " + JSON.stringify((this.user)));
+          console.log(" ");
+          console.log("Usuario: " + this.user[0].nome);
+          console.log(" ");
+          console.log("Habito: " + JSON.stringify(this.habitos));
+          console.log(" ");
+          console.log("Rotina Semanal: " + JSON.stringify(this.rotinaSemanal));
+          console.log(" ");
+
+        } else {
+
+          console.log(" ");
+          console.log("USUARIO NÃO RECEBIDO");
+          console.log(" ");
+
+           this.user = [
+  {
+    nome: 'Zé Monstrão',
+    xpTotal: '1500',
+    habitos: [
+      {
+        titulo: 'Corrida com cachorro',
+        xp: 100,
+        rotinaSemanal: [
+          { //baseado em objetos tipo Date
+            diaSetado: 1, //getDay()     
+            horaSetada: 10, //getHour()
+            minutoSetado: 15, //getMinute()
+            notificar: true,
+            completado: false,
+          },
+          { //baseado em objetos tipo Date
+            diaSetado: 3, //getDay()     
+            horaSetada: 13, //getHour()
+            minutoSetado: 18, //getMinute()
+            notificar: true,
+            completado: false,
+          },
+          { //baseado em objetos tipo Date
+            diaSetado: 4, //getDay()     
+            horaSetada: 15, //getHour()
+            minutoSetado: 19, //getMinute()
+            notificar: true,
+            completado: false,
+          },
+        ],
+      },
+      {
+        titulo: 'Futebol',
+        xp: 100,
+        rotinaSemanal: [
+          { //baseado em objetos tipo Date
+            diaSetado: 1, //getDay()     
+            horaSetada: 10, //getHour()
+            minutoSetado: 15, //getMinute()
+            notificar: true,
+            completado: false,
+          },
+          { //baseado em objetos tipo Date
+            diaSetado: 3, //getDay()     
+            horaSetada: 13, //getHour()
+            minutoSetado: 18, //getMinute()
+            notificar: true,
+            completado: false,
+          },
+          { //baseado em objetos tipo Date
+            diaSetado: 4, //getDay()     
+            horaSetada: 15, //getHour()
+            minutoSetado: 19, //getMinute()
+            notificar: true,
+            completado: false,
+          },
+        ],
+      }
+    ],
+  }
+];
+
+          console.log("USARIO PADRÃO CARREGADO: "+JSON.stringify(this.user));
+          console.log(" ");
+          console.log("Usuario: " + this.user[0].nome);
+          console.log(" ");
+          console.log("Habito: " + JSON.stringify(this.habitos));
+          console.log(" ");
+          console.log("Rotina Semanal: " + JSON.stringify(this.rotinaSemanal));
+          console.log(" ");
+        }
+      })
+      .catch(() => {
+        console.log(" ");
+        console.log("Deu errado no Recebimento de Usuario");
+        console.log(" ");
+      });
+    },
   },
   props: {
     navigation: {

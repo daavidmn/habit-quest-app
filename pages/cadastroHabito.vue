@@ -118,8 +118,8 @@ export default {
   },
   data() {
     return {
-      user: "",
-      habitos: "",
+      user: constUser,
+      habitos: constHabitos,
       rotinaSemanal: [],
       nomeHabito: "",
       modalDiaVisible: false,
@@ -145,15 +145,6 @@ export default {
 
       this.habitoId=0;
 
-      
-      this.habitos = [
-  {
-    titulo: 'Novo Habito',
-    xp: 100,
-    rotinaSemanal: [
-    ],
-  },
-];
       this.rotinaSemanal = [];
       this.nomeHabito = this.habitos[0].titulo;
 
@@ -180,70 +171,6 @@ export default {
           console.log(" ");
           console.log("USUARIO NÃO RECEBIDO");
           console.log(" ");
-
-          this.user = [
-  {
-    nome: 'Zé Monstrão',
-    xpTotal: '1500',
-    habitos: [
-      {
-        titulo: 'Corrida com cachorro',
-        xp: 100,
-        rotinaSemanal: [
-          { //baseado em objetos tipo Date
-            diaSetado: 1, //getDay()     
-            horaSetada: 10, //getHour()
-            minutoSetado: 15, //getMinute()
-            notificar: true,
-            completado: false,
-          },
-          { //baseado em objetos tipo Date
-            diaSetado: 3, //getDay()     
-            horaSetada: 13, //getHour()
-            minutoSetado: 18, //getMinute()
-            notificar: true,
-            completado: false,
-          },
-          { //baseado em objetos tipo Date
-            diaSetado: 4, //getDay()     
-            horaSetada: 15, //getHour()
-            minutoSetado: 19, //getMinute()
-            notificar: true,
-            completado: false,
-          },
-        ],
-      },
-      {
-        titulo: 'Futebol',
-        xp: 100,
-        rotinaSemanal: [
-          { //baseado em objetos tipo Date
-            diaSetado: 1, //getDay()     
-            horaSetada: 10, //getHour()
-            minutoSetado: 15, //getMinute()
-            notificar: true,
-            completado: false,
-          },
-          { //baseado em objetos tipo Date
-            diaSetado: 3, //getDay()     
-            horaSetada: 13, //getHour()
-            minutoSetado: 18, //getMinute()
-            notificar: true,
-            completado: false,
-          },
-          { //baseado em objetos tipo Date
-            diaSetado: 4, //getDay()     
-            horaSetada: 15, //getHour()
-            minutoSetado: 19, //getMinute()
-            notificar: true,
-            completado: false,
-          },
-        ],
-      }
-    ],
-  }
-];
-
 
           console.log("USARIO PADRÃO CARREGADO: "+JSON.stringify(this.user));
 

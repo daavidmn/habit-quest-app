@@ -35,7 +35,7 @@ export default {
   },
   methods: {
         goToModificar() {
-      this.navigation.navigate("modificarHabito");
+      this.navigation.push("modificarHabito");
     },
 
   },

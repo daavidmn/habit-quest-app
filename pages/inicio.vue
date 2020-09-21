@@ -24,7 +24,7 @@
 
     <!-- <text :style="{fontSize: 10}">{{user[0].habitos[1]}}</text> -->
     <!-- <text :style="{fontSize: 10}">{{console.log(user[0].habitos)}}</text> -->
-    <view class="weekbar"></view>
+    <view class="weekbar"><text>{{user[0].nome}}</text></view>
     <view class="habits">
       <ScrollView :fadingEdgeLength="0" :showsVerticalScrollIndicator="false">
         <view class="scroll-box">
@@ -64,7 +64,7 @@ export default {
   data() {
     return {
       loaded: false,
-      user: "asasdaa",
+      user: constUser,
     };
   },
 
@@ -79,97 +79,27 @@ export default {
           this.user = usuarioParsed;
 
           console.log(" ");
-          console.log("RECEBIDO USUARIO: " + JSON.stringify((this.user)));
+          console.log("RECEBIDO USUARIO TELA INICIAL: " + JSON.stringify((this.user)));
           console.log(" ");
           console.log("Usuario: " + this.user[0].nome);
-          console.log(" ");
-          console.log("Habito: " + JSON.stringify(this.habitos));
-          console.log(" ");
-          console.log("Rotina Semanal: " + JSON.stringify(this.rotinaSemanal));
           console.log(" ");
 
         } else {
 
           console.log(" ");
-          console.log("USUARIO NÃO RECEBIDO");
+          console.log("USUARIO NÃO RECEBIDO TELA INICIAL");
           console.log(" ");
 
-          this.user = [
-  {
-    nome: 'Zé Monstrão',
-    xpTotal: '1500',
-    habitos: [
-      {
-        titulo: 'Corrida com cachorro',
-        xp: 100,
-        rotinaSemanal: [
-          { //baseado em objetos tipo Date
-            diaSetado: 1, //getDay()     
-            horaSetada: 10, //getHour()
-            minutoSetado: 15, //getMinute()
-            notificar: true,
-            completado: false,
-          },
-          { //baseado em objetos tipo Date
-            diaSetado: 3, //getDay()     
-            horaSetada: 13, //getHour()
-            minutoSetado: 18, //getMinute()
-            notificar: true,
-            completado: false,
-          },
-          { //baseado em objetos tipo Date
-            diaSetado: 4, //getDay()     
-            horaSetada: 15, //getHour()
-            minutoSetado: 19, //getMinute()
-            notificar: true,
-            completado: false,
-          },
-        ],
-      },
-      {
-        titulo: 'Futebol',
-        xp: 100,
-        rotinaSemanal: [
-          { //baseado em objetos tipo Date
-            diaSetado: 1, //getDay()     
-            horaSetada: 10, //getHour()
-            minutoSetado: 15, //getMinute()
-            notificar: true,
-            completado: false,
-          },
-          { //baseado em objetos tipo Date
-            diaSetado: 3, //getDay()     
-            horaSetada: 13, //getHour()
-            minutoSetado: 18, //getMinute()
-            notificar: true,
-            completado: false,
-          },
-          { //baseado em objetos tipo Date
-            diaSetado: 4, //getDay()     
-            horaSetada: 15, //getHour()
-            minutoSetado: 19, //getMinute()
-            notificar: true,
-            completado: false,
-          },
-        ],
-      }
-    ],
-  }
-];
-
-          console.log("USARIO PADRÃO CARREGADO: "+JSON.stringify(this.user));
+          console.log("USARIO PADRÃO CARREGADO TELA INICIAL: "+JSON.stringify(this.user));
           console.log(" ");
           console.log("Usuario: " + this.user[0].nome);
           console.log(" ");
-          console.log("Habito: " + JSON.stringify(this.habitos));
-          console.log(" ");
-          console.log("Rotina Semanal: " + JSON.stringify(this.rotinaSemanal));
-          console.log(" ");
+
         }
       })
       .catch(() => {
         console.log(" ");
-        console.log("Deu errado no Recebimento de Usuario");
+        console.log("Deu errado no Recebimento de Usuario TELA INICIAL");
         console.log(" ");
       });
       
@@ -187,97 +117,28 @@ export default {
           this.user = usuarioParsed;
 
           console.log(" ");
-          console.log("RECEBIDO USUARIO: " + JSON.stringify((this.user)));
+          console.log("RECEBIDO USUARIO TELA INICIAL: " + JSON.stringify((this.user)));
           console.log(" ");
           console.log("Usuario: " + this.user[0].nome);
           console.log(" ");
-          console.log("Habito: " + JSON.stringify(this.habitos));
-          console.log(" ");
-          console.log("Rotina Semanal: " + JSON.stringify(this.rotinaSemanal));
           console.log(" ");
 
         } else {
 
           console.log(" ");
-          console.log("USUARIO NÃO RECEBIDO");
-          console.log(" ");
+          console.log("USUARIO NÃO RECEBIDO TELA INICIAL");
+          console.log(" ")
 
-           this.user = [
-  {
-    nome: 'Zé Monstrão',
-    xpTotal: '1500',
-    habitos: [
-      {
-        titulo: 'Corrida com cachorro',
-        xp: 100,
-        rotinaSemanal: [
-          { //baseado em objetos tipo Date
-            diaSetado: 1, //getDay()     
-            horaSetada: 10, //getHour()
-            minutoSetado: 15, //getMinute()
-            notificar: true,
-            completado: false,
-          },
-          { //baseado em objetos tipo Date
-            diaSetado: 3, //getDay()     
-            horaSetada: 13, //getHour()
-            minutoSetado: 18, //getMinute()
-            notificar: true,
-            completado: false,
-          },
-          { //baseado em objetos tipo Date
-            diaSetado: 4, //getDay()     
-            horaSetada: 15, //getHour()
-            minutoSetado: 19, //getMinute()
-            notificar: true,
-            completado: false,
-          },
-        ],
-      },
-      {
-        titulo: 'Futebol',
-        xp: 100,
-        rotinaSemanal: [
-          { //baseado em objetos tipo Date
-            diaSetado: 1, //getDay()     
-            horaSetada: 10, //getHour()
-            minutoSetado: 15, //getMinute()
-            notificar: true,
-            completado: false,
-          },
-          { //baseado em objetos tipo Date
-            diaSetado: 3, //getDay()     
-            horaSetada: 13, //getHour()
-            minutoSetado: 18, //getMinute()
-            notificar: true,
-            completado: false,
-          },
-          { //baseado em objetos tipo Date
-            diaSetado: 4, //getDay()     
-            horaSetada: 15, //getHour()
-            minutoSetado: 19, //getMinute()
-            notificar: true,
-            completado: false,
-          },
-        ],
-      }
-    ],
-  }
-];
-
-          console.log("USARIO PADRÃO CARREGADO: "+JSON.stringify(this.user));
+          console.log("USARIO PADRÃO CARREGADO TELA INICIAL: "+JSON.stringify(this.user));
           console.log(" ");
           console.log("Usuario: " + this.user[0].nome);
           console.log(" ");
-          console.log("Habito: " + JSON.stringify(this.habitos));
-          console.log(" ");
-          console.log("Rotina Semanal: " + JSON.stringify(this.rotinaSemanal));
-          console.log(" ");
+
         }
       })
       .catch(() => {
         console.log(" ");
-        console.log("Deu errado no Recebimento de Usuario");
+        console.log("Deu errado no Recebimento de Usuario TELA INICIAL");
         console.log(" ");
       });
     },

@@ -68,7 +68,7 @@ export default {
       value1: false,
       value2: false,
       nomeUsuario: "",
-      user:constUser,
+      user:"",
       salvarUsuario:"",
     };
   },
@@ -101,7 +101,8 @@ export default {
 
                       this.$store.dispatch("fetchUsuario");
 
-                      this.nomeUsuario = this.userr[0].nome;
+                      
+
                       
                       console.log("------------Fim Reiniciar Usuario-------------");
 
@@ -109,6 +110,9 @@ export default {
     }},
                 ],
                 { cancelable: false });
+      
+      this.nomeUsuario = this.userr[0].nome;
+      
     },
 
 

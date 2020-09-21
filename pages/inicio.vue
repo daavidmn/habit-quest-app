@@ -93,45 +93,7 @@ export default {
     this.$store.dispatch("fetchUsuario");
 
   },
-  watch: {
-    navigation() {
-      // watch it
-      console.log("MUDOU");
-      AsyncStorage.getItem("Usuario")
-        .then((usuarioSalvo) => {
-          const usuarioParsed = JSON.parse(usuarioSalvo);
-          if (usuarioParsed) {
-            this.user = usuarioParsed;
 
-            console.log(" ");
-            console.log(
-              "RECEBIDO USUARIO TELA INICIAL: " + JSON.stringify(this.user)
-            );
-            console.log(" ");
-            console.log("Usuario: " + this.user[0].nome);
-            console.log(" ");
-            console.log(" ");
-          } else {
-            console.log(" ");
-            console.log("USUARIO NÃO RECEBIDO TELA INICIAL");
-            console.log(" ");
-
-            console.log(
-              "USARIO PADRÃO CARREGADO TELA INICIAL: " +
-                JSON.stringify(this.user)
-            );
-            console.log(" ");
-            console.log("Usuario: " + this.user[0].nome);
-            console.log(" ");
-          }
-        })
-        .catch(() => {
-          console.log(" ");
-          console.log("Deu errado no Recebimento de Usuario TELA INICIAL");
-          console.log(" ");
-        });
-    },
-  },
   props: {
     navigation: {
       type: Object,

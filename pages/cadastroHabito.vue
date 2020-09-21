@@ -178,7 +178,7 @@ export default {
 
     
       
-      if (this.diaTemp=="0"||this.diaTemp==""||this.horaTemp==""||this.minutoTemp==""){
+      if (this.horaTemp==""||this.minutoTemp==""){
 
         Alert.alert(
                 'Valor Invalido',

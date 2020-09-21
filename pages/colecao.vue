@@ -9,7 +9,7 @@
       </view>
       <view class="box-centro">
         <view class="box-cima">
-          <text class="nome">Zé Monstrão</text>
+          <text class="nome">{{userr[0].nome}}</text>
         </view>
         <view class="box-baixo">
           <view class="box-esquerda">
@@ -47,16 +47,29 @@
 
 <script>
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { AsyncStorage } from "react-native";
+import store from "../store";
+import Vue from "vue-native-core";
+
+Vue.prototype.$store = store;
 
 export default {
   components: {
     MaterialCommunityIcons,
+  },
+  computed: {
+    userr() {
+      return this.$store.state.storeUsuario;
+    },
   },
   props: {
     navigation: {
       type: Object,
     },
   },
+  created(){
+    this.$store.dispatch("fetchUsuario");
+  }
 };
 </script>
 

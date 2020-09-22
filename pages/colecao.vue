@@ -28,20 +28,22 @@
         <text class="texto-baixo">Fev. 2020</text>
       </view>
     </view>
-    <text class="texto-centro">Conquistas Obtidas</text>
-    <view class="conteudo-central-superior">
-      <view class="conquistas">
-        <text>Destemido</text>
-        <text>Popular</text>
-        <text>Mestre</text>
-        <text>Quente</text>
+    <view class="conteudo-meio">
+      <text class="texto-centro">Conquistas Obtidas</text>
+      <view class="conteudo-central-superior">
+        <view class="conquistas">
+          <text>Destemido</text>
+          <text>Popular</text>
+          <text>Mestre</text>
+          <text>Quente</text>
+        </view>
+        <view class="ver-mais">
+          <text class="ver-mais-texto">Ver + 8 conquistas</text>
+        </view>
       </view>
-      <view class="ver-mais">
-        <text class="ver-mais-texto">Ver + 8 conquistas</text>
-      </view>
+      <text class="texto-centro">Estatísticas</text>
+      <view class="estatisticas"></view>
     </view>
-    <text class="texto-centro">Estatísticas</text>
-    <view class="estatisticas"></view>
   </view>
 </template>
 
@@ -71,7 +73,7 @@ export default {
   padding-left: 5px;
   padding-right: 5px;
   width: 100%;
-  height: 115px;
+  height: 20%;
   background-color: #6a994e;
   justify-content: space-around;
   align-items: center;
@@ -135,6 +137,7 @@ export default {
   align-items: center;
   flex-direction: row;
 }
+
 .texto-baixo {
   padding-right: 10px;
   color: white;
@@ -158,22 +161,28 @@ export default {
   color: white;
 }
 
+.conteudo-meio {
+  width: 100%;
+  height: 100%;
+  align-content: center;
+  flex-direction: column;
+}
+
 .texto-centro {
-  width: 157px;
-  height: 27px;
+  width: 100%;
   top: 0px;
-  left: 10px;
+  left: 16px;
   font-style: normal;
   font-size: 18px;
   line-height: 32px;
-  display: flex;
   align-items: center;
 }
 
 .conteudo-central-superior {
   flex-direction: column;
-  width: 95%;
-  left: 10px;
+  width: 100%;
+  padding-left: 16px;
+  padding-right: 16px;
   top: 0px;
 }
 
@@ -193,7 +202,7 @@ export default {
   border-bottom-right-radius: 8px;
 }
 .ver-mais-texto {
-  width: 118px;
+  width: 100%;
   height: 32px;
   line-height: 10px;
   top: 10px;
@@ -206,8 +215,8 @@ export default {
 
 .estatisticas {
   height: 10%;
-  width: 95%;
-  left: 10px;
+  width: 91%;
+  left: 16px;
   flex-direction: row;
   background-color: #f0f0f0;
   border-top-left-radius: 8px;

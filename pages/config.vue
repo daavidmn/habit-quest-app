@@ -1,31 +1,33 @@
 <template>
   <view class="config">
     <text class="titulo">Configurações</text>
-    <text class="subtitulo">Trocar de nome</text>
+    <ScrollView :fadingEdgeLength="0" :showsVerticalScrollIndicator="false">
+      <view class="scroll-box">
+        <text class="subtitulo">Trocar de nome</text>
 
-    <text-input
-      :style="{height: 40, padding:10, width: '100%', borderColor: '#6A994E', borderWidth: 2, borderRadius: 8}"
-      v-model="nomeUsuario"
-    />
-
-    <touchable-opacity class="confirma-creditos" :on-press="() => trocarNomeUsuario()">
-      <text class="text-confirma-creditos">Confirmar</text>
-    </touchable-opacity>
-
-    <text class="subtitulo">Notificações</text>
-    <touchable-without-feedback :on-press="() => valueChange()">
-      <view class="notificacoes">
-        <text>Permitir Notificações</text>
-        <switch
-          :on-value-change="handleChange1"
-          :value="value1"
-          :track-color="{ false: '#F0F0F0', true: '#A7C957' }"
-          thumb-color="#386641"
+        <text-input
+          :style="{height: 40, padding:10, width: '100%', borderColor: '#6A994E', borderWidth: 2, borderRadius: 8}"
+          v-model="nomeUsuario"
         />
-      </view>
-    </touchable-without-feedback>
 
-    <!-- <view class="notificacoes">
+        <touchable-opacity class="confirma-creditos" :on-press="() => trocarNomeUsuario()">
+          <text class="text-confirma-creditos">Confirmar</text>
+        </touchable-opacity>
+
+        <text class="subtitulo">Notificações</text>
+        <touchable-without-feedback :on-press="() => valueChange()">
+          <view class="notificacoes">
+            <text>Permitir Notificações</text>
+            <switch
+              :on-value-change="handleChange1"
+              :value="value1"
+              :track-color="{ false: '#F0F0F0', true: '#A7C957' }"
+              thumb-color="#386641"
+            />
+          </view>
+        </touchable-without-feedback>
+
+        <!-- <view class="notificacoes">
       <text>Permitir Roubo de Dados</text>
       <switch
         :on-value-change="handleChange2"
@@ -33,22 +35,22 @@
         :track-color="{ false: '#F0F0F0', true: '#A7C957' }"
         thumb-color="#386641"
       />
-    </view>-->
+        </view>-->
 
+        <text class="subtitulo2" :style="{marginTop: 40}">Créditos do aplicativo</text>
+        <text>Veja quem ajudou a produzir esse aplicativo</text>
+        <touchable-opacity class="confirma-creditos">
+          <text class="text-confirma-creditos">Ver créditos</text>
+        </touchable-opacity>
 
-    <text class="subtitulo2" :style="{marginTop: 40}">Resetar Usuário</text>
-    <text>Apagar dados e reiniciar memória da aplicação</text>
-    <touchable-opacity class="confirma-creditos" :on-press="() => resetarUsuario()">
-      <text class="text-confirma-creditos">Reset do Usuario</text>
+        <text class="subtitulo2" :style="{marginTop: 40}">Gerenciamento de conta</text>
 
-    </touchable-opacity>
-
-    <text class="subtitulo2" :style="{marginTop: 40}">Gerenciamento de conta</text>
-
-    <text>Cuidado, essas ação é irreversível</text>
-    <touchable-opacity class="resetar" :on-press="() => resetarUsuario()">
-      <text class="text-confirma-creditos">Resetar progresso</text>
-    </touchable-opacity>
+        <text>Cuidado, essa ação é irreversível</text>
+        <touchable-opacity class="resetar" :on-press="() => resetarUsuario()">
+          <text class="text-confirma-creditos">Resetar progresso</text>
+        </touchable-opacity>
+      </view>
+    </ScrollView>
   </view>
 </template>
 
@@ -161,10 +163,7 @@ console.log("------------Inicio Alterar Nome Usuario-------------");
        
 
       //this.navigation.navigate("inicio","teste");
-
-
-    }
-
+    },
   },
   created() {
 

@@ -69,11 +69,15 @@ export default {
     return {
       value1: false,
       value2: false,
-      resetar: false,
       nomeUsuario: "",
-      user: constUser,
-      salvarUsuario: "",
+      user:"",
+      salvarUsuario:"",
     };
+  },
+  computed: {
+    userr() {
+      return this.$store.state.storeUsuario;
+    },
   },
   methods: {
     valueChange() {
@@ -87,227 +91,86 @@ export default {
     },
     resetarUsuario: function () {
       Alert.alert(
-        "Reset de Usuario",
-        "Você tem certeza que deseja resetar?",
-        [
-          {
-            text: "Cancelar",
-            onPress: () => (this.resetar = false),
-            style: "cancel",
-          },
-          {
-            text: "Confirmar",
-            onPress: () => {
-              console.log("------------Inicio Reiniciar Usuario-------------");
 
-              AsyncStorage.clear()
-                .then(() => {
-                  console.log(" ");
-                  console.log(" ");
-                  console.log("Usuário Reiniciado");
-                  this.resetar = false;
-                })
-                .catch(() => {
-                  console.log(" ");
-                  console.log(" ");
-                  console.log("Não foi possível Reiniciar o Usuario");
-                  console.log(" ");
-                  console.log(" ");
-                });
+                'Reset de Usuario',
+                'Você tem certeza que deseja resetar?',
+                [   {text: 'Cancelar', onPress: () => console.log("Cancelar"), style: 'cancel'},
+                    {text: 'Confirmar', onPress: () => { 
 
-              console.log("------------Fim Reiniciar Usuario-------------");
+                      console.log("------------Inicio Reiniciar Usuario-------------");
 
-              this.user = [
-                {
-                  nome: "Zé Monstrão",
-                  xpTotal: "1500",
-                  habitos: [
-                    {
-                      titulo: "Corrida com cachorro",
-                      xp: 100,
-                      rotinaSemanal: [
-                        {
-                          //baseado em objetos tipo Date
-                          diaSetado: 1, //getDay()
-                          horaSetada: 10, //getHour()
-                          minutoSetado: 15, //getMinute()
-                          notificar: true,
-                          completado: false,
-                        },
-                        {
-                          //baseado em objetos tipo Date
-                          diaSetado: 3, //getDay()
-                          horaSetada: 13, //getHour()
-                          minutoSetado: 18, //getMinute()
-                          notificar: true,
-                          completado: false,
-                        },
-                        {
-                          //baseado em objetos tipo Date
-                          diaSetado: 4, //getDay()
-                          horaSetada: 15, //getHour()
-                          minutoSetado: 19, //getMinute()
-                          notificar: true,
-                          completado: false,
-                        },
-                      ],
-                    },
-                    {
-                      titulo: "Futebol",
-                      xp: 100,
-                      rotinaSemanal: [
-                        {
-                          //baseado em objetos tipo Date
-                          diaSetado: 1, //getDay()
-                          horaSetada: 10, //getHour()
-                          minutoSetado: 15, //getMinute()
-                          notificar: true,
-                          completado: false,
-                        },
-                        {
-                          //baseado em objetos tipo Date
-                          diaSetado: 3, //getDay()
-                          horaSetada: 13, //getHour()
-                          minutoSetado: 18, //getMinute()
-                          notificar: true,
-                          completado: false,
-                        },
-                        {
-                          //baseado em objetos tipo Date
-                          diaSetado: 4, //getDay()
-                          horaSetada: 15, //getHour()
-                          minutoSetado: 19, //getMinute()
-                          notificar: true,
-                          completado: false,
-                        },
-                      ],
-                    },
-                  ],
-                },
-              ];
-              this.salvarUsuario = JSON.stringify(this.user);
+                      this.$store.dispatch("resetarDados");
 
-              AsyncStorage.setItem("Usuario", this.salvarUsuario)
-                .then(() => {
-                  console.log(" ");
-                  console.log(" ");
-                  console.log("Usuario: " + this.salvarUsuario);
-                  console.log(" ");
-                  console.log(" ");
-                  console.log("Usuário Atualizado");
-                  this.$store.dispatch("fetchUsuario");
-                  this.navigation.navigate("inicio");
-                })
-                .catch(() => {
-                  console.log(" ");
-                  console.log(" ");
-                  console.log("Não foi possível atualizar o Usuario");
-                  console.log(" ");
-                  console.log(" ");
-                });
-            },
-          },
-        ],
-        { cancelable: false }
-      );
+                      this.$store.dispatch("fetchUsuario");
+
+                      
+
+                      
+                      console.log("------------Fim Reiniciar Usuario-------------");
+
+
+    }},
+                ],
+                { cancelable: false });
+      
+      this.nomeUsuario = this.userr[0].nome;
+      
     },
 
-    trocarNomeUsuario: function () {
-      AsyncStorage.getItem("Usuario")
-        .then((usuarioSalvo) => {
-          const usuarioParsed = JSON.parse(usuarioSalvo);
-          if (usuarioParsed) {
-            this.user = usuarioParsed;
-          } else {
-            console.log(" ");
-            console.log("USUARIO NÃO RECEBIDO");
-            console.log(" ");
-          }
-        })
-        .catch(() => {
-          console.log(" ");
-          console.log("Deu errado no Recebimento de Usuario");
-          console.log(" ");
-        });
 
-      this.user[0].nome = this.nomeUsuario;
+    trocarNomeUsuario: function() {
 
-      console.log("------------Inicio Alterar Nome Usuario-------------");
 
-      this.salvarUsuario = JSON.stringify(this.user);
+console.log("------------Inicio Alterar Nome Usuario-------------");
+
+      this.$store.dispatch("fetchUsuario");
+
+      this.userr[0].nome = this.nomeUsuario;
+
+      this.salvarUsuario = JSON.stringify(this.userr);
 
       AsyncStorage.setItem("Usuario", this.salvarUsuario)
         .then(() => {
-          console.log(" ");
-          console.log(" ");
-          console.log("Usuario: " + this.salvarUsuario);
-          console.log(" ");
-          console.log(" ");
-          console.log("Usuário Atualizado");
+          Alert.alert(
+                'Seu nome foi alterado',
+                'Nome alterado com sucesso',
+                [
+                    {text: 'OK', onPress: () => {
+                  this.$store.dispatch("fetchUsuario");
+                this.nomeUsuario = this.userr[0].nome;
+              this.navigation.navigate("inicio")}},
+                ],
+                { cancelable: false }
+            );
+          
         })
         .catch(() => {
-          console.log(" ");
-          console.log(" ");
-          console.log("Não foi possível atualizar o Usuario");
-          console.log(" ");
-          console.log(" ");
+          Alert.alert(
+                'Erro',
+                'Ocorreu um erro ao alterar seu nome',
+                [
+                    {text: 'OK', onPress: () => {
+                  this.$store.dispatch("fetchUsuario");
+                this.nomeUsuario = this.userr[0].nome;
+              this.navigation.navigate("inicio")}},
+                ],
+                { cancelable: false }
+            );
         });
+
       console.log("------------Fim Alterar Nome Usuario-------------");
 
-      Alert.alert(
-        "Seu nome foi alterado",
-        "Nome alterado com sucesso",
-        [
-          {
-            text: "OK",
-            onPress: () => {
-              this.navigation.navigate("inicio");
-              this.$store.dispatch("fetchUsuario");
-            },
-          },
-        ],
-        { cancelable: false }
-      );
+       
 
       //this.navigation.navigate("inicio","teste");
     },
   },
   created() {
-    console.log("------------Tela de Configurações-------------");
-    console.log(" ");
-    console.log(" ");
 
-    AsyncStorage.getItem("Usuario")
-      .then((usuarioSalvo) => {
-        const usuarioParsed = JSON.parse(usuarioSalvo);
-        if (usuarioParsed) {
-          this.user = usuarioParsed;
-          this.nomeUsuario = this.user[0].nome;
+      this.$store.dispatch("fetchUsuario");
 
-          console.log(" ");
-          console.log("RECEBIDO USUARIO: " + JSON.stringify(this.user));
-          console.log(" ");
-          console.log("Usuario: " + this.user[0].nome);
-          console.log(" ");
-        } else {
-          console.log(" ");
-          console.log("USUARIO NÃO RECEBIDO");
-          console.log(" ");
+      this.nomeUsuario = this.userr[0].nome;
 
-          this.nomeUsuario = this.user[0].nome;
-
-          console.log("USARIO PADRÃO CARREGADO: " + JSON.stringify(this.user));
-
-          console.log(" ");
-          console.log("Usuario: " + this.user[0].nome);
-          console.log(" ");
-        }
-      })
-      .catch(() => {
-        console.log(" ");
-        console.log("Deu errado no Recebimento de Usuario");
-        console.log(" ");
-      });
   },
   props: {
     navigation: {

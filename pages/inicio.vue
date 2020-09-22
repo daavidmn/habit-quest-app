@@ -9,7 +9,7 @@
       </view>
       <view class="progress-bar">
         <text>LV 150</text>
-        <text>{{user[0].xpTotal}} /3000</text>
+        <text>{{userr[0].xpTotal}} /3000</text>
         <view class="progress-fill"></view>
       </view>
       <view class="tasks">
@@ -32,7 +32,7 @@
     <view class="habits">
       <ScrollView :fadingEdgeLength="0" :showsVerticalScrollIndicator="false">
         <view class="scroll-box">
-          <view v-for="(habito, key) in (user[0].habitos)" :key="key">
+          <view v-for="(habito, key) in (userr[0].habitos)" :key="key">
             <view v-for="(rotina, chave) in habito.rotinaSemanal" :key="chave">
               <Habitviewer
                 :title="habito.titulo"
@@ -92,77 +92,8 @@ export default {
   created() {
     this.$store.dispatch("fetchUsuario");
 
-    // AsyncStorage.getItem("Usuario")
-    //   .then((usuarioSalvo) => {
-    //     const usuarioParsed = JSON.parse(usuarioSalvo);
-    //     if (usuarioParsed) {
-
-    //       this.user = usuarioParsed;
-
-    //       console.log(" ");
-    //       console.log("RECEBIDO USUARIO TELA INICIAL: " + JSON.stringify((this.user)));
-    //       console.log(" ");
-    //       console.log("Usuario: " + this.user[0].nome);
-    //       console.log(" ");
-
-    //     } else {
-
-    //       console.log(" ");
-    //       console.log("USUARIO NÃO RECEBIDO TELA INICIAL");
-    //       console.log(" ");
-
-    //       console.log("USARIO PADRÃO CARREGADO TELA INICIAL: "+JSON.stringify(this.user));
-    //       console.log(" ");
-    //       console.log("Usuario: " + this.user[0].nome);
-    //       console.log(" ");
-
-    //     }
-    //   })
-    //   .catch(() => {
-    //     console.log(" ");
-    //     console.log("Deu errado no Recebimento de Usuario TELA INICIAL");
-    //     console.log(" ");
-    //   });
   },
-  watch: {
-    navigation() {
-      // watch it
-      console.log("MUDOU");
-      AsyncStorage.getItem("Usuario")
-        .then((usuarioSalvo) => {
-          const usuarioParsed = JSON.parse(usuarioSalvo);
-          if (usuarioParsed) {
-            this.user = usuarioParsed;
 
-            console.log(" ");
-            console.log(
-              "RECEBIDO USUARIO TELA INICIAL: " + JSON.stringify(this.user)
-            );
-            console.log(" ");
-            console.log("Usuario: " + this.user[0].nome);
-            console.log(" ");
-            console.log(" ");
-          } else {
-            console.log(" ");
-            console.log("USUARIO NÃO RECEBIDO TELA INICIAL");
-            console.log(" ");
-
-            console.log(
-              "USARIO PADRÃO CARREGADO TELA INICIAL: " +
-                JSON.stringify(this.user)
-            );
-            console.log(" ");
-            console.log("Usuario: " + this.user[0].nome);
-            console.log(" ");
-          }
-        })
-        .catch(() => {
-          console.log(" ");
-          console.log("Deu errado no Recebimento de Usuario TELA INICIAL");
-          console.log(" ");
-        });
-    },
-  },
   props: {
     navigation: {
       type: Object,
@@ -256,7 +187,7 @@ export default {
   flex-direction: column;
   align-items: center;
   width: 100%;
-  height: 430px;
+  height: 483px;
 }
 
 .scroll-box {

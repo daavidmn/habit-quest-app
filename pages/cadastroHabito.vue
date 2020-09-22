@@ -132,65 +132,17 @@ export default {
       salvarUsuario: "",
     };
   },
+  computed: {
+    userr() {
+      return this.$store.state.storeUsuario;
+    },
+  },
   created() {
-    console.log("------------Inicializando Informações-------------");
-    console.log(" ");
-    console.log(" ");
-    this.habitoId = 0;
-
-
-      console.log("------------Inicializando Informações-------------");
-      console.log(" ");
-      console.log(" ");
-
-      this.habitoId=0;
+    
+      this.$store.dispatch("fetchUsuario");
 
       this.rotinaSemanal = [];
       this.nomeHabito = this.habitos[0].titulo;
-
-
-    AsyncStorage.getItem("Usuario")
-      .then((usuarioSalvo) => {
-        const usuarioParsed = JSON.parse(usuarioSalvo);
-        if (usuarioParsed) {
-
-          this.user = usuarioParsed;
-
-          console.log(" ");
-          console.log("RECEBIDO USUARIO: " + JSON.stringify(this.user));
-          console.log(" ");
-          console.log("Usuario: " + this.user[0].nome);
-          console.log(" ");
-          console.log("Habito: " + JSON.stringify(this.habitos));
-          console.log(" ");
-          console.log("Rotina Semanal: " + JSON.stringify(this.rotinaSemanal));
-          console.log(" ");
-
-        } else {
-
-          console.log(" ");
-          console.log("USUARIO NÃO RECEBIDO");
-          console.log(" ");
-
-          console.log("USARIO PADRÃO CARREGADO: "+JSON.stringify(this.user));
-
-          console.log(" ");
-          console.log("Usuario: " + this.user[0].nome);
-          console.log(" ");
-          console.log("Habito: " + JSON.stringify(this.habitos));
-          console.log(" ");
-          console.log("Rotina Semanal: " + JSON.stringify(this.rotinaSemanal));
-          console.log(" ");
-        }
-      })
-      .catch(() => {
-        console.log(" ");
-        console.log("Deu errado no Recebimento de Usuario");
-        console.log(" ");
-      });
-
-    //this.habitos = constHabitos;
-    // this.habitos = []; //inicializar zerado na pagina
   },
   watch: {
     horaTemp: function () {
@@ -224,19 +176,9 @@ export default {
     definirHora() {
       this.modalHoraVisible = false;
 
-      console.log("------------Inicio Teste Rotina Semanal-------------");
-      console.log(" ");
-      console.log(" ");
-
-
-      console.log("Antiga Rotina Semanal do habito: " + this.nomeHabito);
-
-      console.log(JSON.stringify(this.habitos[this.habitoId].rotinaSemanal));
-
-      console.log(" ");
-      console.log(" "); 
+    
       
-      if (this.diaTemp==""||this.horaTemp==""||this.minutoTemp==""){
+      if (this.horaTemp==""||this.minutoTemp==""){
 
         Alert.alert(
                 'Valor Invalido',
@@ -255,29 +197,6 @@ export default {
         completado: false,
       });}
 
-      console.log("Nova Rotina Semanal do habito: " + this.nomeHabito);
-      console.log(JSON.stringify(this.rotinaSemanal));
-
-      console.log(" ");
-      console.log(" ");
-      console.log("------------Fim Teste Rotina Semanal-------------");
-
-      console.log(" ");
-      console.log(" ");
-      console.log(" ");
-
-      console.log("------------Inicio Teste Novos habitos-------------");
-      console.log(" ");
-      console.log(" ");
-
-      console.log("INFORMAÇÕES DO USUARIO: " + JSON.stringify(this.user[0]));
-
-      console.log(" ");
-      console.log(" ");
-      console.log("------------Fim Teste Novos habitos-------------");
-
-      console.log(" ");
-      console.log(" ");
     },
     definirHabito() {
 
@@ -293,23 +212,21 @@ export default {
                 { cancelable: false });
       }
       else{
-     this.user[0].habitos.push({
+     this.userr[0].habitos.push({
 
         titulo: this.nomeHabito,
         xp: 100,
         rotinaSemanal: this.rotinaSemanal,
       });
-      //let tam = this.user[0].habitos.lenght;
-      console.log(this.user[0].habitos);
 
-      // this.user[0].habitos[tam - 1].rotinaSemanal.push(this.rotinaSemanal); //TA BUGANDO
       this.diaTemp = "";
       this.horaTemp = "";
       this.minutoTemp = "";
 
       console.log("------------Inicio Atualizar Usuario-------------");
 
-      this.salvarUsuario = JSON.stringify(this.user);
+
+      this.salvarUsuario = JSON.stringify(this.userr);
 
       AsyncStorage.setItem("Usuario", this.salvarUsuario)
         .then(() => {
@@ -329,7 +246,9 @@ export default {
         });
       console.log("------------Fim Atualizar Usuario-------------");
 
-      this.navigation.navigate("inicio","teste");
+      this.$store.dispatch("fetchUsuario");
+
+      this.navigation.navigate("inicio");
     }
     },
   },

@@ -91,7 +91,6 @@ export default {
 
   created() {
     this.$store.dispatch("fetchUsuario");
-
   },
 
   props: {

@@ -30,19 +30,70 @@
     </view>
     <view class="conteudo-meio">
       <text class="texto-centro">Conquistas Obtidas</text>
-      <view class="conteudo-central-superior">
-        <view class="conquistas">
+      <view class="conquistas">
+        <view class="medal-mini">
+          <image
+            :style="{width: 50, height: 50}"
+            :source="require('../assets/img/avatar/medalha-ouro.png')"
+          />
           <text>Destemido</text>
+        </view>
+
+        <view class="medal-mini">
+          <image
+            :style="{width: 50, height: 50}"
+            :source="require('../assets/img/avatar/medalha-ouro.png')"
+          />
           <text>Popular</text>
+        </view>
+
+        <view class="medal-mini">
+          <image
+            :style="{width: 50, height: 50}"
+            :source="require('../assets/img/avatar/medalha-ouro.png')"
+          />
           <text>Mestre</text>
+        </view>
+
+        <view class="medal-mini">
+          <image
+            :style="{width: 50, height: 50}"
+            :source="require('../assets/img/avatar/medalha-ouro.png')"
+          />
           <text>Quente</text>
         </view>
-        <view class="ver-mais">
-          <text class="ver-mais-texto">Ver + 8 conquistas</text>
+      </view>
+      <touchable-opacity class="ver-mais" :onPress="goToConquistas">
+        <text class="ver-mais-texto">Ver + 8 conquistas</text>
+      </touchable-opacity>
+
+      <text class="texto-centro">Estatísticas</text>
+      <view class="estatisticas">
+        <view class="estatisticas-cima">
+          <view class="e-esquerda">
+            <MaterialCommunityIcons name="calendar-check" :size="40" color="#A7C957" />
+            <text :style="{fontWeight:'bold'}">Metas alcançadas</text>
+            <text>Placeholder</text>
+          </view>
+          <view class="e-direita">
+            <MaterialCommunityIcons name="calendar-check" :size="40" color="#A7C957" />
+            <text :style="{fontWeight:'bold'}">Total de hábitos</text>
+            <text>Placeholder</text>
+          </view>
+        </view>
+        <view class="estatisticas-baixo">
+          <view class="e-esquerda">
+            <MaterialCommunityIcons name="fire" :size="40" color="#BC4749" />
+            <text :style="{fontWeight:'bold'}">Maior sequência</text>
+            <text>Placeholder</text>
+          </view>
+          <view class="e-direita">
+            <MaterialCommunityIcons name="fire" :size="40" color="#BC4749" />
+            <text :style="{fontWeight:'bold'}">Sequência atual</text>
+            <text>Placeholder</text>
+          </view>
         </view>
       </view>
-      <text class="texto-centro">Estatísticas</text>
-      <view class="estatisticas"></view>
     </view>
   </view>
 </template>
@@ -69,9 +120,18 @@ export default {
       type: Object,
     },
   },
-  created(){
+  created() {
     this.$store.dispatch("fetchUsuario");
-  }
+  },
+
+  methods: {
+    goToConquistas() {
+      this.navigation.navigate("conquistas");
+    },
+    onPressButton: function () {
+      alert("Clicked Image");
+    },
+  },
 };
 </script>
 
@@ -136,6 +196,11 @@ export default {
   align-items: center;
   justify-content: center;
 }
+
+.medal-mini {
+  align-items: center;
+  justify-content: center;
+}
 .tasks {
   height: 32px;
   width: 50px;
@@ -177,6 +242,8 @@ export default {
 .conteudo-meio {
   width: 100%;
   height: 100%;
+  padding-left: 16px;
+  padding-right: 16px;
   align-content: center;
   flex-direction: column;
 }
@@ -184,35 +251,27 @@ export default {
 .texto-centro {
   width: 100%;
   top: 0px;
-  left: 16px;
-  font-style: normal;
   font-size: 18px;
   line-height: 32px;
   align-items: center;
 }
 
-.conteudo-central-superior {
-  flex-direction: column;
-  width: 100%;
-  padding-left: 16px;
-  padding-right: 16px;
-  top: 0px;
-}
-
 .conquistas {
-  height: 40%;
+  height: 92px;
   flex-direction: row;
   background-color: #f0f0f0;
   border-color: #386641;
   border-width: 2px;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
+  justify-content: space-evenly;
 }
 
 .ver-mais {
   background-color: #386641;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
+  margin-bottom: 24px;
 }
 .ver-mais-texto {
   width: 100%;
@@ -227,16 +286,36 @@ export default {
 }
 
 .estatisticas {
-  height: 10%;
-  width: 91%;
-  left: 16px;
-  flex-direction: row;
+  height: 220px;
+  width: 100%;
+  flex-direction: column;
   background-color: #f0f0f0;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-  border-bottom-left-radius: 8px;
-  border-bottom-right-radius: 8px;
+  border-radius: 8px;
   border-color: #386641;
   border-width: 2px;
+  padding-top: 22px;
+}
+
+.estatisticas-cima {
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.estatisticas-baixo {
+  padding-top: 22px;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.e-esquerda {
+  flex-direction: column;
+  align-items: center;
+}
+
+.e-direita {
+  flex-direction: column;
+  align-items: center;
 }
 </style>

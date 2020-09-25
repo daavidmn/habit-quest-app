@@ -112,20 +112,19 @@ const StackNavigator = createStackNavigator(
       screen: pgCadastroHabito,
       navigationOptions: {
         title: "Criar Hábito",
-      },},
-      modificarHabito: {
+      },
+    },
+    modificarHabito: {
       screen: pgModificarHabito,
       navigationOptions: {
         title: "Modificar Hábito",
-        
-              },
+      },
     },
-          inicio: {
+    inicio: {
       screen: pgInicio,
       navigationOptions: {
         title: "Início",
-        
-              },
+      },
     },
   },
   {

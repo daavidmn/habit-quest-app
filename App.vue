@@ -14,11 +14,11 @@ import pgInicio from "./pages/inicio.vue";
 import pgCadastroHabito from "./pages/cadastroHabito.vue";
 import pgColecao from "./pages/colecao.vue";
 import pgAmigos from "./pages/amigos.vue";
-import pgExpedicao from "./pages/expedicao.vue";
+import pgPasse from "./pages/passe.vue";
 import pgConfig from "./pages/config.vue";
 import pgModificarHabito from "./pages/modificarHabito.vue";
 import React from "react";
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { StatusBar } from "react-native";
 
 const BottomTabNavigator = createBottomTabNavigator(
@@ -55,12 +55,12 @@ const BottomTabNavigator = createBottomTabNavigator(
         },
       },
     },
-    expedicao: {
-      screen: pgExpedicao,
+    passe: {
+      screen: pgPasse,
       navigationOptions: {
-        title: "Expedição",
+        title: "Passe",
         tabBarIcon: () => {
-          return <Ionicons name={`md-map`} size={25} color={"#fff"} />;
+          return <MaterialCommunityIcons name="crown" size={25} color="#fff" />; //<Ionicons name={`md-map`} size={25} color={"#fff"} />;
         },
       },
     },

@@ -1,7 +1,11 @@
 <template>
   <view class="app">
     <text>Pagina amigos</text>
-    <button title="ir para expedicao" :on-press="goToPage" :navigation="this.props.navigation" />
+    <button
+      title="ir para expedicao"
+      :on-press="goToPage"
+      :navigation="this.props.navigation"
+    />
   </view>
 </template>
 
@@ -24,5 +28,6 @@ export default {
 .app {
   width: 100%;
   height: 100%;
+  background-color: #ededed;
 }
 </style>

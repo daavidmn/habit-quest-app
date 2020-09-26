@@ -3,13 +3,13 @@
     <view class="header">
       <view class="avatar-mini">
         <image
-          :style="{width: 60, height: 60}"
+          :style="{ width: 50, height: 50 }"
           :source="require('../assets/img/avatar/020-superhero-19.png')"
         />
       </view>
       <view class="box-centro">
         <view class="box-cima">
-          <text class="nome">{{userr[0].nome}}</text>
+          <text class="nome">{{ userr[0].nome }}</text>
         </view>
         <view class="box-baixo">
           <view class="box-esquerda">
@@ -33,7 +33,7 @@
       <view class="conquistas">
         <view class="medal-mini">
           <image
-            :style="{width: 50, height: 50}"
+            :style="{ width: 50, height: 50 }"
             :source="require('../assets/img/avatar/medalha-ouro.png')"
           />
           <text>Destemido</text>
@@ -41,7 +41,7 @@
 
         <view class="medal-mini">
           <image
-            :style="{width: 50, height: 50}"
+            :style="{ width: 50, height: 50 }"
             :source="require('../assets/img/avatar/medalha-ouro.png')"
           />
           <text>Popular</text>
@@ -49,7 +49,7 @@
 
         <view class="medal-mini">
           <image
-            :style="{width: 50, height: 50}"
+            :style="{ width: 50, height: 50 }"
             :source="require('../assets/img/avatar/medalha-ouro.png')"
           />
           <text>Mestre</text>
@@ -57,7 +57,7 @@
 
         <view class="medal-mini">
           <image
-            :style="{width: 50, height: 50}"
+            :style="{ width: 50, height: 50 }"
             :source="require('../assets/img/avatar/medalha-ouro.png')"
           />
           <text>Quente</text>
@@ -71,25 +71,33 @@
       <view class="estatisticas">
         <view class="estatisticas-cima">
           <view class="e-esquerda">
-            <MaterialCommunityIcons name="calendar-check" :size="40" color="#A7C957" />
-            <text :style="{fontWeight:'bold'}">Metas alcançadas</text>
+            <MaterialCommunityIcons
+              name="calendar-check"
+              :size="40"
+              color="#A7C957"
+            />
+            <text :style="{ fontWeight: 'bold' }">Metas alcançadas</text>
             <text>Placeholder</text>
           </view>
           <view class="e-direita">
-            <MaterialCommunityIcons name="calendar-check" :size="40" color="#A7C957" />
-            <text :style="{fontWeight:'bold'}">Total de hábitos</text>
+            <MaterialCommunityIcons
+              name="calendar-check"
+              :size="40"
+              color="#A7C957"
+            />
+            <text :style="{ fontWeight: 'bold' }">Total de hábitos</text>
             <text>Placeholder</text>
           </view>
         </view>
         <view class="estatisticas-baixo">
           <view class="e-esquerda">
             <MaterialCommunityIcons name="fire" :size="40" color="#BC4749" />
-            <text :style="{fontWeight:'bold'}">Maior sequência</text>
+            <text :style="{ fontWeight: 'bold' }">Maior sequência</text>
             <text>Placeholder</text>
           </view>
           <view class="e-direita">
             <MaterialCommunityIcons name="fire" :size="40" color="#BC4749" />
-            <text :style="{fontWeight:'bold'}">Sequência atual</text>
+            <text :style="{ fontWeight: 'bold' }">Sequência atual</text>
             <text>Placeholder</text>
           </view>
         </view>

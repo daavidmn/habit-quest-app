@@ -10,13 +10,13 @@ import {
   createStackNavigator,
 } from "vue-native-router";
 
-import pgInicio from "./pages/inicio.vue";
-import pgCadastroHabito from "./pages/cadastroHabito.vue";
-import pgColecao from "./pages/colecao.vue";
-import pgAmigos from "./pages/amigos.vue";
-import pgPasse from "./pages/passe.vue";
-import pgConfig from "./pages/config.vue";
-import pgModificarHabito from "./pages/modificarHabito.vue";
+import pgInicio from "./src/pages/inicio.vue";
+import pgCadastroHabito from "./src/pages/cadastroHabito.vue";
+import pgColecao from "./src/pages/colecao.vue";
+import pgAmigos from "./src/pages/amigos.vue";
+import pgPasse from "./src/pages/passe.vue";
+import pgConfig from "./src/pages/config.vue";
+import pgModificarHabito from "./src/pages/modificarHabito.vue";
 import React from "react";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { StatusBar } from "react-native";

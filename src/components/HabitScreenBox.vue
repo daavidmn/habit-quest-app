@@ -25,7 +25,7 @@
         </view>
       </view>
       <view class="box-above-right">
-        <MaterialCommunityIcons name="window-close" :size="14" color="white" />
+        <MaterialCommunityIcons name="window-close" :size="14" color="red" />
       </view>
     </view>
 
@@ -41,7 +41,7 @@ export default {
   components: {
     MaterialCommunityIcons,
   },
-  props: ["dia", "hora", "minuto"],
+  props: ["dia", "hora", "minuto","idHabito"],
 };
 </script>
 

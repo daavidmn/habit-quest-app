@@ -1,23 +1,26 @@
 <template>
   <view class="container">
-    <text :style="{fontSize: 18}">Nome do hábito</text>
+    <text :style="{ fontSize: 18 }">Nome do Habito</text>
     <text-input
-      :style="{height: 40, padding:10, width: '100%', borderColor: '#6A994E', borderWidth: 2, borderRadius: 8}"
+      :style="{
+        height: 40,
+        padding: 10,
+        width: '100%',
+        borderColor: '#6A994E',
+        borderWidth: 2,
+        borderRadius: 8,
+      }"
       v-model="nomeHabito"
     />
-    <text :style="{fontSize: 18, marginTop: 30}">Dias de prática</text>
-    <text :style="{fontSize: 12}">Alterar os dias irá zerar sua sequência atual nesse hábito.</text>
+    <text :style="{ fontSize: 18, marginTop: 30 }">Dias de prática</text>
+    <text :style="{ fontSize: 12 }"
+      >Alterar os dias irá zerar sua sequência atual nesse hábito.</text
+    >
 
     <touchable-opacity class="botao-adicionar-habito" :on-press="modalDia">
-      <text :style="{fontSize: 24, color: 'white'}">+</text>
+      <text :style="{ fontSize: 24, color: 'white' }">+</text>
     </touchable-opacity>
 
-    <!-- <text>{{habitos}}</text>
-    <text>{{rotinaSemanal}}</text>-->
-
-    <!-- <text>modal dia visivel: {{modalDiaVisible}}</text> -->
-    <!-- <text>modal hora visivel: {{modalHoraVisible}}</text> -->
-    <!-- <text>{{habitos[0].rotinaSemanal}}</text> -->
     <view class="scroll-area">
       <ScrollView :fadingEdgeLength="0" :showsVerticalScrollIndicator="false">
         <view class="scroll-box">
@@ -34,62 +37,123 @@
       </ScrollView>
     </view>
 
-    <touchable-opacity class="confirmar-habito" :on-press="() => definirHabito()">
+    <touchable-opacity
+      class="confirmar-habito"
+      :on-press="() => definirHabito()"
+    >
       <text class="confirmar-estilo">Confirmar</text>
     </touchable-opacity>
 
     <view class="centered-view">
-      <modal animationType="slide" :transparent="true" :visible="modalDiaVisible">
+      <modal
+        animationType="slide"
+        :transparent="true"
+        :visible="modalDiaVisible"
+      >
         <view class="centered-view2">
           <view class="modal-view">
-            <text :style="{fontSize: 24}">Dia da Semana</text>
-            <touchable-opacity class="adicionarDia" :on-press="() => definirDia(0)">
+            <text :style="{ fontSize: 24 }">Dia da Semana</text>
+            <view class="line" />
+            <touchable-opacity
+              class="adicionarDia"
+              :on-press="() => definirDia(0)"
+            >
               <text>Domingo</text>
             </touchable-opacity>
-            <touchable-opacity class="adicionarDia" :on-press="() => definirDia(1)">
+            <view class="line" />
+            <touchable-opacity
+              class="adicionarDia"
+              :on-press="() => definirDia(1)"
+            >
               <text>Segunda-feira</text>
             </touchable-opacity>
-            <touchable-opacity class="adicionarDia" :on-press="() => definirDia(2)">
+            <view class="line" />
+            <touchable-opacity
+              class="adicionarDia"
+              :on-press="() => definirDia(2)"
+            >
               <text>Terça-feira</text>
             </touchable-opacity>
-            <touchable-opacity class="adicionarDia" :on-press="() => definirDia(3)">
+            <view class="line" />
+            <touchable-opacity
+              class="adicionarDia"
+              :on-press="() => definirDia(3)"
+            >
               <text>Quarta-feira</text>
             </touchable-opacity>
-            <touchable-opacity class="adicionarDia" :on-press="() => definirDia(4)">
+            <view class="line" />
+            <touchable-opacity
+              class="adicionarDia"
+              :on-press="() => definirDia(4)"
+            >
               <text>Quinta-feira</text>
             </touchable-opacity>
-            <touchable-opacity class="adicionarDia" :on-press="() => definirDia(5)">
+            <view class="line" />
+            <touchable-opacity
+              class="adicionarDia"
+              :on-press="() => definirDia(5)"
+            >
               <text>Sexta-feira</text>
             </touchable-opacity>
-            <touchable-opacity class="adicionarDia" :on-press="() => definirDia(6)">
+            <view class="line" />
+            <touchable-opacity
+              class="adicionarDia"
+              :on-press="() => definirDia(6)"
+            >
               <text>Sábado</text>
             </touchable-opacity>
+            <view class="line" />
           </view>
         </view>
       </modal>
 
-      <modal animationType="slide" :transparent="true" :visible="modalHoraVisible">
+      <modal
+        animationType="slide"
+        :transparent="true"
+        :visible="modalHoraVisible"
+      >
         <view class="centered-view3">
           <view class="modal-view">
-            <text :style="{fontSize: 22}">Horário</text>
+            <text :style="{ fontSize: 22 }">Horário</text>
             <view class="box-horario">
               <text-input
                 keyboardType="numeric"
                 :maxLength="2"
-                :style="{height: 60, width: '30%', borderColor: '#6A994E', borderWidth: 1, borderRadius: 8, textAlign: 'center', fontWeight: 'bold', fontSize: 30}"
+                :style="{
+                  height: 60,
+                  width: '30%',
+                  borderColor: '#6A994E',
+                  borderWidth: 1,
+                  borderRadius: 8,
+                  textAlign: 'center',
+                  fontWeight: 'bold',
+                  fontSize: 30,
+                }"
                 v-model="horaTemp"
               />
-              <text :style="{fontSize: 30, fontWeight: 'bold'}">:</text>
+              <text :style="{ fontSize: 30, fontWeight: 'bold' }">:</text>
               <text-input
                 keyboardType="numeric"
                 :maxLength="2"
-                :style="{height: 60, width: '30%', borderColor: '#6A994E', borderWidth: 1, borderRadius: 8, textAlign: 'center', fontWeight: 'bold', fontSize: 30}"
+                :style="{
+                  height: 60,
+                  width: '30%',
+                  borderColor: '#6A994E',
+                  borderWidth: 1,
+                  borderRadius: 8,
+                  textAlign: 'center',
+                  fontWeight: 'bold',
+                  fontSize: 30,
+                }"
                 v-model="minutoTemp"
               />
             </view>
-            <!-- <text>{{horaTemp}}</text> -->
-            <touchable-opacity class="adicionarRotina" :on-press="() => definirHora()">
-              <text :style="{fontSize: 16, color: 'white'}">Pronto</text>
+
+            <touchable-opacity
+              class="adicionarRotina"
+              :on-press="() => definirHora()"
+            >
+              <text :style="{ fontSize: 16, color: 'white' }">Pronto</text>
             </touchable-opacity>
           </view>
         </view>
@@ -102,7 +166,9 @@
 import { constUser } from "../consts/user";
 import { constHabitos } from "../consts/habitos";
 import { AsyncStorage } from "react-native";
+import { Alert } from "react-native";
 import HabitScreenBox from "../components/HabitScreenBox";
+
 export default {
   components: {
     HabitScreenBox,
@@ -114,75 +180,35 @@ export default {
   },
   data() {
     return {
-      user: "",
-      habitos: "",
-      rotinaSemanal: [],
-      nomeHabito: "",
+      user: constUser,
+      habitos: constHabitos,
       modalDiaVisible: false,
       modalHoraVisible: false,
       diaTemp: "",
       horaTemp: "",
       minutoTemp: "",
-      usuarioId:"",
-      habitoId:"",
-      salvarUsuario:"",
+      usuarioId: "",
+      habitoId: "",
+      salvarUsuario: "",
     };
   },
+  computed: {
+    userr() {
+      return this.$store.state.storeUsuario;
+    },
+    habitoSelecionado() {
+      return this.$store.state.storeHabitoSelecionado;
+    },
+    rotinaSemanal(){
+      return this.userr[0].habitos[this.habitoSelecionado].rotinaSemanal;
+    },
+    nomeHabito(){
+      return this.userr[0].habitos[this.habitoSelecionado].titulo;
+    }
+  },
   created() {
-      console.log("------------Inicializando Informações-------------");
-      console.log(" ");
-      console.log(" ");
 
-      this.user = "";
-    this.habitoId = 0;
-    this.nomeHabito = "teste"
-
-    AsyncStorage.getItem("Usuario")
-      .then((usuarioSalvo) => {
-        const usuarioParsed = JSON.parse(usuarioSalvo);
-        if (usuarioParsed) {
-          this.user = usuarioParsed;
-          this.habitos = this.user[0].habitos[this.habitoId];
-          this.rotinaSemanal = this.habitos.rotinaSemanal;
-
-          console.log(" ");
-          console.log("RECEBIDO USUARIO: "+usuarioParsed);
-          console.log(" ");
-          console.log("Usuario: " + this.user[0].nome);
-          console.log(" ");
-          console.log("Habito: " + this.habitos.titulo);
-          console.log(" ");
-          console.log("Rotina Semanal: " + JSON.stringify(this.rotinaSemanal));
-          console.log(" ");
-
-        } else {
-          console.log(" ");
-          console.log("USUARIO NÃO RECEBIDO"+JSON.stringify(constUser));
-          this.user = constUser;
-          this.habitos = this.user[0].habitos[this.habitoId];
-          this.rotinaSemanal = this.habitos.rotinaSemanal;
-          console.log(" ");
-          console.log("Usuario: " + this.user[0].nome);
-          console.log(" ");
-          console.log("Habito: " + this.habitos.titulo);
-          console.log(" ");
-          console.log("Rotina Semanal: " + JSON.stringify(this.rotinaSemanal));
-          console.log(" ");
-        }
-      })
-      .catch(() => {
-        console.log(" ");
-        console.log("Deu errado no Recebimento de Usuario");
-        console.log(" ");
-      });
-
-
-
-
-    //this.habitos = constHabitos;
-   // this.habitos = []; //inicializar zerado na pagina
-
-
+    this.$store.dispatch("fetchUsuario");
 
   },
   watch: {
@@ -217,105 +243,63 @@ export default {
     definirHora() {
       this.modalHoraVisible = false;
 
-      console.log("------------Inicio Teste Rotina Semanal-------------");
-      console.log(" ");
-      console.log(" ");
-      console.log("Antiga Rotina Semanal do habito: "+this.habitos.titulo);
-      console.log(JSON.stringify(this.habitos.rotinaSemanal));
-      console.log(" ");
-      console.log(" ");
-
-      this.rotinaSemanal.push({
-        diaSetado: this.diaTemp,
-        horaSetada: this.horaTemp,
-        minutoSetado: this.minutoTemp,
-        notificar: false,
-        completado: false,
-      });
-      
-      this.habitos.rotinaSemanal=this.rotinaSemanal;
-
-      console.log("Nova Rotina Semanal do habito: "+this.habitos.titulo);
-      console.log(JSON.stringify(this.habitos.rotinaSemanal));
-      console.log(" ");
-      console.log(" ");
-      console.log("------------Fim Teste Rotina Semanal-------------");
-
-      console.log(" ");
-      console.log(" ");
-      console.log(" ");
-
-      console.log("------------Inicio Teste Novos habitos-------------");
-      console.log(" ");
-      console.log(" ");
-
-      this.user[0].habitos[this.habitoId]=this.habitos;
-
-      console.log("INFORMAÇÕES DO USUARIO: "+JSON.stringify(this.user[0]));
-
-      console.log(" ");
-      console.log(" ");
-      console.log("------------Fim Teste Novos habitos-------------");
-
-      console.log(" ");
-      console.log(" ");
-
-      this.salvarUsuario = JSON.stringify(this.user);
-
-      console.log("------------Inicio Atualizar Usuario-------------");
-      AsyncStorage.setItem("Usuario",this.salvarUsuario).then(()=>{
-        console.log(" ");
-        console.log(" ");
-        console.log("Usuario: "+this.salvarUsuario);
-        console.log(" ");
-        console.log(" ");
-        console.log("Usuário Atualizado");
-      })
-      .catch(()=>{
-        console.log(" ");
-        console.log(" ");
-        console.log("Não foi possível atualizar o Usuario")
-        console.log(" ");
-        console.log(" ");
-      })
-      console.log("------------Fim Atualizar Usuario-------------");
-
-
-
+      if (this.horaTemp == "" || this.minutoTemp == "") {
+        Alert.alert(
+          "Valor Invalido",
+          "Adicione valores validos para o habito",
+          [{ text: "OK", onPress: () => console.log("OK Pressed") }],
+          { cancelable: false }
+        );
+      } else {
+        this.rotinaSemanal.push({
+          diaSetado: this.diaTemp,
+          horaSetada: this.horaTemp,
+          minutoSetado: this.minutoTemp,
+          notificar: false,
+          completado: false,
+        });
+      }
     },
     definirHabito() {
-     /*this.user[0].habitos.push({
-        titulo: this.nomeHabito,
-        xp: 100,
-        rotinaSemanal: [],
-      });
-      let tam = this.user[0].habitos.lenght;
-      console.log(this.user[0].habitos);
+      if (this.rotinaSemanal == "") {
+        Alert.alert(
+          "Você não cadastrou dias para seu habito",
+          "Adicione um dia e horario para seu habito",
+          [{ text: "OK", onPress: () => console.log("OK Pressed") }],
+          { cancelable: false }
+        );
+      } else {
 
-      // this.user[0].habitos[tam - 1].rotinaSemanal.push(this.rotinaSemanal); //TA BUGANDO
-      this.diaTemp = "";
-      this.horaTemp = "";
-      this.minutoTemp = "";*/
-      this.user = constUser;
-      console.log("------------Inicio Reiniciar Usuario-------------");
-      AsyncStorage.removeItem("Usuario").then(()=>{
-        console.log(" ");
-        console.log(" ");
-        console.log("Usuario: "+JSON.stringify(this.user));
-        console.log(" ");
-        console.log(" ");
-        console.log("Usuário Reiniciado");
-      })
-      .catch(()=>{
-        console.log(" ");
-        console.log(" ");
-        console.log("Não foi possível Reiniciar o Usuario")
-        console.log(" ");
-        console.log(" ");
-      })
-      console.log("------------Fim Reiniciar Usuario-------------");
+        this.diaTemp = "";
+        this.horaTemp = "";
+        this.minutoTemp = "";
 
-      this.navigation.navigate("AndroidTabs");
+        console.log("------------Inicio Atualizar Usuario-------------");
+
+        this.salvarUsuario = JSON.stringify(this.userr);
+
+        AsyncStorage.setItem("Usuario", this.salvarUsuario)
+          .then(() => {
+            console.log(" ");
+            console.log(" ");
+            console.log("Usuario: " + this.salvarUsuario);
+            console.log(" ");
+            console.log(" ");
+            console.log("Usuário Atualizado");
+          })
+          .catch(() => {
+            console.log(" ");
+            console.log(" ");
+            console.log("Não foi possível atualizar o Usuario");
+            console.log(" ");
+            console.log(" ");
+          });
+        console.log("------------Fim Atualizar Usuario-------------");
+
+        this.$store.dispatch("fetchUsuario");
+
+        this.navigation.navigate("inicio");
+      }
     },
   },
 };
@@ -384,7 +368,6 @@ export default {
   flex: 1;
   justify-content: center;
   align-items: center;
-  margin-top: 22;
 }
 
 .centered-view3 {
@@ -392,7 +375,6 @@ export default {
   flex: 1;
   justify-content: center;
   align-items: center;
-  margin-top: 22;
 }
 
 .adicionarRotina {
@@ -412,6 +394,14 @@ export default {
   border-radius: 20;
   padding: 35;
   align-items: center;
+}
+
+.line {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 100%;
+  border-bottom-color: rgba(0, 0, 0, 0.1);
+  border-bottom-width: 1;
 }
 
 .box-horario {

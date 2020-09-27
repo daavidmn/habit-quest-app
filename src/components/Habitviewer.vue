@@ -40,15 +40,13 @@ export default {
   methods: {
       goToModificar() {
 
-      this.$store.commit("setHabito",this.rotinaId);
-
-      console.log("Habito selecionado: " + this.rotinaId);
+      this.$store.commit("setHabito",this.habitoId);
 
       this.navigation.push("modificarHabito");
     },
 
   },
-  props: ["title", "xp", "hora", "minutos", "dia", "rotinaId", "navigation"],
+  props: ["title", "xp", "hora", "minutos", "dia", "habitoId", "navigation"],
 
 };
 </script>

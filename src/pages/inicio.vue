@@ -78,7 +78,6 @@ export default {
     ActionButton,
     MaterialCommunityIcons,
   },
-
   data() {
     return {
       loaded: false,

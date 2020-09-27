@@ -25,11 +25,12 @@
       <ScrollView :fadingEdgeLength="0" :showsVerticalScrollIndicator="false">
         <view class="scroll-box">
           <view v-if="habitos.length > 0">
-            <view v-for="(habit, key) in rotinaSemanal" :key="key">
-              <HabitScreenBox
+            <view v-for="(habit, key) in userr[0].habitos[habitoSelecionado].rotinaSemanal" :key="key">
+              <HabitScreenBox @remove="() => removerRotina()"
                 :dia="habit.diaSetado"
                 :hora="habit.horaSetada"
                 :minuto="habit.minutoSetado"
+                :rotinaId="key"
               />
             </view>
           </view>
@@ -42,6 +43,13 @@
       :on-press="() => definirHabito()"
     >
       <text class="confirmar-estilo">Confirmar</text>
+    </touchable-opacity>
+
+    <touchable-opacity
+      class="remover-habito"
+      :on-press="() => removerHabito()"
+    >
+      <text class="confirmar-estilo">Remover</text>
     </touchable-opacity>
 
     <view class="centered-view">
@@ -199,9 +207,6 @@ export default {
     habitoSelecionado() {
       return this.$store.state.storeHabitoSelecionado;
     },
-    rotinaSemanal(){
-      return this.userr[0].habitos[this.habitoSelecionado].rotinaSemanal;
-    },
     nomeHabito(){
       return this.userr[0].habitos[this.habitoSelecionado].titulo;
     }
@@ -232,6 +237,23 @@ export default {
     },
   },
   methods: {
+    removerRotina: function (id){
+      this.userr[0].habitos[this.habitoSelecionado].rotinaSemanal.splice(id,1);
+    },
+    removerHabito: function (){
+
+      if(this.userr[0].habitos.length > 1){
+      this.userr[0].habitos.splice(this.habitoSelecionado,1);
+
+      this.$store.commit('setSalvarUsuario', this.userr);
+
+      this.$store.dispatch('salvarUsuario');
+
+      this.navigation.navigate("inicio");}
+
+      else{alert("Você precisa manter pelo menos um habito");}
+
+    },
     modalDia() {
       this.modalDiaVisible = true;
     },
@@ -251,7 +273,7 @@ export default {
           { cancelable: false }
         );
       } else {
-        this.rotinaSemanal.push({
+        this.userr[0].habitos[this.habitoSelecionado].rotinaSemanal.push({
           diaSetado: this.diaTemp,
           horaSetada: this.horaTemp,
           minutoSetado: this.minutoTemp,
@@ -261,7 +283,7 @@ export default {
       }
     },
     definirHabito() {
-      if (this.rotinaSemanal == "") {
+      if (this.userr[0].habitos[this.habitoSelecionado].rotinaSemanal == "") {
         Alert.alert(
           "Você não cadastrou dias para seu habito",
           "Adicione um dia e horario para seu habito",
@@ -317,13 +339,24 @@ export default {
 
 .confirmar-habito {
   position: absolute;
-  right: 20px;
+  left: 20px;
   bottom: 30px;
-  width: 100%;
+  width: 50%;
   height: 80px;
   align-items: center;
   justify-content: center;
   background-color: #386641;
+  border-radius: 8px;
+}
+.remover-habito {
+  position: absolute;
+  right: 20px;
+  bottom: 30px;
+  width: 50%;
+  height: 80px;
+  align-items: center;
+  justify-content: center;
+  background-color: red;
   border-radius: 8px;
 }
 .confirmar-estilo {

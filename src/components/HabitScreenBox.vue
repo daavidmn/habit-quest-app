@@ -26,7 +26,9 @@
       </view>
       
       <view class="box-above-right">
-        <MaterialCommunityIcons name="window-close" :size="14" color="white" />
+        <touchable-opacity :on-press="() => removerRotina()">
+        <MaterialCommunityIcons name="window-close" :size="18" color="white" />
+        </touchable-opacity>
       </view>
     
     </view>
@@ -43,7 +45,14 @@ export default {
   components: {
     MaterialCommunityIcons,
   },
-  props: ["dia", "hora", "minuto","idHabito"],
+  props: ["dia", "hora", "minuto","rotinaId"],
+   methods: {
+    removerRotina() {
+
+      this.$emit('remove', this.rotinaId);
+
+    },
+  }
 };
 </script>
 

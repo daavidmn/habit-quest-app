@@ -42,7 +42,7 @@ export default {
 
       this.$store.commit("setHabito",this.habitoId);
 
-      this.navigation.push("modificarHabito");
+      this.navigation.navigate("modificarHabito");
     },
 
   },

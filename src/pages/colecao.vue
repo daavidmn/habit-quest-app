@@ -1,9 +1,9 @@
 <template>
-  <view class="app">
+  <view class="container">
     <view class="header">
       <view class="avatar-mini">
         <image
-          :style="{ width: 50, height: 50 }"
+          :style="{ width: 45, height: 45 }"
           :source="require('../assets/img/avatar/020-superhero-19.png')"
         />
       </view>
@@ -12,20 +12,20 @@
           <text class="nome">{{ userr[0].nome }}</text>
         </view>
         <view class="box-baixo">
-          <view class="box-esquerda">
-            <text class="texto-baixo">Nível 150</text>
+          <view class="box-baixo-esquerda">
+            <text class="texto-branco">Nível 150</text>
           </view>
-          <view class="box-direita">
+          <view class="box-baixo-direita">
             <view class="achievements">
-              <MaterialCommunityIcons name="crown" :size="24" color="white" />
-              <text class="texto-baixo">Nível 15</text>
+              <MaterialCommunityIcons name="crown" :size="18" color="white" />
+              <text class="texto-branco">15</text>
             </view>
           </view>
         </view>
       </view>
       <view class="box-lateral">
         <text class="texto-box-lateral">Desde:</text>
-        <text class="texto-baixo">Fev. 2020</text>
+        <text class="texto-branco">Fev. 2020</text>
       </view>
     </view>
     <view class="conteudo-meio">
@@ -145,16 +145,15 @@ export default {
 
 
 <style scoped>
-.app {
+.container {
   width: 100%;
   height: 100%;
 }
 
 .header {
-  padding-left: 5px;
-  padding-right: 5px;
+  padding: 10px;
   width: 100%;
-  height: 20%;
+  height: 95px;
   background-color: #6a994e;
   justify-content: space-around;
   align-items: center;
@@ -167,18 +166,19 @@ export default {
   width: 50%;
 }
 
-.box-esquerda {
-  padding-top: 5px;
-  align-items: center;
-}
-
-.box-direita {
-  align-items: center;
-}
-
 .box-baixo {
-  justify-content: flex-start;
+  height: 25%;
   flex-direction: row;
+  align-items: center;
+  /* background-color: red; */
+}
+
+.box-baixo-esquerda {
+  /* align-items: center; */
+}
+
+.box-baixo-direita {
+  /* align-items: center; */
 }
 
 .nome {
@@ -197,10 +197,11 @@ export default {
 
 .avatar-mini {
   width: 20%;
-  height: 67px;
+  height: 60px;
   background-color: #f2e8cf;
-  border-color: rgba(0, 0, 0, 0.1);
-  border-radius: 4px;
+  border-width: 2px;
+  border-color: #dad1ba;
+  border-radius: 5px;
   align-items: center;
   justify-content: center;
 }
@@ -216,34 +217,28 @@ export default {
   justify-content: center;
   flex-direction: row;
 }
-.tasks-text {
-  color: white;
-}
 .achievements {
+  margin-left: 15px;
   align-items: center;
   flex-direction: row;
 }
 
-.texto-baixo {
-  padding-right: 10px;
-  color: white;
-}
-
 .box-lateral {
   width: 20%;
-  align-content: center;
-  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* background-color: red; */
 }
 
 .texto-box-lateral {
   height: 32px;
-  left: 0px;
-  top: 0px;
   font-style: normal;
-  font-size: 22px;
+  font-size: 18px;
   line-height: 32px;
-  display: flex;
-  align-items: center;
+  color: white;
+}
+
+.texto-branco {
   color: white;
 }
 
@@ -257,11 +252,11 @@ export default {
 }
 
 .texto-centro {
+  margin-top: 10px;
+  margin-bottom: 10px;
   width: 100%;
-  top: 0px;
-  font-size: 18px;
-  line-height: 32px;
-  align-items: center;
+  font-size: 16px;
+  font-weight: bold;
 }
 
 .conquistas {

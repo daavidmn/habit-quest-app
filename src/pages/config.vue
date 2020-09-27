@@ -184,7 +184,7 @@ export default {
             },
           },
         ],
-        { cancelable: false }
+        { cancelable: true }
       );
 
       this.nomeUsuario = this.userr[0].nome;

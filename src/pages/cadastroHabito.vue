@@ -26,10 +26,11 @@
         <view class="scroll-box">
           <view v-if="habitos.length > 0">
             <view v-for="(habit, key) in rotinaSemanal" :key="key">
-              <HabitScreenBox
+              <HabitScreenBox @remove="() => removerRotina()"
                 :dia="habit.diaSetado"
                 :hora="habit.horaSetada"
                 :minuto="habit.minutoSetado"
+                :rotinaId="key"
               />
             </view>
           </view>
@@ -225,6 +226,9 @@ export default {
     },
   },
   methods: {
+    removerRotina: function (id){
+      this.rotinaSemanal.splice(id,1);
+    },
     modalDia() {
       this.modalDiaVisible = true;
     },

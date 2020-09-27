@@ -10,7 +10,7 @@ export default new Vuex.Store({
   // We are keeping our data in the state.
   state: {
     storeUsuario: 'a',
-    habitoSelecionado:'0'
+    storeHabitoSelecionado:'0'
   },
   // Like computed properties in component.
   // You can use getters to acess state in the store
@@ -227,13 +227,19 @@ export default new Vuex.Store({
       })
     }
 
+    
+
   },
   // Like method in component.
   // To save data to the state.
   mutations: {
     setUsuario(state, storeUsuario) {
       Vue.set(state, 'storeUsuario', storeUsuario);
-    }
-
+    },
+    
+    setHabito(state, storeHabitoSelecionado) {
+      Vue.set(state,'storeHabitoSelecionado', storeHabitoSelecionado);
+    },
+    
   }
 })

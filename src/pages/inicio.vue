@@ -91,6 +91,7 @@ export default {
     userr() {
       return this.$store.state.storeUsuario;
     },
+    
   },
 
   created() {
@@ -103,7 +104,7 @@ export default {
     },
   },
   methods: {
-    goToCadastrar() {
+    goToCadastrar: function() {
       this.navigation.navigate("cadastroHabito");
     },
     onPressButton: function () {

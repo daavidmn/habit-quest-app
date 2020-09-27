@@ -29,12 +29,21 @@
 
 <script>
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import store from "../store";
+import Vue from "vue-native-core";
+
+Vue.prototype.$store = store;
 export default {
   components: {
     MaterialCommunityIcons,
   },
   methods: {
-        goToModificar() {
+      goToModificar() {
+
+      this.$store.commit("setHabito",this.rotinaId);
+
+      console.log("Habito selecionado: " + this.rotinaId);
+
       this.navigation.push("modificarHabito");
     },
 

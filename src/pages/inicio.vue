@@ -3,7 +3,7 @@
     <view class="header">
       <view class="avatar-mini">
         <image
-          :style="{ width: 30, height: 30 }"
+          :style="{ width: 25, height: 25 }"
           :source="require('../assets/img/avatar/020-superhero-19.png')"
         />
       </view>

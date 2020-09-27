@@ -24,6 +24,7 @@ import {
   AntDesign,
 } from "@expo/vector-icons";
 import { StatusBar } from "react-native";
+import { Asset } from "expo-asset";
 
 const BottomTabNavigator = createBottomTabNavigator(
   {
@@ -145,6 +146,22 @@ export default {
     console.log("======");
     console.log(StatusBar.currentHeight);
     console.log("======");
+    // async function loadResourcesAsync() {
+    //   await Promise.all([
+    //     Asset.loadAsync([require("./src/assets/img/bg/bg-passe.png")]),
+    //     Asset.loadAsync([require("./src/assets/img/bg/paper.png")]),
+    //     // Font.loadAsync({
+    //     //   // This is the font that we are using for our tab bar
+    //     //   ...Ionicons.font,
+    //     //   // We include SpaceMono because we use it in HomeScreen.js. Feel free to
+    //     //   // remove this if you are not using it in your app
+    //     //   'open-sans-regular': require('./assets/fonts/OpenSans-Regular.ttf'),
+    //     //   'open-sans-extrabold': require('./assets/fonts/OpenSans-ExtraBold.ttf'),
+    //     // }),
+    //   ]);
+    //   alert("sasa");
+    // }
+    // loadResourcesAsync();
   },
 };
 </script>

@@ -82,6 +82,7 @@ const BottomTabNavigator = createBottomTabNavigator(
     navigationOptions: {
       headerStyle: {
         height: 0,
+        backgroundColor: "#6A994E",
       },
     },
     initialRouteName: "inicio",
@@ -150,7 +151,6 @@ export default {
 
 <style>
 .app {
-  background-color: white;
   align-items: center;
   justify-content: center;
   flex: 1;

@@ -1,15 +1,24 @@
 <template>
   <view class="container">
-    <text :style="{fontSize: 18}">Nome do hábito</text>
+    <text :style="{ fontSize: 18 }">Nome do hábito</text>
     <text-input
-      :style="{height: 40, padding:10, width: '100%', borderColor: '#6A994E', borderWidth: 2, borderRadius: 8}"
+      :style="{
+        height: 40,
+        padding: 10,
+        width: '100%',
+        borderColor: '#6A994E',
+        borderWidth: 2,
+        borderRadius: 8,
+      }"
       v-model="nomeHabito"
     />
-    <text :style="{fontSize: 18, marginTop: 30}">Dias de prática</text>
-    <text :style="{fontSize: 12}">Alterar os dias irá zerar sua sequência atual nesse hábito.</text>
+    <text :style="{ fontSize: 18, marginTop: 30 }">Dias de prática</text>
+    <text :style="{ fontSize: 12 }"
+      >Alterar os dias irá zerar sua sequência atual nesse hábito.</text
+    >
 
     <touchable-opacity class="botao-adicionar-habito" :on-press="modalDia">
-      <text :style="{fontSize: 24, color: 'white'}">+</text>
+      <text :style="{ fontSize: 24, color: 'white' }">+</text>
     </touchable-opacity>
 
     <view class="scroll-area">
@@ -28,41 +37,69 @@
       </ScrollView>
     </view>
 
-    <touchable-opacity class="confirmar-habito" :on-press="() => definirHabito()">
+    <touchable-opacity
+      class="confirmar-habito"
+      :on-press="() => definirHabito()"
+    >
       <text class="confirmar-estilo">Confirmar</text>
     </touchable-opacity>
 
     <view class="centered-view">
-      <modal animationType="slide" :transparent="true" :visible="modalDiaVisible">
+      <modal
+        animationType="slide"
+        :transparent="true"
+        :visible="modalDiaVisible"
+      >
         <view class="centered-view2">
           <view class="modal-view">
-            <text :style="{fontSize: 24}">Dia da Semana</text>
+            <text :style="{ fontSize: 24 }">Dia da Semana</text>
             <view class="line" />
-            <touchable-opacity class="adicionarDia" :on-press="() => definirDia(0)">
+            <touchable-opacity
+              class="adicionarDia"
+              :on-press="() => definirDia(0)"
+            >
               <text>Domingo</text>
             </touchable-opacity>
             <view class="line" />
-            <touchable-opacity class="adicionarDia" :on-press="() => definirDia(1)">
+            <touchable-opacity
+              class="adicionarDia"
+              :on-press="() => definirDia(1)"
+            >
               <text>Segunda-feira</text>
             </touchable-opacity>
             <view class="line" />
-            <touchable-opacity class="adicionarDia" :on-press="() => definirDia(2)">
+            <touchable-opacity
+              class="adicionarDia"
+              :on-press="() => definirDia(2)"
+            >
               <text>Terça-feira</text>
             </touchable-opacity>
             <view class="line" />
-            <touchable-opacity class="adicionarDia" :on-press="() => definirDia(3)">
+            <touchable-opacity
+              class="adicionarDia"
+              :on-press="() => definirDia(3)"
+            >
               <text>Quarta-feira</text>
             </touchable-opacity>
             <view class="line" />
-            <touchable-opacity class="adicionarDia" :on-press="() => definirDia(4)">
+            <touchable-opacity
+              class="adicionarDia"
+              :on-press="() => definirDia(4)"
+            >
               <text>Quinta-feira</text>
             </touchable-opacity>
             <view class="line" />
-            <touchable-opacity class="adicionarDia" :on-press="() => definirDia(5)">
+            <touchable-opacity
+              class="adicionarDia"
+              :on-press="() => definirDia(5)"
+            >
               <text>Sexta-feira</text>
             </touchable-opacity>
             <view class="line" />
-            <touchable-opacity class="adicionarDia" :on-press="() => definirDia(6)">
+            <touchable-opacity
+              class="adicionarDia"
+              :on-press="() => definirDia(6)"
+            >
               <text>Sábado</text>
             </touchable-opacity>
             <view class="line" />
@@ -70,28 +107,53 @@
         </view>
       </modal>
 
-      <modal animationType="slide" :transparent="true" :visible="modalHoraVisible">
+      <modal
+        animationType="slide"
+        :transparent="true"
+        :visible="modalHoraVisible"
+      >
         <view class="centered-view3">
           <view class="modal-view">
-            <text :style="{fontSize: 22}">Horário</text>
+            <text :style="{ fontSize: 22 }">Horário</text>
             <view class="box-horario">
               <text-input
                 keyboardType="numeric"
                 :maxLength="2"
-                :style="{height: 60, width: '30%', borderColor: '#6A994E', borderWidth: 1, borderRadius: 8, textAlign: 'center', fontWeight: 'bold', fontSize: 30}"
+                :style="{
+                  height: 60,
+                  width: '30%',
+                  borderColor: '#6A994E',
+                  borderWidth: 1,
+                  borderRadius: 8,
+                  textAlign: 'center',
+                  fontWeight: 'bold',
+                  fontSize: 30,
+                }"
                 v-model="horaTemp"
               />
-              <text :style="{fontSize: 30, fontWeight: 'bold'}">:</text>
+              <text :style="{ fontSize: 30, fontWeight: 'bold' }">:</text>
               <text-input
                 keyboardType="numeric"
                 :maxLength="2"
-                :style="{height: 60, width: '30%', borderColor: '#6A994E', borderWidth: 1, borderRadius: 8, textAlign: 'center', fontWeight: 'bold', fontSize: 30}"
+                :style="{
+                  height: 60,
+                  width: '30%',
+                  borderColor: '#6A994E',
+                  borderWidth: 1,
+                  borderRadius: 8,
+                  textAlign: 'center',
+                  fontWeight: 'bold',
+                  fontSize: 30,
+                }"
                 v-model="minutoTemp"
               />
             </view>
 
-            <touchable-opacity class="adicionarRotina" :on-press="() => definirHora()">
-              <text :style="{fontSize: 16, color: 'white'}">Pronto</text>
+            <touchable-opacity
+              class="adicionarRotina"
+              :on-press="() => definirHora()"
+            >
+              <text :style="{ fontSize: 16, color: 'white' }">Pronto</text>
             </touchable-opacity>
           </view>
         </view>
@@ -138,11 +200,10 @@ export default {
     },
   },
   created() {
-    
-      this.$store.dispatch("fetchUsuario");
+    this.$store.dispatch("fetchUsuario");
 
-      this.rotinaSemanal = [];
-      this.nomeHabito = this.habitos[0].titulo;
+    this.rotinaSemanal = [];
+    this.nomeHabito = this.habitos[0].titulo;
   },
   watch: {
     horaTemp: function () {
@@ -176,80 +237,68 @@ export default {
     definirHora() {
       this.modalHoraVisible = false;
 
-    
-      
-      if (this.horaTemp==""||this.minutoTemp==""){
-
+      if (this.horaTemp == "" || this.minutoTemp == "") {
         Alert.alert(
-                'Valor Invalido',
-                'Adicione valores validos para o habito',
-                [
-                    {text: 'OK', onPress: () => console.log('OK Pressed')},
-                ],
-                { cancelable: false });
+          "Valor Invalido",
+          "Adicione valores validos para o habito",
+          [{ text: "OK", onPress: () => console.log("OK Pressed") }],
+          { cancelable: false }
+        );
+      } else {
+        this.rotinaSemanal.push({
+          diaSetado: this.diaTemp,
+          horaSetada: this.horaTemp,
+          minutoSetado: this.minutoTemp,
+          notificar: false,
+          completado: false,
+        });
       }
-      else{
-      this.rotinaSemanal.push({
-        diaSetado: this.diaTemp,
-        horaSetada: this.horaTemp,
-        minutoSetado: this.minutoTemp,
-        notificar: false,
-        completado: false,
-      });}
-
     },
     definirHabito() {
-
-
-       if (this.rotinaSemanal==""){
-
+      if (this.rotinaSemanal == "") {
         Alert.alert(
-                'Você não cadastrou dias para seu habito',
-                'Adicione um dia e horario para seu habito',
-                [
-                    {text: 'OK', onPress: () => console.log('OK Pressed')},
-                ],
-                { cancelable: false });
-      }
-      else{
-     this.userr[0].habitos.push({
-
-        titulo: this.nomeHabito,
-        xp: 100,
-        rotinaSemanal: this.rotinaSemanal,
-      });
-
-      this.diaTemp = "";
-      this.horaTemp = "";
-      this.minutoTemp = "";
-
-      console.log("------------Inicio Atualizar Usuario-------------");
-
-
-      this.salvarUsuario = JSON.stringify(this.userr);
-
-      AsyncStorage.setItem("Usuario", this.salvarUsuario)
-        .then(() => {
-          console.log(" ");
-          console.log(" ");
-          console.log("Usuario: " + this.salvarUsuario);
-          console.log(" ");
-          console.log(" ");
-          console.log("Usuário Atualizado");
-        })
-        .catch(() => {
-          console.log(" ");
-          console.log(" ");
-          console.log("Não foi possível atualizar o Usuario");
-          console.log(" ");
-          console.log(" ");
+          "Você não cadastrou dias para seu habito",
+          "Adicione um dia e horario para seu habito",
+          [{ text: "OK", onPress: () => console.log("OK Pressed") }],
+          { cancelable: false }
+        );
+      } else {
+        this.userr[0].habitos.push({
+          titulo: this.nomeHabito,
+          xp: 100,
+          rotinaSemanal: this.rotinaSemanal,
         });
-      console.log("------------Fim Atualizar Usuario-------------");
 
-      this.$store.dispatch("fetchUsuario");
+        this.diaTemp = "";
+        this.horaTemp = "";
+        this.minutoTemp = "";
 
-      this.navigation.navigate("inicio");
-    }
+        console.log("------------Inicio Atualizar Usuario-------------");
+
+        this.salvarUsuario = JSON.stringify(this.userr);
+
+        AsyncStorage.setItem("Usuario", this.salvarUsuario)
+          .then(() => {
+            console.log(" ");
+            console.log(" ");
+            console.log("Usuario: " + this.salvarUsuario);
+            console.log(" ");
+            console.log(" ");
+            console.log("Usuário Atualizado");
+          })
+          .catch(() => {
+            console.log(" ");
+            console.log(" ");
+            console.log("Não foi possível atualizar o Usuario");
+            console.log(" ");
+            console.log(" ");
+          });
+        console.log("------------Fim Atualizar Usuario-------------");
+
+        this.$store.dispatch("fetchUsuario");
+
+        this.navigation.navigate("inicio");
+      }
     },
   },
 };
@@ -318,7 +367,6 @@ export default {
   flex: 1;
   justify-content: center;
   align-items: center;
-  margin-top: 22;
 }
 
 .centered-view3 {
@@ -326,7 +374,6 @@ export default {
   flex: 1;
   justify-content: center;
   align-items: center;
-  margin-top: 22;
 }
 
 .adicionarRotina {

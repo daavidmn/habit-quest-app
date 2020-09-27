@@ -18,7 +18,11 @@ import pgPasse from "./src/pages/passe.vue";
 import pgConfig from "./src/pages/config.vue";
 import pgModificarHabito from "./src/pages/modificarHabito.vue";
 import React from "react";
-import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
+import {
+  Ionicons,
+  MaterialCommunityIcons,
+  AntDesign,
+} from "@expo/vector-icons";
 import { StatusBar } from "react-native";
 
 const BottomTabNavigator = createBottomTabNavigator(

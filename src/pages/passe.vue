@@ -1,14 +1,66 @@
 <template>
-  <view class="app">
-    <text>Pagina expedicaaao {{ test }}</text>
-    <button
-      :on-press="incrementar"
-      title="incrementar"
-      color="#841584"
-      accessibility-label="Learn more about this purple button"
-    />
-    <button title="ir para o inicio" :on-press="goToPage" :navigation="this.props.navigation" />
-  </view>
+  <ImageBackground
+    class="container-image"
+    :source="require('../assets/img/bg/bg-passe.png')"
+    resizeMode="cover"
+    :styles="{ flex: 1 }"
+  >
+    <view class="container">
+      <ImageBackground
+        class="paper-container"
+        :source="require('../assets/img/bg/paper.png')"
+        resizeMode="stretch"
+        :styles="{ flex: 1 }"
+      >
+        <text class="text-title">Quest semanal</text>
+        <text class="text-subtitle"
+          >Por manter seus hábitos durante essa semana, você irá receber:</text
+        >
+        <view
+          :style="{
+            marginTop: 10,
+            marginBottom: 10,
+            height: 50,
+            backgroundColor: 'red',
+          }"
+        >
+          <!-- ESPAÇO PROS DIAS DA SEMANA -->
+        </view>
+        <text
+          >Continue assim até o final dessa semana e receba um bônus especial de
+          2 a mais por cada dia!</text
+        >
+      </ImageBackground>
+
+      <view class="passe-container">
+        <text class="text-title" :style="{ color: 'white' }"
+          >Passe de <text :style="{ color: '#6A994E' }">Primavera</text></text
+        >
+        <text class="text-subtitle" :style="{ color: 'white' }"
+          >Apenas
+          <text :style="{ color: '#6A994E' }">28 dias até o fim!</text></text
+        >
+        <view
+          :style="{
+            marginTop: 10,
+            marginBottom: 10,
+            height: 150,
+            backgroundColor: 'red',
+          }"
+        >
+          <!-- ESPAÇO DO CARROSEL DE PREMIAÇÃO -->
+        </view>
+        <text class="text-title2">Quer ter acesso a mais recompensas?</text>
+        <text
+          >Torne-se um apoiador, tenha acesso a recompensas exclusivas e ainda
+          apoie o desenvolvimento desse app!
+        </text>
+        <touchable-opacity class="botao-apoiador">
+          <text class="text-apoiador">Sim, quero me tornar um apoiador</text>
+        </touchable-opacity>
+      </view>
+    </view>
+  </ImageBackground>
 </template>
 
 <script>
@@ -51,8 +103,63 @@ export default {
 </script>
 
 <style>
-.app {
+.container-image {
   width: 100%;
   height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* background-image: url("../assets/icon.png"); */
+}
+.container {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.18);
+  padding-right: 16px;
+  padding-left: 16px;
+  padding-top: 5px;
+  align-items: center;
+}
+
+.paper-container {
+  height: 35%;
+  width: 110%;
+  padding: 20px;
+  display: flex;
+}
+.text-title {
+  font-size: 20px;
+  font-style: normal;
+  font-weight: bold;
+}
+.text-title2 {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: bold;
+}
+.text-subtitle {
+  font-size: 16px;
+  font-style: normal;
+  /* font-weight: bold; */
+}
+
+.passe-container {
+  width: 100%;
+  height: 100%;
+  padding-top: 20px;
+}
+
+.botao-apoiador {
+  height: 45px;
+  width: 100%;
+  margin-top: 30px;
+  border-radius: 8px;
+  background-color: #386641;
+  align-items: center;
+  justify-content: center;
+}
+
+.text-apoiador {
+  font-size: 12px;
+  font-weight: bold;
+  color: white;
 }
 </style>

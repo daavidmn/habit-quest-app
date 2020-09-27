@@ -3,17 +3,21 @@
     <view class="header">
       <view class="avatar-mini">
         <image
-          :style="{width: 30, height: 30}"
+          :style="{ width: 30, height: 30 }"
           :source="require('../assets/img/avatar/020-superhero-19.png')"
         />
       </view>
       <view class="progress-bar">
         <text>LV 150</text>
-        <text>{{userr[0].xpTotal}} /3000</text>
+        <text>{{ userr[0].xpTotal }} /3000</text>
         <view class="progress-fill"></view>
       </view>
       <view class="tasks">
-        <MaterialCommunityIcons name="calendar-check" :size="24" color="white" />
+        <MaterialCommunityIcons
+          name="calendar-check"
+          :size="24"
+          color="white"
+        />
         <text class="tasks-text">20</text>
       </view>
       <view class="achievements">
@@ -26,13 +30,13 @@
     <!-- <text :style="{fontSize: 10}">{{console.log(user[0].habitos)}}</text> -->
 
     <view class="weekbar">
-      <text>{{userr[0].nome}}</text>
+      <text>{{ userr[0].nome }}</text>
     </view>
 
     <view class="habits">
       <ScrollView :fadingEdgeLength="0" :showsVerticalScrollIndicator="false">
         <view class="scroll-box">
-          <view v-for="(habito, key) in (userr[0].habitos)" :key="key">
+          <view v-for="(habito, key) in userr[0].habitos" :key="key">
             <view v-for="(rotina, chave) in habito.rotinaSemanal" :key="chave">
               <Habitviewer
                 :title="habito.titulo"

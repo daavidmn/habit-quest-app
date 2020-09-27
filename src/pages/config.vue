@@ -1,16 +1,28 @@
 <template>
-  <view class="config">
+  <view class="container">
     <text class="titulo">Configurações</text>
     <ScrollView :fadingEdgeLength="0" :showsVerticalScrollIndicator="false">
       <view class="scroll-box">
         <text class="subtitulo">Trocar de nome</text>
 
         <text-input
-          :style="{height: 40, padding:10, width: '100%', borderColor: '#6A994E', borderWidth: 2, borderRadius: 8}"
+          :placeholder="'Seu novo nome'"
+          :style="{
+            height: 40,
+            padding: 10,
+            width: '100%',
+            borderColor: '#6A994E',
+            borderWidth: 2,
+            borderRadius: 8,
+            backgroundColor: 'white',
+          }"
           v-model="nomeUsuario"
         />
 
-        <touchable-opacity class="confirma-creditos" :on-press="() => trocarNomeUsuario()">
+        <touchable-opacity
+          class="confirma-creditos"
+          :on-press="() => trocarNomeUsuario()"
+        >
           <text class="text-confirma-creditos">Confirmar</text>
         </touchable-opacity>
 
@@ -37,13 +49,17 @@
       />
         </view>-->
 
-        <text class="subtitulo2" :style="{marginTop: 40}">Créditos do aplicativo</text>
+        <text class="subtitulo2" :style="{ marginTop: 40 }"
+          >Créditos do aplicativo</text
+        >
         <text>Veja quem ajudou a produzir esse aplicativo</text>
         <touchable-opacity class="confirma-creditos">
           <text class="text-confirma-creditos">Ver créditos</text>
         </touchable-opacity>
 
-        <text class="subtitulo2" :style="{marginTop: 40}">Gerenciamento de conta</text>
+        <text class="subtitulo2" :style="{ marginTop: 40 }"
+          >Gerenciamento de conta</text
+        >
 
         <text>Cuidado, essa ação é irreversível</text>
         <touchable-opacity class="resetar" :on-press="() => resetarUsuario()">
@@ -70,8 +86,8 @@ export default {
       value1: false,
       value2: false,
       nomeUsuario: "",
-      user:"",
-      salvarUsuario:"",
+      user: "",
+      salvarUsuario: "",
     };
   },
   computed: {
@@ -91,37 +107,35 @@ export default {
     },
     resetarUsuario: function () {
       Alert.alert(
+        "Reset de Usuario",
+        "Você tem certeza que deseja resetar?",
+        [
+          {
+            text: "Cancelar",
+            onPress: () => console.log("Cancelar"),
+            style: "cancel",
+          },
+          {
+            text: "Confirmar",
+            onPress: () => {
+              console.log("------------Inicio Reiniciar Usuario-------------");
 
-                'Reset de Usuario',
-                'Você tem certeza que deseja resetar?',
-                [   {text: 'Cancelar', onPress: () => console.log("Cancelar"), style: 'cancel'},
-                    {text: 'Confirmar', onPress: () => { 
+              this.$store.dispatch("resetarDados");
 
-                      console.log("------------Inicio Reiniciar Usuario-------------");
+              this.$store.dispatch("fetchUsuario");
 
-                      this.$store.dispatch("resetarDados");
+              console.log("------------Fim Reiniciar Usuario-------------");
+            },
+          },
+        ],
+        { cancelable: false }
+      );
 
-                      this.$store.dispatch("fetchUsuario");
-
-                      
-
-                      
-                      console.log("------------Fim Reiniciar Usuario-------------");
-
-
-    }},
-                ],
-                { cancelable: false });
-      
       this.nomeUsuario = this.userr[0].nome;
-      
     },
 
-
-    trocarNomeUsuario: function() {
-
-
-console.log("------------Inicio Alterar Nome Usuario-------------");
+    trocarNomeUsuario: function () {
+      console.log("------------Inicio Alterar Nome Usuario-------------");
 
       this.$store.dispatch("fetchUsuario");
 
@@ -132,45 +146,48 @@ console.log("------------Inicio Alterar Nome Usuario-------------");
       AsyncStorage.setItem("Usuario", this.salvarUsuario)
         .then(() => {
           Alert.alert(
-                'Seu nome foi alterado',
-                'Nome alterado com sucesso',
-                [
-                    {text: 'OK', onPress: () => {
+            "Seu nome foi alterado",
+            "Nome alterado com sucesso",
+            [
+              {
+                text: "OK",
+                onPress: () => {
                   this.$store.dispatch("fetchUsuario");
-                this.nomeUsuario = this.userr[0].nome;
-              this.navigation.navigate("inicio")}},
-                ],
-                { cancelable: false }
-            );
-          
+                  this.nomeUsuario = this.userr[0].nome;
+                  this.navigation.navigate("inicio");
+                },
+              },
+            ],
+            { cancelable: false }
+          );
         })
         .catch(() => {
           Alert.alert(
-                'Erro',
-                'Ocorreu um erro ao alterar seu nome',
-                [
-                    {text: 'OK', onPress: () => {
+            "Erro",
+            "Ocorreu um erro ao alterar seu nome",
+            [
+              {
+                text: "OK",
+                onPress: () => {
                   this.$store.dispatch("fetchUsuario");
-                this.nomeUsuario = this.userr[0].nome;
-              this.navigation.navigate("inicio")}},
-                ],
-                { cancelable: false }
-            );
+                  this.nomeUsuario = this.userr[0].nome;
+                  this.navigation.navigate("inicio");
+                },
+              },
+            ],
+            { cancelable: false }
+          );
         });
 
       console.log("------------Fim Alterar Nome Usuario-------------");
-
-       
 
       //this.navigation.navigate("inicio","teste");
     },
   },
   created() {
+    this.$store.dispatch("fetchUsuario");
 
-      this.$store.dispatch("fetchUsuario");
-
-      this.nomeUsuario = this.userr[0].nome;
-
+    this.nomeUsuario = this.userr[0].nome;
   },
   props: {
     navigation: {
@@ -182,7 +199,7 @@ console.log("------------Inicio Alterar Nome Usuario-------------");
 
 
 <style scoped>
-.config {
+.container {
   width: 100%;
   height: 100%;
   padding-right: 16px;

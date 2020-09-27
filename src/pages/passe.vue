@@ -21,7 +21,6 @@
             marginTop: 10,
             marginBottom: 10,
             height: 50,
-            backgroundColor: 'red',
           }"
         >
           <!-- ESPAÇO PROS DIAS DA SEMANA -->
@@ -45,7 +44,6 @@
             marginTop: 10,
             marginBottom: 10,
             height: 150,
-            backgroundColor: 'red',
           }"
         >
           <!-- ESPAÇO DO CARROSEL DE PREMIAÇÃO -->

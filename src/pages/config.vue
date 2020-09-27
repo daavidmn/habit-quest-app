@@ -53,7 +53,10 @@
           >Créditos do aplicativo</text
         >
         <text>Veja quem ajudou a produzir esse aplicativo</text>
-        <touchable-opacity class="confirma-creditos">
+        <touchable-opacity
+          class="confirma-creditos"
+          :on-press="() => switchModalCreditos()"
+        >
           <text class="text-confirma-creditos">Ver créditos</text>
         </touchable-opacity>
 
@@ -63,10 +66,62 @@
 
         <text>Cuidado, essa ação é irreversível</text>
         <touchable-opacity class="resetar" :on-press="() => resetarUsuario()">
-          <text class="text-confirma-creditos">Resetar progresso</text>
+          <text class="text-confirma-creditos">Ok</text>
         </touchable-opacity>
       </view>
     </ScrollView>
+
+    <modal
+      animationType="fade"
+      :transparent="true"
+      :visible="modalCreditosVisible"
+    >
+      <view class="centered-view">
+        <view class="modal-view">
+          <view class="modal-top">
+            <text :style="{ fontSize: 20, fontWeight: 'bold' }">Créditos</text>
+            <text class="modal-text-top bold"
+              >Universidade Federal do Ceará</text
+            >
+            <text class="modal-text-top bold">Sistemas de Mídias Digitais</text>
+            <text class="modal-text-top bold"
+              >Disciplina de Projeto Integrado 2 2020.1</text
+            >
+          </view>
+          <view class="modal-bottom">
+            <text class="modal-text"
+              >Professores:
+              <text class="bold">José Gilvan e Liandro Roger</text></text
+            >
+            <text class="modal-text"
+              >Desenvolvimento: <text class="bold">Equipe Dorime</text></text
+            >
+            <text class="modal-text"
+              >Membros:
+              <text class="bold"
+                >David Macedo, Pedro Burgos, Tarik Ponciano e Wendel
+                Tavares</text
+              ></text
+            >
+            <text class="modal-text"
+              >Avatares e Medalhas: <text class="bold">SmashIcons</text></text
+            >
+            <text class="modal-text"
+              >Fundo de primavera: <text class="bold">Freepik</text></text
+            >
+            <text class="modal-text"
+              >Ícones: <text class="bold">Ant Design</text></text
+            >
+          </view>
+          <touchable-opacity
+            class="credits-button"
+            :on-press="() => switchModalCreditos()"
+          >
+            <text :style="{ fontSize: 16, color: 'white' }">Ok</text>
+          </touchable-opacity>
+        </view>
+      </view>
+    </modal>
   </view>
 </template>
 
@@ -88,6 +143,7 @@ export default {
       nomeUsuario: "",
       user: "",
       salvarUsuario: "",
+      modalCreditosVisible: false,
     };
   },
   computed: {
@@ -182,6 +238,9 @@ export default {
       console.log("------------Fim Alterar Nome Usuario-------------");
 
       //this.navigation.navigate("inicio","teste");
+    },
+    switchModalCreditos: function () {
+      this.modalCreditosVisible = !this.modalCreditosVisible;
     },
   },
   created() {
@@ -304,5 +363,53 @@ export default {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 8px;
+}
+
+.centered-view {
+  background-color: rgba(0, 0, 0, 0.8);
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-view {
+  width: 300px;
+  background-color: white;
+  border-radius: 20;
+  padding: 35;
+  align-items: center;
+  justify-content: space-around;
+}
+.modal-top {
+  justify-content: space-around;
+  align-items: center;
+  height: 100px;
+}
+
+.modal-bottom {
+  margin-top: 20px;
+  width: 100%;
+  height: 150px;
+  justify-content: space-around;
+}
+.modal-text-top {
+  text-align: center;
+  font-size: 12px;
+}
+.modal-text-bottom {
+  /* text-align: center; */
+  font-size: 12px;
+}
+.bold {
+  font-weight: bold;
+}
+.credits-button {
+  height: 45px;
+  width: 30%;
+  margin-top: 30px;
+  border-radius: 8px;
+  background-color: #386641;
+  align-items: center;
+  justify-content: center;
 }
 </style>

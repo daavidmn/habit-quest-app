@@ -17,6 +17,7 @@ import pgAmigos from "./src/pages/amigos.vue";
 import pgPasse from "./src/pages/passe.vue";
 import pgConfig from "./src/pages/config.vue";
 import pgModificarHabito from "./src/pages/modificarHabito.vue";
+import pgModificarAvatar from "./src/pages/modificarAvatar.vue";
 import React from "react";
 import {
   Ionicons,
@@ -124,6 +125,12 @@ const StackNavigator = createStackNavigator(
       screen: pgModificarHabito,
       navigationOptions: {
         title: "Modificar Hábito",
+      },
+    },
+    modificarAvatar: {
+      screen: pgModificarAvatar,
+      navigationOptions: {
+        title: "Modificar Avatar",
       },
     },
     inicio: {

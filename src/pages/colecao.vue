@@ -1,12 +1,12 @@
 <template>
   <view class="container">
     <view class="header">
-      <view class="avatar-mini">
+      <touchable-opacity class="avatar-button" :onPress="goToModificarAvatar">
         <image
           :style="{ width: 45, height: 45 }"
           :source="require('../assets/img/avatar/020-superhero-19.png')"
         />
-      </view>
+      </touchable-opacity>
       <view class="box-centro">
         <view class="box-cima">
           <text class="nome">{{ userr[0].nome }}</text>
@@ -136,6 +136,9 @@ export default {
     goToConquistas() {
       this.navigation.navigate("conquistas");
     },
+    goToModificarAvatar() {
+      this.navigation.navigate("modificarAvatar");
+    },
     onPressButton: function () {
       alert("Clicked Image");
     },
@@ -195,7 +198,7 @@ export default {
   color: #ffffff;
 }
 
-.avatar-mini {
+.avatar-button {
   width: 20%;
   height: 60px;
   background-color: #f2e8cf;

@@ -24,9 +24,11 @@
           <text :style="{fontSize: 14, color: 'white'}">Sábado</text>
         </view>
       </view>
+      
       <view class="box-above-right">
-        <MaterialCommunityIcons name="window-close" :size="14" color="red" />
+        <MaterialCommunityIcons name="window-close" :size="14" color="white" />
       </view>
+    
     </view>
 
     <view class="box-below">

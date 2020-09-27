@@ -274,29 +274,10 @@ export default {
         this.horaTemp = "";
         this.minutoTemp = "";
 
-        console.log("------------Inicio Atualizar Usuario-------------");
 
-        this.salvarUsuario = JSON.stringify(this.userr);
+        this.$store.commit('setSalvarUsuario', this.userr);
 
-        AsyncStorage.setItem("Usuario", this.salvarUsuario)
-          .then(() => {
-            console.log(" ");
-            console.log(" ");
-            console.log("Usuario: " + this.salvarUsuario);
-            console.log(" ");
-            console.log(" ");
-            console.log("Usuário Atualizado");
-          })
-          .catch(() => {
-            console.log(" ");
-            console.log(" ");
-            console.log("Não foi possível atualizar o Usuario");
-            console.log(" ");
-            console.log(" ");
-          });
-        console.log("------------Fim Atualizar Usuario-------------");
-
-        this.$store.dispatch("fetchUsuario");
+        this.$store.dispatch('salvarUsuario');
 
         this.navigation.navigate("inicio");
       }

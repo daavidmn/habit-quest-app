@@ -26,8 +26,7 @@
       </view>
     </view>
 
-    <!-- <text :style="{fontSize: 10}">{{user[0].habitos[1]}}</text> -->
-    <!-- <text :style="{fontSize: 10}">{{console.log(user[0].habitos)}}</text> -->
+    
 
     <view class="weekbar">
       <text>{{ userr[0].nome }}</text>
@@ -44,7 +43,7 @@
                 :hora="rotina.horaSetada"
                 :minutos="rotina.minutoSetado"
                 :dia="rotina.diaSetado"
-                :rotinaId="key"
+                :habitoId="key"
                 :navigation="navigation"
               />
             </view>

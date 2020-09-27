@@ -10,7 +10,8 @@ export default new Vuex.Store({
   // We are keeping our data in the state.
   state: {
     storeUsuario: 'a',
-    storeHabitoSelecionado:'0'
+    storeHabitoSelecionado:'0',
+    storeUsuarioSalvar:'b'
   },
   // Like computed properties in component.
   // You can use getters to acess state in the store
@@ -106,7 +107,7 @@ export default new Vuex.Store({
           { //baseado em objetos tipo Date
             diaSetado: 4, //getDay()     
             horaSetada: 15, //getHour()
-            minutoSetado: 19, //getMinute()
+            minutoSetado: 18, //getMinute()
             notificar: true,
             completado: false,
           },
@@ -215,8 +216,13 @@ export default new Vuex.Store({
         setTimeout(async () => {
           try {
 
-            await AsyncStorage.clear();
-            alert("RESET Deu certo");
+            const user = state.storeUsuarioSalvar;
+
+            await AsyncStorage.setItem("Usuario", JSON.stringify(user));
+
+            commit('setUsuario', user);
+
+            alert("Usuário Atualizado");
 
           } catch (error) {
             console.log("ENTROU NO CATCH");
@@ -236,9 +242,12 @@ export default new Vuex.Store({
     setUsuario(state, storeUsuario) {
       Vue.set(state, 'storeUsuario', storeUsuario);
     },
-    
+
     setHabito(state, storeHabitoSelecionado) {
       Vue.set(state,'storeHabitoSelecionado', storeHabitoSelecionado);
+    },
+    setSalvarUsuario(state, storeUsuarioSalvar) {
+      Vue.set(state,'storeUsuarioSalvar', storeUsuarioSalvar);
     },
     
   }

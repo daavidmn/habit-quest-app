@@ -277,7 +277,6 @@ export default {
   margin-top: 10px;
   margin-bottom: 10px;
   width: 100%;
-  font-size: 16px;
   font-weight: bold;
 }
 

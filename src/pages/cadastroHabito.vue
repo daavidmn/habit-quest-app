@@ -275,6 +275,21 @@ export default {
           { cancelable: false }
         );
       } else {
+
+        if (this.nomeHabito ==""){
+
+          Alert.alert(
+          "Você não cadastrou um nome para seu habito",
+          "Adicione um nome válido para seu habito",
+          [{ text: "OK", onPress: () => console.log("OK Pressed") }],
+          { cancelable: false }
+        );
+
+
+        }
+
+
+        else{
         this.userr[0].habitos.push({
           titulo: this.nomeHabito,
           xp: 100,
@@ -291,7 +306,7 @@ export default {
 
         this.$store.dispatch("fetchUsuario");
 
-        this.navigation.navigate("inicio");
+        this.navigation.navigate("inicio");}
       }
     },
   },

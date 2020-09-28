@@ -340,7 +340,29 @@ export default {
           [{ text: "OK", onPress: () => console.log("OK Pressed") }],
           { cancelable: false }
         );
+      }  if (this.rotinaSemanal == "") {
+        Alert.alert(
+          "Você não cadastrou dias para seu habito",
+          "Adicione um dia e horario para seu habito",
+          [{ text: "OK", onPress: () => console.log("OK Pressed") }],
+          { cancelable: false }
+        );
       } else {
+
+        if (this.nomeHabito ==""){
+
+          Alert.alert(
+          "Você não cadastrou um nome para seu habito",
+          "Adicione um nome válido para seu habito",
+          [{ text: "OK", onPress: () => console.log("OK Pressed") }],
+          { cancelable: false }
+        );
+
+
+        }
+
+
+        else{
         this.diaTemp = "";
         this.horaTemp = "";
         this.minutoTemp = "";
@@ -368,6 +390,7 @@ export default {
           { cancelable: true }
         );
       }
+    }
     },
   },
 };

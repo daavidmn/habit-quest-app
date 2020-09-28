@@ -127,16 +127,16 @@ const StackNavigator = createStackNavigator(
         title: "Modificar Hábito",
       },
     },
-    modificarAvatar: {
-      screen: pgModificarAvatar,
-      navigationOptions: {
-        title: "Mudar Avatar",
-      },
-    },
     inicio: {
       screen: pgInicio,
       navigationOptions: {
         title: "Início",
+      },
+    },
+    modificarAvatar: {
+      screen: pgModificarAvatar,
+      navigationOptions: {
+        title: "Modificar Avatar",
       },
     },
   },

@@ -2,7 +2,12 @@
   <view class="container">
     <view class="header">
       <view class="avatar-mini">
-        <image :style="{ width: 25, height: 25 }" :source="avatar[4].src" />
+
+        <image
+          :style="{ width: 25, height: 25 }"
+          :source="avatar[2].src"
+        />
+
       </view>
       <view class="progress-bar">
         <text>Nível {{ userr[0].level }}</text>
@@ -86,6 +91,7 @@
                       :hora="rotina.horaSetada"
                       :minutos="rotina.minutoSetado"
                       :dia="rotina.diaSetado"
+                      :diaSemana="rotina.diaSemana"
                       :habitoId="key"
                       :navigation="navigation"
                     />
@@ -127,6 +133,7 @@ export default {
   },
   data() {
     return {
+      avatarIndex:0,
       loaded: false,
       avatar: constAvatar,
       user: constUser,
@@ -138,10 +145,15 @@ export default {
     userr() {
       return this.$store.state.storeUsuario;
     },
+
   },
 
   created() {
     this.$store.dispatch("fetchUsuario");
+
+    this.avatarIndex = this.userr[0].avatarIndex;
+    
+
   },
 
   props: {
@@ -150,6 +162,10 @@ export default {
     },
   },
   methods: {
+    getAvatarIndex:function(){
+      if(this.userr){return this.userr[0].avatarIndex;}
+      else return 0;
+    },
     switchModalLevel: function () {
       this.modalLevelVisible = false;
     },

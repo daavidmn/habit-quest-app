@@ -18,11 +18,11 @@
           :size="24"
           color="white"
         />
-        <text class="tasks-text">20</text>
+        <text class="tasks-text">{{userr[0].totalRotinas}}</text>
       </view>
       <view class="achievements">
         <MaterialCommunityIcons name="crown" :size="24" color="white" />
-        <text class="achievements-text">15</text>
+        <text class="achievements-text">{{userr[0].rotinasCompletadas}}</text>
       </view>
     </view>
 
@@ -70,6 +70,7 @@
                 <view
                   v-if="!userr[0].habitos[key].rotinaSemanal[chave].completado"
                 >
+               
                   <Habitviewer
                     @completa-rotina="() => completarRotina(key, chave)"
                     :title="habito.titulo"
@@ -80,6 +81,7 @@
                     :habitoId="key"
                     :navigation="navigation"
                   />
+                
                 </view>
               </view>
             </view>
@@ -124,12 +126,14 @@ export default {
 
   computed: {
     userr() {
+
       return this.$store.state.storeUsuario;
     },
   },
 
   created() {
     this.$store.dispatch("fetchUsuario");
+    
   },
 
   props: {
@@ -142,9 +146,13 @@ export default {
       this.modalLevelVisible = false;
     },
     completarRotina: function (habitosId, rotinaId) {
+
+      let hoje = new Date();
+
       this.userr[0].habitos[habitosId].rotinaSemanal[
         rotinaId
       ].completado = true;
+
 
       this.userr[0].xpAtual += this.userr[0].habitos[habitosId].xp;
 

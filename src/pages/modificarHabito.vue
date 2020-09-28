@@ -319,6 +319,8 @@ Alert.alert(
           minutoSetado: this.minutoTemp,
           notificar: false,
           completado: false,
+          completadoData: "",
+          mesmoDia: false,
         });
       }
     },

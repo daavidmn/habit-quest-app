@@ -60,6 +60,8 @@ export default new Vuex.Store({
                   level: 1,
                   xpAtual: 0,
                   xpProx: 100,
+                  totalRotinas: 0,
+                  rotinasCompletadas:0,
                   habitos: [
                     // {
                     //   titulo: 'Corrida com cachorro',
@@ -119,6 +121,24 @@ export default new Vuex.Store({
                 }
               ];
             }
+
+            user[0].totalRotinas = 0;
+            user[0].rotinasCompletadas = 0;
+            
+
+             if(user[0].habitos){
+              for(var i=0;i<user[0].habitos.length;i++){
+                user[0].totalRotinas += user[0].habitos[i].rotinaSemanal.length;
+                if(user[0].habitos[i].rotinaSemanal){
+                for (var j=0;j<user[0].habitos[i].rotinaSemanal.length;j++){
+                  if(user[0].habitos[i].rotinaSemanal[j].completado){
+                user[0].rotinasCompletadas += 1;
+                
+                }
+              }
+              }
+            }
+          }
             console.log(user)
             commit('setUsuario', user)
             resolve();
@@ -145,6 +165,8 @@ export default new Vuex.Store({
                 level: 1,
                 xpAtual: 0,
                 xpProx: 100,
+                totalRotinas: 0,
+                rotinasCompletadas:0,
                 habitos: [
                   // {
                   //   titulo: 'Corrida com cachorro',
@@ -223,6 +245,24 @@ export default new Vuex.Store({
             const user = state.storeUsuarioSalvar;
 
             await AsyncStorage.setItem("Usuario", JSON.stringify(user));
+
+            user[0].totalRotinas = 0;
+            user[0].rotinasCompletadas = 0;
+            
+
+             if(user[0].habitos){
+              for(var i=0;i<user[0].habitos.length;i++){
+                user[0].totalRotinas += user[0].habitos[i].rotinaSemanal.length;
+                if(user[0].habitos[i].rotinaSemanal){
+                for (var j=0;j<user[0].habitos[i].rotinaSemanal.length;j++){
+                  if(user[0].habitos[i].rotinaSemanal[j].completado){
+                user[0].rotinasCompletadas += 1;
+                
+                }
+              }
+              }
+            }
+          }
 
             commit('setUsuario', user);
             resolve();

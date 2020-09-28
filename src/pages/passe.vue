@@ -16,40 +16,28 @@
         <text class="text-subtitle"
           >Por manter seus hábitos durante essa semana, você irá receber:</text
         >
-        <view
-          :style="{
-            marginTop: 10,
-            marginBottom: 10,
-            height: 50,
-          }"
-        >
+        <view class="week-carousel">
           <!-- ESPAÇO PROS DIAS DA SEMANA -->
         </view>
-        <text
+        <text class="text-subtitle2" :style="{ alignSelf: 'flex-end' }"
           >Continue assim até o final dessa semana e receba um bônus especial de
           2 a mais por cada dia!</text
         >
       </ImageBackground>
 
       <view class="passe-container">
-        <text class="text-title" :style="{ color: 'white' }"
+        <text class="text-title2" :style="{ color: 'white' }"
           >Passe de <text :style="{ color: '#6A994E' }">Primavera</text></text
         >
-        <text class="text-subtitle" :style="{ color: 'white' }"
+        <text class="text-subtitle3" :style="{ color: 'white' }"
           >Apenas
           <text :style="{ color: '#6A994E' }">28 dias até o fim!</text></text
         >
-        <view
-          :style="{
-            marginTop: 10,
-            marginBottom: 10,
-            height: 150,
-          }"
-        >
+        <view class="prize-carousel">
           <!-- ESPAÇO DO CARROSEL DE PREMIAÇÃO -->
         </view>
-        <text class="text-title2">Quer ter acesso a mais recompensas?</text>
-        <text
+        <text class="text-title3">Quer ter acesso a mais recompensas?</text>
+        <text class="text-subtitle4"
           >Torne-se um apoiador, tenha acesso a recompensas exclusivas e ainda
           apoie o desenvolvimento desse app!
         </text>
@@ -120,29 +108,70 @@ export default {
 .paper-container {
   height: 35%;
   width: 110%;
-  padding: 20px;
+  padding: 15px;
   display: flex;
 }
 .text-title {
-  font-size: 20px;
+  height: 15%;
+  font-size: 18px;
   font-style: normal;
   font-weight: bold;
 }
-.text-title2 {
-  font-size: 16px;
-  font-style: normal;
-  font-weight: bold;
-}
+
 .text-subtitle {
-  font-size: 16px;
+  height: 15%;
+  font-size: 11px;
   font-style: normal;
   /* font-weight: bold; */
 }
 
+.text-subtitle2 {
+  height: 20%;
+  font-size: 12px;
+  font-style: normal;
+  /* font-weight: bold; */
+}
+
+.week-carousel {
+  margin-top: 10;
+  margin-bottom: 10;
+  height: 30%;
+}
+
 .passe-container {
   width: 100%;
-  height: 100%;
-  padding-top: 20px;
+  height: 65%;
+  padding-top: 10px;
+}
+.text-title2 {
+  height: 10%;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: bold;
+  /* background-color: red; */
+}
+.text-subtitle3 {
+  height: 10%;
+  font-size: 14px;
+  font-style: normal;
+  /* font-weight: bold; */
+}
+.prize-carousel {
+  height: 30%;
+  margin-top: 10;
+  margin-bottom: 10;
+}
+.text-title3 {
+  height: 5%;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: bold;
+}
+.text-subtitle4 {
+  height: 10%;
+  font-size: 10px;
+  font-style: normal;
+  /* font-weight: bold; */
 }
 
 .botao-apoiador {

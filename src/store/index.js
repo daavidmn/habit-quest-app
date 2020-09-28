@@ -12,7 +12,7 @@ export default new Vuex.Store({
     storeUsuario: 'a',
     storeHabitoSelecionado: '0',
     storeUsuarioSalvar: 'b',
-    storeAvatarIndex:1,
+
   },
   // Like computed properties in component.
   // You can use getters to acess state in the store
@@ -47,7 +47,7 @@ export default new Vuex.Store({
       return new Promise(function (resolve, reject) {
         setTimeout(async () => {
           try {
-            const usuarioParsed = JSON.parse(await AsyncStorage.getItem("Usuario"));
+            let usuarioParsed = JSON.parse(await AsyncStorage.getItem("Usuario"));
             let user = 'a';
             console.log("ENTROU NO TRY")
             if (usuarioParsed) {
@@ -63,7 +63,7 @@ export default new Vuex.Store({
                   xpProx: 100,
                   totalRotinas: 0,
                   rotinasCompletadas:0,
-                  avatarIndex: 0,
+                  avatarIndex: 1,
                   habitos: [
                     // {
                     //   titulo: 'Corrida com cachorro',
@@ -141,9 +141,10 @@ export default new Vuex.Store({
               }
             }
           }
-            console.log(user)
-            user[0].avatarIndex = state.storeAvatarIndex;
-            commit('setUsuario', user)
+            console.log(user);
+
+            
+            commit('setUsuario', user);
             resolve();
             return state.storeUsuario;
           } catch (error) {
@@ -170,7 +171,7 @@ export default new Vuex.Store({
                 xpProx: 100,
                 totalRotinas: 0,
                 rotinasCompletadas:0,
-                avatarIndex:0,
+                avatarIndex:1,
                 habitos: [
                   // {
                   //   titulo: 'Corrida com cachorro',
@@ -229,6 +230,7 @@ export default new Vuex.Store({
                 ],
               }
             ];
+
             commit('setUsuario', user);
             resolve();
 
@@ -246,7 +248,9 @@ export default new Vuex.Store({
         setTimeout(async () => {
           try {
 
-            const user = state.storeUsuarioSalvar;
+            let user = state.storeUsuarioSalvar;
+            
+          //  user[0].avatarIndex = state.storeAvatarIndex;
 
             await AsyncStorage.setItem("Usuario", JSON.stringify(user));
 
@@ -267,7 +271,7 @@ export default new Vuex.Store({
               }
             }
           }
-            user[0].avatarIndex = state.storeAvatarIndex;
+           // commit('setAvatarIndex', storeAvatarIndex);
             commit('setUsuario', user);
             resolve();
 
@@ -296,9 +300,6 @@ export default new Vuex.Store({
 
     setSalvarUsuario(state, storeUsuarioSalvar) {
       Vue.set(state, 'storeUsuarioSalvar', storeUsuarioSalvar);
-    },
-    storeAvatarIndex(state, storeAvatarIndex) {
-      Vue.set(state, 'storeAvatarIndex', storeAvatarIndex);
     },
 
   }

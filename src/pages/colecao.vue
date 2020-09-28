@@ -4,7 +4,7 @@
       <touchable-opacity class="avatar-button" :onPress="goToModificarAvatar">
         <image
           :style="{ width: 45, height: 45 }"
-          :source="require('../assets/img/avatar/020-superhero.png')"
+          :source="avatar[userr[0].avatarIndex].src"
         />
       </touchable-opacity>
       <view class="box-centro">
@@ -109,6 +109,7 @@
 <script>
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { AsyncStorage } from "react-native";
+import { constAvatar } from "../consts/avatar";
 import store from "../store";
 import Vue from "vue-native-core";
 
@@ -117,6 +118,9 @@ Vue.prototype.$store = store;
 export default {
   components: {
     MaterialCommunityIcons,
+  },
+  data: {
+    avatar:constAvatar,
   },
   computed: {
     userr() {

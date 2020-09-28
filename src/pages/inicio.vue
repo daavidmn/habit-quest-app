@@ -4,7 +4,7 @@
       <view class="avatar-mini">
         <image
           :style="{ width: 25, height: 25 }"
-          :source="avatar[4].src"
+          :source="avatar[avatarIndex].src"
         />
       </view>
       <view class="progress-bar">
@@ -130,6 +130,7 @@ export default {
   },
   data() {
     return {
+      avatarIndex:0,
       loaded: false,
       avatar: constAvatar,
       user: constUser,
@@ -141,10 +142,12 @@ export default {
     userr() {
       return this.$store.state.storeUsuario;
     },
+
   },
 
   created() {
     this.$store.dispatch("fetchUsuario");
+    this.avatarIndex = this.userr[0].avatarIndex;
     
   },
 
@@ -154,6 +157,10 @@ export default {
     },
   },
   methods: {
+    getAvatarIndex:function(){
+      if(this.userr){return this.userr[0].avatarIndex;}
+      else return 0;
+    },
     switchModalLevel: function () {
       this.modalLevelVisible = false;
     },

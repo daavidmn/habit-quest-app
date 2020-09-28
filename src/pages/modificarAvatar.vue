@@ -26,6 +26,11 @@
 
 <script>
 import AvatarScreenViewer from "../components/AvatarScreenViewer";
+import store from "../store";
+import Vue from "vue-native-core";
+
+Vue.prototype.$store = store;
+
 export default {
   components: {
     AvatarScreenViewer,
@@ -35,13 +40,20 @@ export default {
       type: Object,
     },
   },
+  computed: {
+  userr() {
+      return this.$store.state.storeUsuario;
+    },
+  },
   data() {
     return {
       classSelected: [],
       teste: "",
     };
   },
-  created() {},
+  created() {
+    this.$store.dispatch("fetchUsuario");
+  },
   methods: {
     selectAvatar(indice) {
       let v = indice - 1;
@@ -51,6 +63,15 @@ export default {
       this.classSelected[v] = true;
       console.log(this.classSelected);
       this.teste += " ";
+
+      this.userr[0].avatarIndex = (indice-1);
+
+      this.$store.commit("setSalvarUsuario",this.userr);
+
+      this.$store.dispatch("salvarUsuario");
+
+      this.$store.dispatch("fetchUsuario");
+
     },
   },
   // watch: {

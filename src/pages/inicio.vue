@@ -114,10 +114,6 @@ export default {
     userr() {
       return this.$store.state.storeUsuario;
     },
-
-    stats(){
-      return this.$store.state.storeUsuarioStats;
-    },
     
 
   },

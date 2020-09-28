@@ -2,10 +2,7 @@
   <view class="container">
     <view class="header">
       <view class="avatar-mini">
-        <image
-          :style="{ width: 25, height: 25 }"
-          :source="avatar[4].src"
-        />
+        <image :style="{ width: 25, height: 25 }" :source="avatar[4].src" />
       </view>
       <view class="progress-bar">
         <text>Nível {{ userr[0].level }}</text>
@@ -18,11 +15,11 @@
           :size="24"
           color="white"
         />
-        <text class="tasks-text">{{userr[0].totalRotinas}}</text>
+        <text class="tasks-text">{{ userr[0].totalRotinas }}</text>
       </view>
       <view class="achievements">
         <MaterialCommunityIcons name="crown" :size="24" color="white" />
-        <text class="achievements-text">{{userr[0].rotinasCompletadas}}</text>
+        <text class="achievements-text">{{ userr[0].rotinasCompletadas }}</text>
       </view>
     </view>
 
@@ -69,36 +66,36 @@
         >
       </view>
       <view class="scroll-area">
-      <ScrollView :fadingEdgeLength="0" :showsVerticalScrollIndicator="true">
-        <view class="scroll-box">
-          <view v-if="userr[0].habitos != false">
-            <view v-for="(habito, key) in userr[0].habitos" :key="key">
-              <view
-                v-for="(rotina, chave) in userr[0].habitos[key].rotinaSemanal"
-                :key="chave"
-              >
+        <ScrollView :fadingEdgeLength="0" :showsVerticalScrollIndicator="true">
+          <view class="scroll-box">
+            <view v-if="userr[0].habitos != false">
+              <view v-for="(habito, key) in userr[0].habitos" :key="key">
                 <view
-                  v-if="!userr[0].habitos[key].rotinaSemanal[chave].completado"
+                  v-for="(rotina, chave) in userr[0].habitos[key].rotinaSemanal"
+                  :key="chave"
                 >
-               
-                  <Habitviewer
-                    @completa-rotina="() => completarRotina(key, chave)"
-                    :title="habito.titulo"
-                    :xp="habito.xp"
-                    :hora="rotina.horaSetada"
-                    :minutos="rotina.minutoSetado"
-                    :dia="rotina.diaSetado"
-                    :habitoId="key"
-                    :navigation="navigation"
-                  />
-              
+                  <view
+                    v-if="
+                      !userr[0].habitos[key].rotinaSemanal[chave].completado
+                    "
+                  >
+                    <Habitviewer
+                      @completa-rotina="() => completarRotina(key, chave)"
+                      :title="habito.titulo"
+                      :xp="habito.xp"
+                      :hora="rotina.horaSetada"
+                      :minutos="rotina.minutoSetado"
+                      :dia="rotina.diaSetado"
+                      :habitoId="key"
+                      :navigation="navigation"
+                    />
+                  </view>
                 </view>
               </view>
             </view>
           </view>
-        </view>
-      </ScrollView>
-    </view>
+        </ScrollView>
+      </view>
     </view>
     <ActionButton
       buttonColor="rgba(56,102,65, 1)"
@@ -145,7 +142,6 @@ export default {
 
   created() {
     this.$store.dispatch("fetchUsuario");
-    
   },
 
   props: {
@@ -158,13 +154,11 @@ export default {
       this.modalLevelVisible = false;
     },
     completarRotina: function (habitosId, rotinaId) {
-
       let hoje = new Date();
 
       this.userr[0].habitos[habitosId].rotinaSemanal[
         rotinaId
       ].completado = true;
-
 
       this.userr[0].xpAtual += this.userr[0].habitos[habitosId].xp;
 
@@ -279,7 +273,7 @@ export default {
 .header {
   padding-left: 10px;
   padding-right: 10px;
-  height: 50px;
+  height: 8%;
   background-color: #6a994e;
   justify-content: space-around;
   align-items: center;
@@ -347,7 +341,7 @@ export default {
   flex-direction: column;
   align-items: center;
   width: 100%;
-  height: 595px;
+  height: 92%;
 }
 
 .scroll-box {

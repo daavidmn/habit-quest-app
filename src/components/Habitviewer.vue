@@ -1,7 +1,10 @@
 <template>
   <view class="habit-box">
+
     <view class="check-container">
+    <touchable-opacity :on-press="() => completaRotina()">
       <view class="check-box"></view>
+    </touchable-opacity>
     </view>
 
     <view class="texts">
@@ -38,6 +41,13 @@ export default {
     MaterialCommunityIcons,
   },
   methods: {
+
+    completaRotina() {
+
+      this.$emit('completa-rotina');
+
+    },
+
       goToModificar() {
 
       this.$store.commit("setHabito",this.habitoId);

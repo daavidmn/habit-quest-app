@@ -49,7 +49,7 @@ export default {
    methods: {
     removerRotina() {
 
-      this.$emit('remove');
+      this.$emit('remove-rotina');
 
     },
   }

@@ -24,8 +24,8 @@
     <view class="scroll-area">
       <ScrollView :fadingEdgeLength="0" :showsVerticalScrollIndicator="false">
         <view class="scroll-box">
-          <view v-if="(userr[0].habitos[habitoSelecionado])">
-            <view v-for="(habit, key) in userr[0].habitos[habitoSelecionado].rotinaSemanal" :key="key">
+          <view v-if="(habito)">
+            <view v-for="(habit, key) in habito.rotinaSemanal" :key="key">
               <HabitScreenBox @remove="() => removerRotina(key)"
                 :dia="habit.diaSetado"
                 :hora="habit.horaSetada"
@@ -188,6 +188,8 @@ export default {
   },
   data() {
     return {
+      habito: "",
+      nomeHabito:"",
       user: constUser,
       modalDiaVisible: false,
       modalHoraVisible: false,
@@ -212,6 +214,8 @@ export default {
     this.$store.dispatch("fetchUsuario");
 
     this.nomeHabito = this.userr[0].habitos[this.habitoSelecionado].titulo;
+
+    this.habito = this.userr[0].habitos[this.habitoSelecionado];
 
   },
   watch: {
@@ -238,9 +242,10 @@ export default {
 
     removerRotina: function (id){
 
-      this.userr[0].habitos[this.habitoSelecionado].rotinaSemanal.splice(id,1);
+      this.habito.rotinaSemanal.splice(id,1);
 
     },
+
     removerHabito: function (){
 
 
@@ -308,7 +313,7 @@ Alert.alert(
           { cancelable: false }
         );
       } else {
-        this.userr[0].habitos[this.habitoSelecionado].rotinaSemanal.push({
+        this.habito.rotinaSemanal.push({
           diaSetado: this.diaTemp,
           horaSetada: this.horaTemp,
           minutoSetado: this.minutoTemp,
@@ -318,7 +323,7 @@ Alert.alert(
       }
     },
     definirHabito() {
-      if (this.userr[0].habitos[this.habitoSelecionado].rotinaSemanal == "") {
+      if (this.habito.rotinaSemanal == "") {
         Alert.alert(
           "Você não cadastrou dias para seu habito",
           "Adicione um dia e horario para seu habito",
@@ -331,6 +336,8 @@ Alert.alert(
         this.horaTemp = "";
         this.minutoTemp = "";
 
+        this.userr[0].habitos[this.habitoSelecionado] = this.habito;
+        this.userr[0].habitos[this.habitoSelecionado].titulo = this.nomeHabito;
 
         this.$store.commit('setSalvarUsuario', this.userr);
 
@@ -338,7 +345,19 @@ Alert.alert(
 
         this.$store.dispatch("fetchUsuario");
 
-        this.navigation.navigate("inicio");
+        Alert.alert(
+        "Atualização de Habito",
+        "Habito Atualizado.",
+        [
+          {
+            text: "Ok",
+            onPress: () => {this.navigation.navigate("inicio");},
+           },
+          
+        ],
+        { cancelable: true }
+      );
+        
       }
     },
   },

@@ -8,8 +8,8 @@
         />
       </view>
       <view class="progress-bar">
-        <text>{{ userr[0].level }}</text>
-        <text>{{ userr[0].xpAtual }} / {{ userr[0].xpProx }}</text>
+        <text>Nível {{ userr[0].level }}</text>
+        <text>Exp: {{ userr[0].xpAtual }} / {{ userr[0].xpProx }}</text>
         <view class="progress-fill"></view>
       </view>
       <view class="tasks">
@@ -59,7 +59,7 @@
       <ScrollView :fadingEdgeLength="0" :showsVerticalScrollIndicator="true">
         <view class="scroll-box">
           <view v-if="userr[0].habitos == false">
-            <text>Você não tem hábitos</text>
+            <text>Você não tem hábitos ainda.</text>
           </view>
           <view v-else>
             <view v-for="(habito, key) in userr[0].habitos" :key="key">

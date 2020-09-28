@@ -2,7 +2,7 @@
   <view class="container">
     <text :style="{ fontSize: 18 }">Nome do hábito</text>
     <text-input
-    placeholder="Digite o nome do habito."
+      placeholder="Digite o nome do habito."
       :style="{
         height: 40,
         padding: 10,
@@ -26,13 +26,20 @@
       <ScrollView :fadingEdgeLength="0" :showsVerticalScrollIndicator="false">
         <view class="scroll-box">
           <view v-if="userr[0].habitos">
-            <view v-for="(habit, key) in rotinaSemanal" :key="key">
-              <HabitScreenBox @remove="() => removerRotina(key)"
-                :dia="habit.diaSetado"
-                :hora="habit.horaSetada"
-                :minuto="habit.minutoSetado"
-                :rotinaId="key"
-              />
+            <view class="habit-container">
+              <view
+                class="habit-box"
+                v-for="(habit, key) in rotinaSemanal"
+                :key="key"
+              >
+                <HabitScreenBox
+                  @remove="() => removerRotina(key)"
+                  :dia="habit.diaSetado"
+                  :hora="habit.horaSetada"
+                  :minuto="habit.minutoSetado"
+                  :rotinaId="key"
+                />
+              </view>
             </view>
           </view>
         </view>
@@ -203,7 +210,6 @@ export default {
   created() {
     this.$store.dispatch("fetchUsuario");
 
-
     this.rotinaSemanal = [];
   },
   watch: {
@@ -227,8 +233,8 @@ export default {
     },
   },
   methods: {
-    removerRotina: function (id){
-      this.rotinaSemanal.splice(id,1);
+    removerRotina: function (id) {
+      this.rotinaSemanal.splice(id, 1);
     },
     modalDia() {
       this.modalDiaVisible = true;
@@ -277,9 +283,9 @@ export default {
         this.horaTemp = "";
         this.minutoTemp = "";
 
-        this.$store.commit('setSalvarUsuario', this.userr);
+        this.$store.commit("setSalvarUsuario", this.userr);
 
-        this.$store.dispatch('salvarUsuario');
+        this.$store.dispatch("salvarUsuario");
 
         this.$store.dispatch("fetchUsuario");
 
@@ -292,11 +298,12 @@ export default {
 
 <style scoped>
 .container {
-  margin-top: 20px;
+  padding-top: 20px;
   padding-left: 20px;
   padding-right: 20px;
   width: 100%;
   height: 100%;
+  background-color: #ededed;
 }
 
 .botao-adicionar-habito {
@@ -311,12 +318,22 @@ export default {
 }
 
 .scroll-area {
-  padding-left: 15px;
-  padding-right: 15px;
-  flex-direction: column;
-  align-items: center;
+  justify-content: center;
   width: 100%;
-  height: 345px;
+  height: 305px;
+}
+
+.habit-container {
+  margin-top: 10px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+}
+
+.habit-box {
+  padding-top: 10px;
 }
 
 .confirmar-habito {

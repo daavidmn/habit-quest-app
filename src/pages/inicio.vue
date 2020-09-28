@@ -2,17 +2,15 @@
   <view class="container">
     <view class="header">
       <view class="avatar-mini">
-
-        <image
-          :style="{ width: 25, height: 25 }"
-          :source="avatar[2].src"
-        />
-
+        <image :style="{ width: 25, height: 25 }" :source="avatar[2].src" />
       </view>
       <view class="progress-bar">
         <text>Nível {{ userr[0].level }}</text>
         <text>Exp: {{ userr[0].xpAtual }} / {{ userr[0].xpProx }}</text>
-        <view class="progress-fill"></view>
+        <view
+          class="progress-fill"
+          :style="{ width: (userr[0].xpAtual / userr[0].xpProx) * 187 }"
+        ></view>
       </view>
       <view class="tasks">
         <MaterialCommunityIcons
@@ -133,7 +131,7 @@ export default {
   },
   data() {
     return {
-      avatarIndex:0,
+      avatarIndex: 0,
       loaded: false,
       avatar: constAvatar,
       user: constUser,
@@ -145,15 +143,12 @@ export default {
     userr() {
       return this.$store.state.storeUsuario;
     },
-
   },
 
   created() {
     this.$store.dispatch("fetchUsuario");
 
     this.avatarIndex = this.userr[0].avatarIndex;
-    
-
   },
 
   props: {
@@ -162,9 +157,10 @@ export default {
     },
   },
   methods: {
-    getAvatarIndex:function(){
-      if(this.userr){return this.userr[0].avatarIndex;}
-      else return 0;
+    getAvatarIndex: function () {
+      if (this.userr) {
+        return this.userr[0].avatarIndex;
+      } else return 0;
     },
     switchModalLevel: function () {
       this.modalLevelVisible = false;
@@ -318,7 +314,6 @@ export default {
   position: absolute;
   left: 0px;
   z-index: -1;
-  width: 50%;
   height: 32px;
   border-bottom-left-radius: 4px;
   border-top-left-radius: 4px;

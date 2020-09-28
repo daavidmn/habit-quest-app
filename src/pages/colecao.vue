@@ -54,7 +54,7 @@
             <view class="medal-mini">
               <image
                 :style="{ width: 50, height: 50 }"
-                :source="require('../assets/img/avatar/medalha-ouro.png')"
+                :source="require('../assets/img/avatar/medalha-bronze.png')"
               />
               <text>Mestre</text>
             </view>
@@ -62,13 +62,13 @@
             <view class="medal-mini">
               <image
                 :style="{ width: 50, height: 50 }"
-                :source="require('../assets/img/avatar/medalha-ouro.png')"
+                :source="require('../assets/img/avatar/medalha-prata.png')"
               />
               <text>Quente</text>
             </view>
           </view>
           <touchable-opacity class="ver-mais" :onPress="goToConquistas">
-            <text class="ver-mais-texto">Ver + 8 conquistas</text>
+            <text class="ver-mais-texto">Ver + 4 conquistas</text>
           </touchable-opacity>
 
           <text class="texto-centro">Estatísticas</text>
@@ -81,7 +81,7 @@
                   color="#A7C957"
                 />
                 <text :style="{ fontWeight: 'bold' }">Metas alcançadas</text>
-                <text>Placeholder</text>
+                <text :style="{fontSize:11 }"> 15 metas semanais</text>
               </view>
               <view class="e-direita">
                 <MaterialCommunityIcons
@@ -90,7 +90,7 @@
                   color="#A7C957"
                 />
                 <text :style="{ fontWeight: 'bold' }">Total de hábitos</text>
-                <text>Placeholder</text>
+                <text :style="{fontSize:11 }">185 hábitos feitos</text>
               </view>
             </view>
             <view class="estatisticas-baixo">
@@ -101,7 +101,7 @@
                   color="#BC4749"
                 />
                 <text :style="{ fontWeight: 'bold' }">Maior sequência</text>
-                <text>Placeholder</text>
+                <text :style="{fontSize:11 }">10 semanas consecutivas</text>
               </view>
               <view class="e-direita">
                 <MaterialCommunityIcons
@@ -110,7 +110,7 @@
                   color="#BC4749"
                 />
                 <text :style="{ fontWeight: 'bold' }">Sequência atual</text>
-                <text>Placeholder</text>
+                <text :style="{fontSize:11 }">8 semanas consecutivas</text>
               </view>
             </view>
           </view>
@@ -135,7 +135,7 @@ export default {
     MaterialCommunityIcons,
   },
   data: {
-    avatar:constAvatar,
+    avatar: constAvatar,
   },
   computed: {
     userr() {
@@ -306,6 +306,8 @@ export default {
   font-size: 10px;
   display: flex;
   color: white;
+  top: 10px;
+  left: 16px;
 }
 
 .estatisticas {

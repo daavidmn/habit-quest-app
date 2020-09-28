@@ -4,8 +4,15 @@
     <view class="avatar-container">
       <view v-for="index in 20" :key="index">
         <touchable-opacity :on-press="() => selectAvatar(index)">
-          <view class="avatar-box" :class="getClass(index)">
-            <AvatarScreenViewer :avatarid="index" :active="true" />
+          <view v-if="classSelected[index - 1] == true">
+            <view class="avatar-box selected">
+              <AvatarScreenViewer :avatarid="index" :active="true" />
+            </view>
+          </view>
+          <view v-else>
+            <view class="avatar-box">
+              <AvatarScreenViewer :avatarid="index" :active="true" />
+            </view>
           </view>
         </touchable-opacity>
       </view>
@@ -13,6 +20,7 @@
     <touchable-opacity class="botao-apoiador">
       <text class="text-apoiador">Confirmar</text>
     </touchable-opacity>
+    <text>{{ teste }}</text>
   </view>
 </template>
 
@@ -30,8 +38,10 @@ export default {
   data() {
     return {
       classSelected: [],
+      teste: "",
     };
   },
+  created() {},
   methods: {
     selectAvatar(indice) {
       let v = indice - 1;
@@ -39,14 +49,15 @@ export default {
         this.classSelected[i] = false;
       }
       this.classSelected[v] = true;
-      // console.log(this.classSelected)
-    },
-    getClass(indice) {
-      return {
-        'selected': this.classSelected[indice - 1],
-      };
+      console.log(this.classSelected);
+      this.teste += " ";
     },
   },
+  // watch: {
+  //   classSelected: function (novo, velho) {
+  //     console.log(novo);
+  //   },
+  // },
 };
 </script>
 

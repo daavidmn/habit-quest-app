@@ -130,7 +130,7 @@ const StackNavigator = createStackNavigator(
     modificarAvatar: {
       screen: pgModificarAvatar,
       navigationOptions: {
-        title: "Modificar Avatar",
+        title: "Mudar Avatar",
       },
     },
     inicio: {

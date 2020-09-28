@@ -18,7 +18,7 @@
           :size="24"
           color="white"
         />
-        <text class="tasks-text">{{userr[0].habitos.length}}</text>
+        <text class="tasks-text">20</text>
       </view>
       <view class="achievements">
         <MaterialCommunityIcons name="crown" :size="24" color="white" />

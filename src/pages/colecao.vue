@@ -81,7 +81,7 @@
                   color="#A7C957"
                 />
                 <text :style="{ fontWeight: 'bold' }">Metas alcançadas</text>
-                <text :style="{fontSize:11 }"> 15 metas semanais</text>
+                <text :style="{fontSize:11 }"> {{userr[0].totalRotinas}} metas semanais</text>
               </view>
               <view class="e-direita">
                 <MaterialCommunityIcons
@@ -90,7 +90,7 @@
                   color="#A7C957"
                 />
                 <text :style="{ fontWeight: 'bold' }">Total de hábitos</text>
-                <text :style="{fontSize:11 }">185 hábitos feitos</text>
+                <text :style="{fontSize:11 }">{{userr[0].rotinasCompletadas}} hábitos feitos</text>
               </view>
             </view>
             <view class="estatisticas-baixo">
@@ -101,7 +101,7 @@
                   color="#BC4749"
                 />
                 <text :style="{ fontWeight: 'bold' }">Maior sequência</text>
-                <text :style="{fontSize:11 }">10 semanas consecutivas</text>
+                <text :style="{fontSize:11 }">1 semana consecutiva</text>
               </view>
               <view class="e-direita">
                 <MaterialCommunityIcons
@@ -110,7 +110,7 @@
                   color="#BC4749"
                 />
                 <text :style="{ fontWeight: 'bold' }">Sequência atual</text>
-                <text :style="{fontSize:11 }">8 semanas consecutivas</text>
+                <text :style="{fontSize:11 }">1 semana consecutiva</text>
               </view>
             </view>
           </view>

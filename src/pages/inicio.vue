@@ -9,6 +9,7 @@
         <text>Exp: {{ userr[0].xpAtual }} / {{ userr[0].xpProx }}</text>
         <view
           class="progress-fill"
+          :style="{ width: (userr[0].xpAtual / userr[0].xpProx) * 187 }"
         ></view>
       </view>
       <view class="tasks">

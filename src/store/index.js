@@ -12,7 +12,6 @@ export default new Vuex.Store({
     storeUsuario: 'a',
     storeHabitoSelecionado:'0',
     storeUsuarioSalvar:'b',
-
   },
   // Like computed properties in component.
   // You can use getters to acess state in the store
@@ -58,7 +57,9 @@ export default new Vuex.Store({
               user = [
   {
     nome: 'Zé Monstrão',
-    xpTotal: '1500',
+    level: 1,
+    xpAtual: 0,
+    xpProx: 100,
     habitos: [
       {
         titulo: 'Corrida com cachorro',
@@ -141,7 +142,9 @@ export default new Vuex.Store({
             let user = [
   {
     nome: 'Zé Monstrão',
-    xpTotal: '1500',
+    level: 1,
+    xpAtual: 0,
+    xpProx: 100,
     habitos: [
       {
         titulo: 'Corrida com cachorro',
@@ -201,7 +204,7 @@ export default new Vuex.Store({
   }
 ];
             commit('setUsuario', user);
-            
+            resolve();
 
           } catch (error) {
             console.log("ENTROU NO CATCH")
@@ -222,7 +225,7 @@ export default new Vuex.Store({
             await AsyncStorage.setItem("Usuario", JSON.stringify(user));
 
             commit('setUsuario', user);
-
+            resolve();
 
           } catch (error) {
             console.log("ENTROU NO CATCH");
@@ -231,7 +234,7 @@ export default new Vuex.Store({
           }
         }, 1000)
       })
-    }
+    },
 
     
 
@@ -246,7 +249,7 @@ export default new Vuex.Store({
     setHabito(state, storeHabitoSelecionado) {
       Vue.set(state,'storeHabitoSelecionado', storeHabitoSelecionado);
     },
-    
+
     setSalvarUsuario(state, storeUsuarioSalvar) {
       Vue.set(state,'storeUsuarioSalvar', storeUsuarioSalvar);
     },

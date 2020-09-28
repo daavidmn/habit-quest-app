@@ -8,8 +8,8 @@
         />
       </view>
       <view class="progress-bar">
-        <text>LV 150</text>
-        <text>{{ userr[0].xpTotal }} /3000</text>
+        <text>{{userr[0].level}}</text>
+        <text>{{ userr[0].xpAtual }} / {{userr[0].xpProx}}</text>
         <view class="progress-fill"></view>
       </view>
       <view class="tasks">
@@ -18,7 +18,7 @@
           :size="24"
           color="white"
         />
-        <text class="tasks-text">20</text>
+        <text class="tasks-text">{{userr[0].habitos.length}}</text>
       </view>
       <view class="achievements">
         <MaterialCommunityIcons name="crown" :size="24" color="white" />
@@ -26,16 +26,42 @@
       </view>
     </view>
 
+
+    <modal
+      animationType="fade"
+      :transparent="true"
+      :visible="modalLevelVisible"
+    >
+      <view class="centered-view">
+        <view class="modal-view">
+          <view class="modal-top">
+            <text :style="{ fontSize: 20, fontWeight: 'bold' }">Você atingiu o Nível {{userr[0].level}}!</text>
+            
+            <text class="modal-text-top bold">Continue subindo de nível e ganhe recompensas</text>
+          </view>
+          <touchable-opacity
+            class="credits-button"
+            :on-press="() => switchModalLevel()"
+          >
+            <text :style="{ fontSize: 16, color: 'white' }">Ok</text>
+          </touchable-opacity>
+        </view>
+      </view>
+    </modal>
+
+    
+
+
     <view class="weekbar">
       <text>{{ userr[0].nome }}</text>
     </view>
     <view class="habits">
-      <ScrollView :fadingEdgeLength="0" :showsVerticalScrollIndicator="false">
+      <ScrollView :fadingEdgeLength="0" :showsVerticalScrollIndicator="true">
         <view class="scroll-box">
-          
           <view v-for="(habito, key) in userr[0].habitos" :key="key">
-            <view v-for="(rotina, chave) in habito.rotinaSemanal" :key="chave">
-              <Habitviewer
+            <view v-for="(rotina, chave) in userr[0].habitos[key].rotinaSemanal" :key="chave">
+              <view v-if="!userr[0].habitos[key].rotinaSemanal[chave].completado">
+              <Habitviewer @completa-rotina="()=>completarRotina(key,chave)"
                 :title="habito.titulo"
                 :xp="habito.xp"
                 :hora="rotina.horaSetada"
@@ -44,6 +70,7 @@
                 :habitoId="key"
                 :navigation="navigation"
               />
+            </view>
             </view>
         </view>
       </ScrollView>
@@ -79,6 +106,7 @@ export default {
     return {
       loaded: false,
       user: constUser,
+      modalLevelVisible: false,
     };
   },
 
@@ -86,6 +114,12 @@ export default {
     userr() {
       return this.$store.state.storeUsuario;
     },
+
+    stats(){
+      return this.$store.state.storeUsuarioStats;
+    },
+    
+
   },
 
   created() {
@@ -98,7 +132,34 @@ export default {
     },
   },
   methods: {
-    goToCadastrar: function () {
+
+    switchModalLevel: function(){
+      this.modalLevelVisible = false;
+    },
+    completarRotina: function(habitosId, rotinaId) {
+
+      this.userr[0].habitos[habitosId].rotinaSemanal[rotinaId].completado = true;
+
+      this.userr[0].xpAtual += this.userr[0].habitos[habitosId].xp;
+
+      if (this.userr[0].xpAtual >= this.userr[0].xpProx){
+
+        this.userr[0].level += 1;
+        this.userr[0].xpAtual -= this.userr[0].xpProx;
+        this.userr[0].xpProx = 100+(50*this.userr[0].level); 
+
+        this.modalLevelVisible = true;
+      }
+
+      this.$store.commit('setSalvarUsuario', this.userr);
+
+      this.$store.dispatch('salvarUsuario');
+
+      this.$store.dispatch("fetchUsuario");
+
+    },
+    goToCadastrar: function() {
+
       this.navigation.navigate("cadastroHabito");
     },
     onPressButton: function () {
@@ -109,6 +170,78 @@ export default {
 </script>
 
 <style scoped>
+.centered-view {
+  background-color: rgba(0, 0, 0, 0.8);
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-view {
+  width: 300px;
+  background-color: white;
+  border-radius: 20;
+  padding: 35;
+  align-items: center;
+  justify-content: space-around;
+}
+.modal-top {
+  justify-content: space-around;
+  align-items: center;
+  height: 100px;
+}
+
+.modal-bottom {
+  margin-top: 20px;
+  width: 100%;
+  height: 150px;
+  justify-content: space-around;
+}
+.modal-text-top {
+  text-align: center;
+  font-size: 16px;
+}
+.modal-text-bottom {
+  /* text-align: center; */
+  font-size: 12px;
+}
+.bold {
+  font-weight: bold;
+}
+.credits-button {
+  height: 45px;
+  width: 30%;
+  margin-top: 30px;
+  border-radius: 8px;
+  background-color: #386641;
+  align-items: center;
+  justify-content: center;
+}
+.confirma-creditos {
+  height: 38px;
+  width: 100%;
+  left: 0px;
+  top: 4px;
+  margin-top: 8px;
+  margin-bottom: 24px;
+  padding-top: 9px;
+  border-radius: 8px;
+  background-color: #386641;
+}
+.text-confirma-creditos {
+  height: 19px;
+  width: 100%;
+  left: 0px;
+  top: 0px;
+  border-radius: nullpx;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: bold;
+  line-height: 19px;
+  text-align: center;
+  color: white;
+  align-self: center;
+}
 .container {
   display: flex;
   height: 100%;

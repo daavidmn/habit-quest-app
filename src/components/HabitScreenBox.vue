@@ -55,7 +55,8 @@ export default {
     removerRotina() {
 
 
-      this.$emit('remove');
+      this.$emit('remove-rotina');
+
 
     },
   },

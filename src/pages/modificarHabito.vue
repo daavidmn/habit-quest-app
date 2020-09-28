@@ -24,9 +24,9 @@
     <view class="scroll-area">
       <ScrollView :fadingEdgeLength="0" :showsVerticalScrollIndicator="false">
         <view class="scroll-box">
-          <view v-if="(habito)">
+          <view v-if="habito">
             <view v-for="(habit, key) in habito.rotinaSemanal" :key="key">
-              <HabitScreenBox @remove="() => removerRotina(key)"
+              <HabitScreenBox @remove-rotina="() => removerRotina(key)"
                 :dia="habit.diaSetado"
                 :hora="habit.horaSetada"
                 :minuto="habit.minutoSetado"

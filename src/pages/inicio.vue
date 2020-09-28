@@ -4,7 +4,7 @@
       <view class="avatar-mini">
         <image
           :style="{ width: 25, height: 25 }"
-          :source="avatar[avatarIndex].src"
+          :source="avatar[getAvatarIndex()].src"
         />
       </view>
       <view class="progress-bar">

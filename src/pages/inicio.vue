@@ -5,7 +5,7 @@
 
         <image
           :style="{ width: 25, height: 25 }"
-          :source="avatar[getAvatarIndex()].src"
+          :source="avatar[0].src"
         />
 
       </view>

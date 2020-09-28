@@ -201,7 +201,7 @@ export default new Vuex.Store({
   }
 ];
             commit('setUsuario', user);
-            alert("Usuário Resetado");
+            
 
           } catch (error) {
             console.log("ENTROU NO CATCH")
@@ -223,7 +223,6 @@ export default new Vuex.Store({
 
             commit('setUsuario', user);
 
-            alert("Usuário Atualizado");
 
           } catch (error) {
             console.log("ENTROU NO CATCH");

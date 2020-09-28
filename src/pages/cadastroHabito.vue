@@ -281,6 +281,8 @@ export default {
 
         this.$store.dispatch('salvarUsuario');
 
+        this.$store.dispatch("fetchUsuario");
+
         this.navigation.navigate("inicio");
       }
     },

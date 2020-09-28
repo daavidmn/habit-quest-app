@@ -242,6 +242,20 @@ export default {
 
     },
     removerHabito: function (){
+
+
+Alert.alert(
+        "Remoção de Habito",
+        "Você tem certeza que deseja remover este Habito?",
+        [
+          {
+            text: "Cancelar",
+            onPress: () => console.log("Cancelar"),
+            style: "cancel",
+          },
+          {
+            text: "Confirmar",
+            onPress: () => {
       let copiaUser=this.userr;
 
       if((this.habitoSelecionado+1) == (copiaUser[0].habitos.length)){copiaUser[0].habitos.pop(); }
@@ -252,7 +266,27 @@ export default {
 
       this.$store.dispatch('salvarUsuario');
 
-      this.navigation.navigate("inicio");
+      this.$store.dispatch("fetchUsuario");
+
+        Alert.alert(
+        "Remoção de Habito",
+        "Habito Removido.",
+        [
+          {
+            text: "Ok",
+            onPress: () => {this.navigation.navigate("inicio");},
+           },
+          
+        ],
+        { cancelable: true }
+      );
+            },
+          },
+        ],
+        { cancelable: true }
+      );
+
+      
 
     },
     modalDia() {
@@ -301,6 +335,8 @@ export default {
         this.$store.commit('setSalvarUsuario', this.userr);
 
         this.$store.dispatch('salvarUsuario');
+
+        this.$store.dispatch("fetchUsuario");
 
         this.navigation.navigate("inicio");
       }

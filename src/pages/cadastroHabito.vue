@@ -337,9 +337,6 @@ export default {
 }
 
 .confirmar-habito {
-  position: absolute;
-  right: 20px;
-  bottom: 30px;
   width: 100%;
   height: 80px;
   align-items: center;

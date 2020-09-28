@@ -13,7 +13,7 @@
         </view>
         <view class="box-baixo">
           <view class="box-baixo-esquerda">
-            <text class="texto-branco">{{userr[0].level}}</text>
+            <text class="texto-branco">Nível: {{ userr[0].level }}</text>
           </view>
           <view class="box-baixo-direita">
             <view class="achievements">
@@ -151,6 +151,7 @@ export default {
 .container {
   width: 100%;
   height: 100%;
+  background-color: #ededed;
 }
 
 .header {

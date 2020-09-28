@@ -4,7 +4,7 @@
       <touchable-opacity class="avatar-button" :onPress="goToModificarAvatar">
         <image
           :style="{ width: 45, height: 45 }"
-          :source="require('../assets/img/avatar/020-superhero-19.png')"
+          :source="require('../assets/img/avatar/020-superhero.png')"
         />
       </touchable-opacity>
       <view class="box-centro">

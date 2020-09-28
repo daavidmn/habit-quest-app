@@ -12,6 +12,7 @@ export default new Vuex.Store({
     storeUsuario: 'a',
     storeHabitoSelecionado: '0',
     storeUsuarioSalvar: 'b',
+    storeAvatarIndex:1,
   },
   // Like computed properties in component.
   // You can use getters to acess state in the store
@@ -60,6 +61,9 @@ export default new Vuex.Store({
                   level: 1,
                   xpAtual: 0,
                   xpProx: 100,
+                  totalRotinas: 0,
+                  rotinasCompletadas:0,
+                  avatarIndex: 0,
                   habitos: [
                     // {
                     //   titulo: 'Corrida com cachorro',
@@ -119,7 +123,26 @@ export default new Vuex.Store({
                 }
               ];
             }
+
+            user[0].totalRotinas = 0;
+            user[0].rotinasCompletadas = 0;
+            
+
+             if(user[0].habitos){
+              for(var i=0;i<user[0].habitos.length;i++){
+                user[0].totalRotinas += user[0].habitos[i].rotinaSemanal.length;
+                if(user[0].habitos[i].rotinaSemanal){
+                for (var j=0;j<user[0].habitos[i].rotinaSemanal.length;j++){
+                  if(user[0].habitos[i].rotinaSemanal[j].completado){
+                user[0].rotinasCompletadas += 1;
+                
+                }
+              }
+              }
+            }
+          }
             console.log(user)
+            user[0].avatarIndex = state.storeAvatarIndex;
             commit('setUsuario', user)
             resolve();
             return state.storeUsuario;
@@ -145,6 +168,9 @@ export default new Vuex.Store({
                 level: 1,
                 xpAtual: 0,
                 xpProx: 100,
+                totalRotinas: 0,
+                rotinasCompletadas:0,
+                avatarIndex:0,
                 habitos: [
                   // {
                   //   titulo: 'Corrida com cachorro',
@@ -224,6 +250,24 @@ export default new Vuex.Store({
 
             await AsyncStorage.setItem("Usuario", JSON.stringify(user));
 
+            user[0].totalRotinas = 0;
+            user[0].rotinasCompletadas = 0;
+            
+
+             if(user[0].habitos){
+              for(var i=0;i<user[0].habitos.length;i++){
+                user[0].totalRotinas += user[0].habitos[i].rotinaSemanal.length;
+                if(user[0].habitos[i].rotinaSemanal){
+                for (var j=0;j<user[0].habitos[i].rotinaSemanal.length;j++){
+                  if(user[0].habitos[i].rotinaSemanal[j].completado){
+                user[0].rotinasCompletadas += 1;
+                
+                }
+              }
+              }
+            }
+          }
+            user[0].avatarIndex = state.storeAvatarIndex;
             commit('setUsuario', user);
             resolve();
 
@@ -252,6 +296,9 @@ export default new Vuex.Store({
 
     setSalvarUsuario(state, storeUsuarioSalvar) {
       Vue.set(state, 'storeUsuarioSalvar', storeUsuarioSalvar);
+    },
+    storeAvatarIndex(state, storeAvatarIndex) {
+      Vue.set(state, 'storeAvatarIndex', storeAvatarIndex);
     },
 
   }

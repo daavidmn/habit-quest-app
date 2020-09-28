@@ -29,10 +29,10 @@
     <view class="weekbar">
       <text>{{ userr[0].nome }}</text>
     </view>
-
     <view class="habits">
       <ScrollView :fadingEdgeLength="0" :showsVerticalScrollIndicator="false">
         <view class="scroll-box">
+          
           <view v-for="(habito, key) in userr[0].habitos" :key="key">
             <view v-for="(rotina, chave) in habito.rotinaSemanal" :key="chave">
               <Habitviewer
@@ -45,7 +45,6 @@
                 :navigation="navigation"
               />
             </view>
-          </view>
         </view>
       </ScrollView>
     </view>

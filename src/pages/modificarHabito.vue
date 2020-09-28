@@ -24,9 +24,9 @@
     <view class="scroll-area">
       <ScrollView :fadingEdgeLength="0" :showsVerticalScrollIndicator="false">
         <view class="scroll-box">
-          <view v-if="habitos.length > 0">
-            <view v-for="(habit, key) in userr[0].habitos[habitoSelecionado].rotinaSemanal" :key="key">
-              <HabitScreenBox @remove="() => removerRotina()"
+          <view v-if="(habito)">
+            <view v-for="(habit, key) in habito.rotinaSemanal" :key="key">
+              <HabitScreenBox @remove="() => removerRotina(key)"
                 :dia="habit.diaSetado"
                 :hora="habit.horaSetada"
                 :minuto="habit.minutoSetado"
@@ -188,8 +188,9 @@ export default {
   },
   data() {
     return {
+      habito: "",
+      nomeHabito:"",
       user: constUser,
-      habitos: constHabitos,
       modalDiaVisible: false,
       modalHoraVisible: false,
       diaTemp: "",
@@ -207,13 +208,14 @@ export default {
     habitoSelecionado() {
       return this.$store.state.storeHabitoSelecionado;
     },
-    nomeHabito(){
-      return this.userr[0].habitos[this.habitoSelecionado].titulo;
-    }
   },
   created() {
 
     this.$store.dispatch("fetchUsuario");
+
+    this.nomeHabito = this.userr[0].habitos[this.habitoSelecionado].titulo;
+
+    this.habito = this.userr[0].habitos[this.habitoSelecionado];
 
   },
   watch: {
@@ -237,21 +239,59 @@ export default {
     },
   },
   methods: {
+
     removerRotina: function (id){
-      this.userr[0].habitos[this.habitoSelecionado].rotinaSemanal.splice(id,1);
+
+      this.habito.rotinaSemanal.splice(id,1);
+
     },
+
     removerHabito: function (){
 
-      if(this.userr[0].habitos.length > 1){
-      this.userr[0].habitos.splice(this.habitoSelecionado,1);
 
-      this.$store.commit('setSalvarUsuario', this.userr);
+Alert.alert(
+        "Remoção de Habito",
+        "Você tem certeza que deseja remover este Habito?",
+        [
+          {
+            text: "Cancelar",
+            onPress: () => console.log("Cancelar"),
+            style: "cancel",
+          },
+          {
+            text: "Confirmar",
+            onPress: () => {
+      let copiaUser=this.userr;
+
+      if((this.habitoSelecionado+1) == (copiaUser[0].habitos.length)){copiaUser[0].habitos.pop(); }
+
+      else{copiaUser[0].habitos.splice(this.habitoSelecionado,1);}
+      
+      this.$store.commit('setSalvarUsuario', copiaUser);
 
       this.$store.dispatch('salvarUsuario');
 
-      this.navigation.navigate("inicio");}
+      this.$store.dispatch("fetchUsuario");
 
-      else{alert("Você precisa manter pelo menos um habito");}
+        Alert.alert(
+        "Remoção de Habito",
+        "Habito Removido.",
+        [
+          {
+            text: "Ok",
+            onPress: () => {this.navigation.navigate("inicio");},
+           },
+          
+        ],
+        { cancelable: true }
+      );
+            },
+          },
+        ],
+        { cancelable: true }
+      );
+
+      
 
     },
     modalDia() {
@@ -273,7 +313,7 @@ export default {
           { cancelable: false }
         );
       } else {
-        this.userr[0].habitos[this.habitoSelecionado].rotinaSemanal.push({
+        this.habito.rotinaSemanal.push({
           diaSetado: this.diaTemp,
           horaSetada: this.horaTemp,
           minutoSetado: this.minutoTemp,
@@ -283,7 +323,7 @@ export default {
       }
     },
     definirHabito() {
-      if (this.userr[0].habitos[this.habitoSelecionado].rotinaSemanal == "") {
+      if (this.habito.rotinaSemanal == "") {
         Alert.alert(
           "Você não cadastrou dias para seu habito",
           "Adicione um dia e horario para seu habito",
@@ -296,12 +336,28 @@ export default {
         this.horaTemp = "";
         this.minutoTemp = "";
 
+        this.userr[0].habitos[this.habitoSelecionado] = this.habito;
+        this.userr[0].habitos[this.habitoSelecionado].titulo = this.nomeHabito;
 
         this.$store.commit('setSalvarUsuario', this.userr);
 
         this.$store.dispatch('salvarUsuario');
 
-        this.navigation.navigate("inicio");
+        this.$store.dispatch("fetchUsuario");
+
+        Alert.alert(
+        "Atualização de Habito",
+        "Habito Atualizado.",
+        [
+          {
+            text: "Ok",
+            onPress: () => {this.navigation.navigate("inicio");},
+           },
+          
+        ],
+        { cancelable: true }
+      );
+        
       }
     },
   },

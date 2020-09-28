@@ -11,7 +11,8 @@ export default new Vuex.Store({
   state: {
     storeUsuario: 'a',
     storeHabitoSelecionado:'0',
-    storeUsuarioSalvar:'b'
+    storeUsuarioSalvar:'b',
+
   },
   // Like computed properties in component.
   // You can use getters to acess state in the store
@@ -222,7 +223,6 @@ export default new Vuex.Store({
 
             commit('setUsuario', user);
 
-            alert("Usuário Atualizado");
 
           } catch (error) {
             console.log("ENTROU NO CATCH");
@@ -246,6 +246,7 @@ export default new Vuex.Store({
     setHabito(state, storeHabitoSelecionado) {
       Vue.set(state,'storeHabitoSelecionado', storeHabitoSelecionado);
     },
+    
     setSalvarUsuario(state, storeUsuarioSalvar) {
       Vue.set(state,'storeUsuarioSalvar', storeUsuarioSalvar);
     },

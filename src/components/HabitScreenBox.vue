@@ -53,7 +53,10 @@ export default {
   props: ["dia", "hora", "minuto", "rotinaId"],
   methods: {
     removerRotina() {
-      this.$emit("remove", this.rotinaId);
+
+
+      this.$emit('remove');
+
     },
   },
 };

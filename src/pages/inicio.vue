@@ -56,12 +56,22 @@
       <text>{{ userr[0].nome }}</text>
     </view> -->
     <view class="habits">
+      <view class="no-habits-container" v-if="userr[0].habitos == false">
+        <text class="text-title"
+          >Você ainda
+          <text :style="{ color: 'rgba(56,102,65, 1)' }">não tem hábitos</text
+          >.</text
+        >
+        <text class="text-title2"
+          >Que tal começar
+          <text :style="{ color: 'rgba(56,102,65, 1)' }">adicionando um</text
+          >?</text
+        >
+      </view>
+
       <ScrollView :fadingEdgeLength="0" :showsVerticalScrollIndicator="true">
         <view class="scroll-box">
-          <view v-if="userr[0].habitos == false">
-            <text>Você não tem hábitos ainda.</text>
-          </view>
-          <view v-else>
+          <view v-if="userr[0].habitos != false">
             <view v-for="(habito, key) in userr[0].habitos" :key="key">
               <view
                 v-for="(rotina, chave) in userr[0].habitos[key].rotinaSemanal"
@@ -327,6 +337,11 @@ export default {
 .scroll-box {
   padding-top: 20;
 }
+.no-habits-container {
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
 
 .habit-box {
   margin-bottom: 10px;
@@ -370,5 +385,21 @@ export default {
 .botao {
   position: absolute;
   bottom: 0px;
+}
+
+.text-title {
+  font-size: 20px;
+  font-style: normal;
+  font-weight: bold;
+}
+.text-title2 {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: bold;
+}
+.text-subtitle {
+  font-size: 16px;
+  font-style: normal;
+  /* font-weight: bold; */
 }
 </style>

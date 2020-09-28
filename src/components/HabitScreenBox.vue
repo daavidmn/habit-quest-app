@@ -53,11 +53,7 @@ export default {
   props: ["dia", "hora", "minuto", "rotinaId"],
   methods: {
     removerRotina() {
-
-
-      this.$emit('remove-rotina');
-
-
+      this.$emit("remove-rotina");
     },
   },
 };
@@ -67,10 +63,8 @@ export default {
 .container {
   display: flex;
   flex-direction: column;
-  width: 200px;
-  height: 100px;
-  margin-bottom: 10px;
-  margin-top: 10px;
+  width: 170px;
+  height: 80px;
 }
 
 .box-above {

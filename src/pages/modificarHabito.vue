@@ -24,9 +24,15 @@
     <view class="scroll-area">
       <ScrollView :fadingEdgeLength="0" :showsVerticalScrollIndicator="false">
         <view class="scroll-box">
-          <view v-if="habito">
-            <view v-for="(habit, key) in habito.rotinaSemanal" :key="key">
-              <HabitScreenBox @remove-rotina="() => removerRotina(key)"
+        <view v-if="habito">
+          <view class="habit-container">
+            <view
+              class="habit-box"
+              v-for="(habit, key) in habito.rotinaSemanal"
+              :key="key"
+            >
+              <HabitScreenBox
+                @remove-rotina="() => removerRotina(key)"
                 :dia="habit.diaSetado"
                 :hora="habit.horaSetada"
                 :minuto="habit.minutoSetado"
@@ -38,19 +44,28 @@
       </ScrollView>
     </view>
 
-    <touchable-opacity
-      class="confirmar-habito"
-      :on-press="() => definirHabito()"
-    >
-      <text class="confirmar-estilo">Confirmar</text>
-    </touchable-opacity>
-
-    <touchable-opacity
-      class="remover-habito"
-      :on-press="() => removerHabito()"
-    >
-      <text class="confirmar-estilo">Remover</text>
-    </touchable-opacity>
+    <view class="botoes-confirmacao">
+      <text :style="{ fontSize: 18 }">Remover hábito</text>
+      <text :style="{ fontSize: 12 }"
+        >Cuidado, essa ação irá apagar seu progresso nesse hábito.</text
+      >
+      <touchable-opacity
+        class="remover-habito"
+        :on-press="() => removerHabito()"
+      >
+        <text
+          class="confirmar-estilo"
+          :style="{ fontSize: 14, fontWeight: 'bold' }"
+          >Remover hábito</text
+        >
+      </touchable-opacity>
+      <touchable-opacity
+        class="confirmar-habito"
+        :on-press="() => definirHabito()"
+      >
+        <text class="confirmar-estilo">Confirmar</text>
+      </touchable-opacity>
+    </view>
 
     <view class="centered-view">
       <modal
@@ -189,7 +204,7 @@ export default {
   data() {
     return {
       habito: "",
-      nomeHabito:"",
+      nomeHabito: "",
       user: constUser,
       modalDiaVisible: false,
       modalHoraVisible: false,
@@ -210,13 +225,11 @@ export default {
     },
   },
   created() {
-
     this.$store.dispatch("fetchUsuario");
 
     this.nomeHabito = this.userr[0].habitos[this.habitoSelecionado].titulo;
 
     this.habito = this.userr[0].habitos[this.habitoSelecionado];
-
   },
   watch: {
     horaTemp: function () {
@@ -239,17 +252,12 @@ export default {
     },
   },
   methods: {
-
-    removerRotina: function (id){
-
-      this.habito.rotinaSemanal.splice(id,1);
-
+    removerRotina: function (id) {
+      this.habito.rotinaSemanal.splice(id, 1);
     },
 
-    removerHabito: function (){
-
-
-Alert.alert(
+    removerHabito: function () {
+      Alert.alert(
         "Remoção de Habito",
         "Você tem certeza que deseja remover este Habito?",
         [
@@ -261,38 +269,38 @@ Alert.alert(
           {
             text: "Confirmar",
             onPress: () => {
-      let copiaUser=this.userr;
+              let copiaUser = this.userr;
 
-      if((this.habitoSelecionado+1) == (copiaUser[0].habitos.length)){copiaUser[0].habitos.pop(); }
+              if (this.habitoSelecionado + 1 == copiaUser[0].habitos.length) {
+                copiaUser[0].habitos.pop();
+              } else {
+                copiaUser[0].habitos.splice(this.habitoSelecionado, 1);
+              }
 
-      else{copiaUser[0].habitos.splice(this.habitoSelecionado,1);}
-      
-      this.$store.commit('setSalvarUsuario', copiaUser);
+              this.$store.commit("setSalvarUsuario", copiaUser);
 
-      this.$store.dispatch('salvarUsuario');
+              this.$store.dispatch("salvarUsuario");
 
-      this.$store.dispatch("fetchUsuario");
+              this.$store.dispatch("fetchUsuario");
 
-        Alert.alert(
-        "Remoção de Habito",
-        "Habito Removido.",
-        [
-          {
-            text: "Ok",
-            onPress: () => {this.navigation.navigate("inicio");},
-           },
-          
-        ],
-        { cancelable: true }
-      );
+              Alert.alert(
+                "Remoção de Habito",
+                "Habito Removido.",
+                [
+                  {
+                    text: "Ok",
+                    onPress: () => {
+                      this.navigation.navigate("inicio");
+                    },
+                  },
+                ],
+                { cancelable: true }
+              );
             },
           },
         ],
         { cancelable: true }
       );
-
-      
-
     },
     modalDia() {
       this.modalDiaVisible = true;
@@ -333,7 +341,6 @@ Alert.alert(
           { cancelable: false }
         );
       } else {
-
         this.diaTemp = "";
         this.horaTemp = "";
         this.minutoTemp = "";
@@ -341,25 +348,25 @@ Alert.alert(
         this.userr[0].habitos[this.habitoSelecionado] = this.habito;
         this.userr[0].habitos[this.habitoSelecionado].titulo = this.nomeHabito;
 
-        this.$store.commit('setSalvarUsuario', this.userr);
+        this.$store.commit("setSalvarUsuario", this.userr);
 
-        this.$store.dispatch('salvarUsuario');
+        this.$store.dispatch("salvarUsuario");
 
         this.$store.dispatch("fetchUsuario");
 
         Alert.alert(
-        "Atualização de Habito",
-        "Habito Atualizado.",
-        [
-          {
-            text: "Ok",
-            onPress: () => {this.navigation.navigate("inicio");},
-           },
-          
-        ],
-        { cancelable: true }
-      );
-        
+          "Atualização de Habito",
+          "Habito Atualizado.",
+          [
+            {
+              text: "Ok",
+              onPress: () => {
+                this.navigation.navigate("inicio");
+              },
+            },
+          ],
+          { cancelable: true }
+        );
       }
     },
   },
@@ -368,11 +375,12 @@ Alert.alert(
 
 <style scoped>
 .container {
-  margin-top: 20px;
+  padding-top: 20px;
   padding-left: 20px;
   padding-right: 20px;
   width: 100%;
   height: 100%;
+  background-color: #ededed;
 }
 
 .botao-adicionar-habito {
@@ -387,19 +395,29 @@ Alert.alert(
 }
 
 .scroll-area {
-  padding-left: 15px;
-  padding-right: 15px;
-  flex-direction: column;
-  align-items: center;
+  justify-content: center;
   width: 100%;
-  height: 345px;
+  height: 200px;
 }
 
+.habit-container {
+  margin-top: 10px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+}
+
+.habit-box {
+  padding-top: 10px;
+}
+.botoes-confirmacao {
+  flex-direction: column;
+}
 .confirmar-habito {
-  position: absolute;
-  left: 20px;
-  bottom: 30px;
-  width: 50%;
+  margin-top: 40px;
+  width: 100%;
   height: 80px;
   align-items: center;
   justify-content: center;
@@ -407,14 +425,13 @@ Alert.alert(
   border-radius: 8px;
 }
 .remover-habito {
-  position: absolute;
-  right: 20px;
-  bottom: 30px;
-  width: 50%;
-  height: 80px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 100%;
+  height: 40px;
   align-items: center;
   justify-content: center;
-  background-color: red;
+  background-color: #bc4749;
   border-radius: 8px;
 }
 .confirmar-estilo {

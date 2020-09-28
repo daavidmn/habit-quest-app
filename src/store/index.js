@@ -57,13 +57,14 @@ export default new Vuex.Store({
               console.log("ENTROU NO else")
               user = [
                 {
-                  nome: 'Zé Monstrão',
+                  nome: 'Novo Usuario',
                   level: 1,
                   xpAtual: 0,
                   xpProx: 100,
                   totalRotinas: 0,
                   rotinasCompletadas:0,
                   avatarIndex: 2,
+                  novoUsuario: true,
                   habitos: [
                     // {
                     //   titulo: 'Corrida com cachorro',
@@ -165,13 +166,14 @@ export default new Vuex.Store({
 
             let user = [
               {
-                nome: 'Zé Monstrão',
+                nome: 'Novo Usuario',
                 level: 1,
                 xpAtual: 0,
                 xpProx: 100,
                 totalRotinas: 0,
                 rotinasCompletadas:0,
                 avatarIndex:2,
+                novoUsuario: true,
                 habitos: [
                   // {
                   //   titulo: 'Corrida com cachorro',

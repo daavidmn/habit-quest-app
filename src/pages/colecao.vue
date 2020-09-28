@@ -9,7 +9,9 @@
       </touchable-opacity>
       <view class="box-centro">
         <view class="box-cima">
-          <text class="nome">{{ userr[0].nome }}</text>
+          <text class="nome" :adjustsFontSizeToFit="true">{{
+            userr[0].nome
+          }}</text>
         </view>
         <view class="box-baixo">
           <view class="box-baixo-esquerda">
@@ -29,79 +31,91 @@
       </view>
     </view>
     <view class="conteudo-meio">
-      <text class="texto-centro">Conquistas Obtidas</text>
-      <view class="conquistas">
-        <view class="medal-mini">
-          <image
-            :style="{ width: 50, height: 50 }"
-            :source="require('../assets/img/avatar/medalha-ouro.png')"
-          />
-          <text>Destemido</text>
-        </view>
+      <ScrollView :fadingEdgeLength="0" :showsVerticalScrollIndicator="true">
+        <view class="scroll-box">
+          <text class="texto-centro">Conquistas Obtidas</text>
+          <view class="conquistas">
+            <view class="medal-mini">
+              <image
+                :style="{ width: 50, height: 50 }"
+                :source="require('../assets/img/avatar/medalha-ouro.png')"
+              />
+              <text>Destemido</text>
+            </view>
 
-        <view class="medal-mini">
-          <image
-            :style="{ width: 50, height: 50 }"
-            :source="require('../assets/img/avatar/medalha-ouro.png')"
-          />
-          <text>Popular</text>
-        </view>
+            <view class="medal-mini">
+              <image
+                :style="{ width: 50, height: 50 }"
+                :source="require('../assets/img/avatar/medalha-ouro.png')"
+              />
+              <text>Popular</text>
+            </view>
 
-        <view class="medal-mini">
-          <image
-            :style="{ width: 50, height: 50 }"
-            :source="require('../assets/img/avatar/medalha-ouro.png')"
-          />
-          <text>Mestre</text>
-        </view>
+            <view class="medal-mini">
+              <image
+                :style="{ width: 50, height: 50 }"
+                :source="require('../assets/img/avatar/medalha-ouro.png')"
+              />
+              <text>Mestre</text>
+            </view>
 
-        <view class="medal-mini">
-          <image
-            :style="{ width: 50, height: 50 }"
-            :source="require('../assets/img/avatar/medalha-ouro.png')"
-          />
-          <text>Quente</text>
-        </view>
-      </view>
-      <touchable-opacity class="ver-mais" :onPress="goToConquistas">
-        <text class="ver-mais-texto">Ver + 8 conquistas</text>
-      </touchable-opacity>
+            <view class="medal-mini">
+              <image
+                :style="{ width: 50, height: 50 }"
+                :source="require('../assets/img/avatar/medalha-ouro.png')"
+              />
+              <text>Quente</text>
+            </view>
+          </view>
+          <touchable-opacity class="ver-mais" :onPress="goToConquistas">
+            <text class="ver-mais-texto">Ver + 8 conquistas</text>
+          </touchable-opacity>
 
-      <text class="texto-centro">Estatísticas</text>
-      <view class="estatisticas">
-        <view class="estatisticas-cima">
-          <view class="e-esquerda">
-            <MaterialCommunityIcons
-              name="calendar-check"
-              :size="40"
-              color="#A7C957"
-            />
-            <text :style="{ fontWeight: 'bold' }">Metas alcançadas</text>
-            <text>Placeholder</text>
-          </view>
-          <view class="e-direita">
-            <MaterialCommunityIcons
-              name="calendar-check"
-              :size="40"
-              color="#A7C957"
-            />
-            <text :style="{ fontWeight: 'bold' }">Total de hábitos</text>
-            <text>Placeholder</text>
+          <text class="texto-centro">Estatísticas</text>
+          <view class="estatisticas">
+            <view class="estatisticas-cima">
+              <view class="e-esquerda">
+                <MaterialCommunityIcons
+                  name="calendar-check"
+                  :size="40"
+                  color="#A7C957"
+                />
+                <text :style="{ fontWeight: 'bold' }">Metas alcançadas</text>
+                <text>Placeholder</text>
+              </view>
+              <view class="e-direita">
+                <MaterialCommunityIcons
+                  name="calendar-check"
+                  :size="40"
+                  color="#A7C957"
+                />
+                <text :style="{ fontWeight: 'bold' }">Total de hábitos</text>
+                <text>Placeholder</text>
+              </view>
+            </view>
+            <view class="estatisticas-baixo">
+              <view class="e-esquerda">
+                <MaterialCommunityIcons
+                  name="fire"
+                  :size="40"
+                  color="#BC4749"
+                />
+                <text :style="{ fontWeight: 'bold' }">Maior sequência</text>
+                <text>Placeholder</text>
+              </view>
+              <view class="e-direita">
+                <MaterialCommunityIcons
+                  name="fire"
+                  :size="40"
+                  color="#BC4749"
+                />
+                <text :style="{ fontWeight: 'bold' }">Sequência atual</text>
+                <text>Placeholder</text>
+              </view>
+            </view>
           </view>
         </view>
-        <view class="estatisticas-baixo">
-          <view class="e-esquerda">
-            <MaterialCommunityIcons name="fire" :size="40" color="#BC4749" />
-            <text :style="{ fontWeight: 'bold' }">Maior sequência</text>
-            <text>Placeholder</text>
-          </view>
-          <view class="e-direita">
-            <MaterialCommunityIcons name="fire" :size="40" color="#BC4749" />
-            <text :style="{ fontWeight: 'bold' }">Sequência atual</text>
-            <text>Placeholder</text>
-          </view>
-        </view>
-      </view>
+      </ScrollView>
     </view>
   </view>
 </template>
@@ -191,15 +205,11 @@ export default {
 
 .nome {
   height: 38px;
-  left: 0px;
-  top: 0px;
   font-style: normal;
   font-weight: 800;
-  font-size: 28px;
-  line-height: 32px;
+  font-size: 22px;
   display: flex;
   align-items: center;
-
   color: #ffffff;
 }
 
@@ -252,11 +262,15 @@ export default {
 
 .conteudo-meio {
   width: 100%;
-  height: 100%;
+  height: 80%;
   padding-left: 16px;
   padding-right: 16px;
   align-content: center;
   flex-direction: column;
+}
+
+.scroll-box {
+  height: 500px;
 }
 
 .texto-centro {
@@ -288,8 +302,6 @@ export default {
   width: 100%;
   height: 32px;
   line-height: 10px;
-  top: 10px;
-  left: 16px;
   font-style: normal;
   font-size: 10px;
   display: flex;

@@ -342,7 +342,8 @@ export default {
   flex-direction: column;
 }
 .confirmar-habito {
-  margin-top: 10px;
+
+
   width: 100%;
   height: 60px;
   align-items: center;

@@ -29,6 +29,7 @@
       </view>
     </view>
     <view class="conteudo-meio">
+      <ScrollView :fadingEdgeLength="0" :showsVerticalScrollIndicator="false">
       <text class="texto-centro">Conquistas Obtidas</text>
       <view class="conquistas">
         <view class="medal-mini">
@@ -103,6 +104,7 @@
         </view>
       </view>
     </view>
+    </ScrollView>
   </view>
 </template>
 

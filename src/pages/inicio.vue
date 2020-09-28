@@ -8,8 +8,8 @@
         />
       </view>
       <view class="progress-bar">
-        <text>{{userr[0].level}}</text>
-        <text>{{ userr[0].xpAtual }} / {{userr[0].xpProx}}</text>
+        <text>{{ userr[0].level }}</text>
+        <text>{{ userr[0].xpAtual }} / {{ userr[0].xpProx }}</text>
         <view class="progress-fill"></view>
       </view>
       <view class="tasks">
@@ -26,7 +26,6 @@
       </view>
     </view>
 
-
     <modal
       animationType="fade"
       :transparent="true"
@@ -35,9 +34,13 @@
       <view class="centered-view">
         <view class="modal-view">
           <view class="modal-top">
-            <text :style="{ fontSize: 20, fontWeight: 'bold' }">Você atingiu o Nível {{userr[0].level}}!</text>
-            
-            <text class="modal-text-top bold">Continue subindo de nível e ganhe recompensas</text>
+            <text :style="{ fontSize: 20, fontWeight: 'bold' }"
+              >Você atingiu o Nível {{ userr[0].level }}!</text
+            >
+
+            <text class="modal-text-top bold"
+              >Continue subindo de nível e ganhe recompensas</text
+            >
           </view>
           <touchable-opacity
             class="credits-button"
@@ -49,29 +52,38 @@
       </view>
     </modal>
 
-    
-
-
-    <view class="weekbar">
+    <!-- <view class="weekbar">
       <text>{{ userr[0].nome }}</text>
-    </view>
+    </view> -->
     <view class="habits">
       <ScrollView :fadingEdgeLength="0" :showsVerticalScrollIndicator="true">
         <view class="scroll-box">
-          <view v-for="(habito, key) in userr[0].habitos" :key="key">
-            <view v-for="(rotina, chave) in userr[0].habitos[key].rotinaSemanal" :key="chave">
-              <view v-if="!userr[0].habitos[key].rotinaSemanal[chave].completado">
-              <Habitviewer @completa-rotina="()=>completarRotina(key,chave)"
-                :title="habito.titulo"
-                :xp="habito.xp"
-                :hora="rotina.horaSetada"
-                :minutos="rotina.minutoSetado"
-                :dia="rotina.diaSetado"
-                :habitoId="key"
-                :navigation="navigation"
-              />
+          <view v-if="userr[0].habitos == false">
+            <text>Você não tem hábitos</text>
+          </view>
+          <view v-else>
+            <view v-for="(habito, key) in userr[0].habitos" :key="key">
+              <view
+                v-for="(rotina, chave) in userr[0].habitos[key].rotinaSemanal"
+                :key="chave"
+              >
+                <view
+                  v-if="!userr[0].habitos[key].rotinaSemanal[chave].completado"
+                >
+                  <Habitviewer
+                    @completa-rotina="() => completarRotina(key, chave)"
+                    :title="habito.titulo"
+                    :xp="habito.xp"
+                    :hora="rotina.horaSetada"
+                    :minutos="rotina.minutoSetado"
+                    :dia="rotina.diaSetado"
+                    :habitoId="key"
+                    :navigation="navigation"
+                  />
+                </view>
+              </view>
             </view>
-            </view>
+          </view>
         </view>
       </ScrollView>
     </view>
@@ -114,8 +126,6 @@ export default {
     userr() {
       return this.$store.state.storeUsuario;
     },
-    
-
   },
 
   created() {
@@ -128,34 +138,31 @@ export default {
     },
   },
   methods: {
-
-    switchModalLevel: function(){
+    switchModalLevel: function () {
       this.modalLevelVisible = false;
     },
-    completarRotina: function(habitosId, rotinaId) {
-
-      this.userr[0].habitos[habitosId].rotinaSemanal[rotinaId].completado = true;
+    completarRotina: function (habitosId, rotinaId) {
+      this.userr[0].habitos[habitosId].rotinaSemanal[
+        rotinaId
+      ].completado = true;
 
       this.userr[0].xpAtual += this.userr[0].habitos[habitosId].xp;
 
-      if (this.userr[0].xpAtual >= this.userr[0].xpProx){
-
+      if (this.userr[0].xpAtual >= this.userr[0].xpProx) {
         this.userr[0].level += 1;
         this.userr[0].xpAtual -= this.userr[0].xpProx;
-        this.userr[0].xpProx = 100+(50*this.userr[0].level); 
+        this.userr[0].xpProx = 100 + 50 * this.userr[0].level;
 
         this.modalLevelVisible = true;
       }
 
-      this.$store.commit('setSalvarUsuario', this.userr);
+      this.$store.commit("setSalvarUsuario", this.userr);
 
-      this.$store.dispatch('salvarUsuario');
+      this.$store.dispatch("salvarUsuario");
 
       this.$store.dispatch("fetchUsuario");
-
     },
-    goToCadastrar: function() {
-
+    goToCadastrar: function () {
       this.navigation.navigate("cadastroHabito");
     },
     onPressButton: function () {
@@ -314,7 +321,7 @@ export default {
   flex-direction: column;
   align-items: center;
   width: 100%;
-  height: 483px;
+  height: 595px;
 }
 
 .scroll-box {

@@ -7,9 +7,7 @@
       <view class="progress-bar">
         <text>Nível {{ userr[0].level }}</text>
         <text>Exp: {{ userr[0].xpAtual }} / {{ userr[0].xpProx }}</text>
-        <view
-          class="progress-fill"
-        ></view>
+        <view class="progress-fill"></view>
       </view>
       <view class="tasks">
         <MaterialCommunityIcons
@@ -51,41 +49,38 @@
       </view>
     </modal>
 
-    <modal
-      animationType="fade"
-      :transparent="true"
-      v-if="userr[0].novoUsuario"
-    >
+    <modal animationType="fade" :transparent="true" v-if="userr[0].novoUsuario">
       <view class="centered-view">
         <view class="modal-view">
           <view class="modal-top">
-            <text :style="{ fontSize: 20, fontWeight: 'bold' }"
+            <text :style="{ fontSize: 18, fontWeight: 'bold' }"
               >Bem vindo ao HabitQuest!</text
             >
 
-            <text class="modal-text-top bold"
-              >Conte-nos vosso nome: </text
-            >
+            <text class="modal-text-top bold">Conte-nos vosso nome: </text>
             <text-input
-          :placeholder="'Seu nome'"
-          :style="{
-            height: 40,
-            padding: 10,
-            width: '100%',
-            borderColor: '#6A994E',
-            borderWidth: 2,
-            borderRadius: 8,
-            backgroundColor: 'white',
-          }"
-          v-model="nome"
-        />
-
+              :placeholder="'Seu nome'"
+              :style="{
+                height: 40,
+                paddingLeft: 60,
+                paddingRight: 60,
+                marginTop: 20,
+                width: '100%',
+                borderColor: '#6A994E',
+                borderWidth: 2,
+                borderRadius: 8,
+                backgroundColor: 'white',
+              }"
+              v-model="nome"
+            />
           </view>
           <touchable-opacity
             class="credits-button"
             :on-press="() => switchNovoUsuario()"
           >
-            <text :style="{ fontSize: 16, color: 'white' }">Confirmar</text>
+            <text :style="{ fontSize: 13, color: 'white', fontWeight: 'bold' }"
+              >Confirmar</text
+            >
           </touchable-opacity>
         </view>
       </view>
@@ -170,14 +165,14 @@ export default {
   },
   data() {
     return {
-      nome:"",
+      nome: "",
       avatarIndex: 0,
       loaded: false,
       avatar: constAvatar,
       user: constUser,
       modalLevelVisible: false,
       modalNovoUsuarioVisible: false,
-      user:"",
+      user: "",
     };
   },
 
@@ -194,7 +189,8 @@ export default {
 
     this.avatarIndex = this.userr[0].avatarIndex;
 
-    this.modalNovoUsuarioVisible = this.user[0].novoUsuario;  },
+    this.modalNovoUsuarioVisible = this.user[0].novoUsuario;
+  },
 
   props: {
     navigation: {
@@ -211,7 +207,6 @@ export default {
       this.modalLevelVisible = false;
     },
     switchNovoUsuario: function (nomeUsuario) {
-
       this.userr[0].nome = this.nome;
       this.userr[0].novoUsuario = false;
 
@@ -302,9 +297,9 @@ export default {
   font-weight: bold;
 }
 .credits-button {
-  height: 45px;
-  width: 30%;
-  margin-top: 30px;
+  height: 35px;
+  width: 40%;
+  margin-top: 20px;
   border-radius: 8px;
   background-color: #386641;
   align-items: center;

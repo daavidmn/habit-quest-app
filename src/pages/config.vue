@@ -66,7 +66,7 @@
 
         <text>Cuidado, essa ação é irreversível</text>
         <touchable-opacity class="resetar" :on-press="() => resetarUsuario()">
-          <text class="text-confirma-creditos">Ok</text>
+          <text class="text-confirma-creditos">Resetar Progresso</text>
         </touchable-opacity>
       </view>
     </ScrollView>

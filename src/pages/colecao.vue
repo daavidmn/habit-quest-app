@@ -117,6 +117,7 @@
         </view>
       </ScrollView>
     </view>
+    </ScrollView>
   </view>
 </template>
 

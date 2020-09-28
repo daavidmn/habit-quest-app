@@ -51,6 +51,46 @@
       </view>
     </modal>
 
+    <modal
+      animationType="fade"
+      :transparent="true"
+      v-if="userr[0].novoUsuario"
+    >
+      <view class="centered-view">
+        <view class="modal-view">
+          <view class="modal-top">
+            <text :style="{ fontSize: 20, fontWeight: 'bold' }"
+              >Bem vindo ao HabitQuest!</text
+            >
+
+            <text class="modal-text-top bold"
+              >Conte-nos vosso nome: </text
+            >
+            <text-input
+          :placeholder="'Seu nome'"
+          :style="{
+            height: 40,
+            padding: 10,
+            width: '100%',
+            borderColor: '#6A994E',
+            borderWidth: 2,
+            borderRadius: 8,
+            backgroundColor: 'white',
+          }"
+          v-model="nome"
+        />
+
+          </view>
+          <touchable-opacity
+            class="credits-button"
+            :on-press="() => switchNovoUsuario()"
+          >
+            <text :style="{ fontSize: 16, color: 'white' }">Confirmar</text>
+          </touchable-opacity>
+        </view>
+      </view>
+    </modal>
+
     <!-- <view class="weekbar">
       <text>{{ userr[0].nome }}</text>
     </view> -->
@@ -130,11 +170,14 @@ export default {
   },
   data() {
     return {
+      nome:"",
       avatarIndex: 0,
       loaded: false,
       avatar: constAvatar,
       user: constUser,
       modalLevelVisible: false,
+      modalNovoUsuarioVisible: false,
+      user:"",
     };
   },
 
@@ -147,8 +190,11 @@ export default {
   created() {
     this.$store.dispatch("fetchUsuario");
 
+    this.user = this.$store.state.storeUsuario;
+
     this.avatarIndex = this.userr[0].avatarIndex;
-  },
+
+    this.modalNovoUsuarioVisible = this.user[0].novoUsuario;  },
 
   props: {
     navigation: {
@@ -163,6 +209,19 @@ export default {
     },
     switchModalLevel: function () {
       this.modalLevelVisible = false;
+    },
+    switchNovoUsuario: function (nomeUsuario) {
+
+      this.userr[0].nome = this.nome;
+      this.userr[0].novoUsuario = false;
+
+      this.$store.commit("setSalvarUsuario", this.userr);
+
+      this.$store.dispatch("salvarUsuario");
+
+      this.$store.dispatch("fetchUsuario");
+
+      this.modalNovoUsuarioVisible = false;
     },
     completarRotina: function (habitosId, rotinaId) {
       let hoje = new Date();

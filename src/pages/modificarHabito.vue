@@ -22,7 +22,7 @@
     </touchable-opacity>
 
     <view class="scroll-area">
-      <ScrollView :fadingEdgeLength="0" :showsVerticalScrollIndicator="false">
+      <ScrollView :fadingEdgeLength="0" :showsVerticalScrollIndicator="true">
         <view class="scroll-box">
         <view v-if="habito">
           <view class="habit-container">
@@ -327,6 +327,8 @@ export default {
           minutoSetado: this.minutoTemp,
           notificar: false,
           completado: false,
+          completadoData: "",
+          mesmoDia: false,
         });
       }
     },
@@ -394,8 +396,9 @@ export default {
 
 .scroll-area {
   justify-content: center;
+  align-items: center;
   width: 100%;
-  height: 200px;
+  height: 150px;
 }
 
 .habit-container {
@@ -414,9 +417,9 @@ export default {
   flex-direction: column;
 }
 .confirmar-habito {
-  margin-top: 40px;
+  margin-top: 10px;
   width: 100%;
-  height: 80px;
+  height: 60px;
   align-items: center;
   justify-content: center;
   background-color: #386641;

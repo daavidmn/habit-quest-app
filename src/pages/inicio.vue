@@ -73,6 +73,7 @@
             </view>
             </view>
         </view>
+      </view>
       </ScrollView>
     </view>
     <ActionButton

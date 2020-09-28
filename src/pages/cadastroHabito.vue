@@ -23,7 +23,7 @@
     </touchable-opacity>
 
     <view class="scroll-area">
-      <ScrollView :fadingEdgeLength="0" :showsVerticalScrollIndicator="false">
+      <ScrollView :fadingEdgeLength="0" :showsVerticalScrollIndicator="true">
         <view class="scroll-box">
           <view v-if="userr[0].habitos">
             <view class="habit-container">
@@ -33,7 +33,7 @@
                 :key="key"
               >
                 <HabitScreenBox
-                  @remove="() => removerRotina(key)"
+                  @remove-rotina="() => removerRotina(key)"
                   :dia="habit.diaSetado"
                   :hora="habit.horaSetada"
                   :minuto="habit.minutoSetado"
@@ -321,8 +321,9 @@ export default {
 
 .scroll-area {
   justify-content: center;
+  align-items: center;
   width: 100%;
-  height: 305px;
+  height: 250px;
 }
 
 .habit-container {
@@ -337,16 +338,26 @@ export default {
 .habit-box {
   padding-top: 10px;
 }
-
+.botoes-confirmacao {
+  flex-direction: column;
+}
 .confirmar-habito {
-  position: absolute;
-  right: 20px;
-  bottom: 30px;
+  margin-top: 10px;
   width: 100%;
-  height: 80px;
+  height: 60px;
   align-items: center;
   justify-content: center;
   background-color: #386641;
+  border-radius: 8px;
+}
+.remover-habito {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 100%;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  background-color: #bc4749;
   border-radius: 8px;
 }
 .confirmar-estilo {

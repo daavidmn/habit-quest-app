@@ -63,7 +63,7 @@ export default {
 .container {
   display: flex;
   flex-direction: column;
-  width: 170px;
+  width: 250px;
   height: 80px;
 }
 

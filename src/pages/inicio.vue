@@ -4,7 +4,7 @@
       <view class="avatar-mini">
         <image
           :style="{ width: 25, height: 25 }"
-          :source="require('../assets/img/avatar/020-superhero.png')"
+          :source="avatar[4].src"
         />
       </view>
       <view class="progress-bar">
@@ -68,7 +68,7 @@
           >?</text
         >
       </view>
-
+      <view class="scroll-area">
       <ScrollView :fadingEdgeLength="0" :showsVerticalScrollIndicator="true">
         <view class="scroll-box">
           <view v-if="userr[0].habitos != false">
@@ -91,13 +91,14 @@
                     :habitoId="key"
                     :navigation="navigation"
                   />
-                
+              
                 </view>
               </view>
             </view>
           </view>
         </view>
       </ScrollView>
+    </view>
     </view>
     <ActionButton
       buttonColor="rgba(56,102,65, 1)"
@@ -112,6 +113,7 @@
 import Habitviewer from "../components/Habitviewer";
 import ActionButton from "react-native-action-button";
 import { constUser } from "../consts/user";
+import { constAvatar } from "../consts/avatar";
 import { AsyncStorage } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
@@ -129,6 +131,7 @@ export default {
   data() {
     return {
       loaded: false,
+      avatar: constAvatar,
       user: constUser,
       modalLevelVisible: false,
     };
@@ -136,7 +139,6 @@ export default {
 
   computed: {
     userr() {
-
       return this.$store.state.storeUsuario;
     },
   },
@@ -191,6 +193,12 @@ export default {
 </script>
 
 <style scoped>
+.scroll-area {
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 85%;
+}
 .centered-view {
   background-color: rgba(0, 0, 0, 0.8);
   flex: 1;

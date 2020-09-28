@@ -1,7 +1,7 @@
 <template>
   <view class="container">
     <view v-if="active" class="imagem-container">
-      <image class="imagem" :source="teste[avatarid - 1].src" />
+      <image class="imagem" :source="teste[1].src" />
     </view>
     <view v-else class="imagem-container">
       <image

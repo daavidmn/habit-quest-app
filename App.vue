@@ -18,7 +18,6 @@ import pgPasse from "./src/pages/passe.vue";
 import pgConfig from "./src/pages/config.vue";
 import pgModificarHabito from "./src/pages/modificarHabito.vue";
 import pgModificarAvatar from "./src/pages/modificarAvatar.vue";
-import pgConquistas from "./src/pages/conquistas.vue";
 import React from "react";
 import {
   Ionicons,
@@ -140,15 +139,7 @@ const StackNavigator = createStackNavigator(
         title: "Modificar Avatar",
       },
     },
-
-    conquistas: {
-      screen: pgConquistas,
-      navigationOptions: {
-        title: "Conquistas obtidas",
-      },
-    },
   },
-
   {
     initialRouteName: "AndroidTabs",
   }

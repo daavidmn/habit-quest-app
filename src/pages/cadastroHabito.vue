@@ -2,6 +2,7 @@
   <view class="container">
     <text :style="{ fontSize: 18 }">Nome do hábito</text>
     <text-input
+    placeholder="Digite o nome do habito."
       :style="{
         height: 40,
         padding: 10,
@@ -24,9 +25,9 @@
     <view class="scroll-area">
       <ScrollView :fadingEdgeLength="0" :showsVerticalScrollIndicator="false">
         <view class="scroll-box">
-          <view v-if="habitos.length > 0">
+          <view v-if="userr[0].habitos">
             <view v-for="(habit, key) in rotinaSemanal" :key="key">
-              <HabitScreenBox @remove="() => removerRotina()"
+              <HabitScreenBox @remove="() => removerRotina(key)"
                 :dia="habit.diaSetado"
                 :hora="habit.horaSetada"
                 :minuto="habit.minutoSetado"
@@ -182,7 +183,7 @@ export default {
   data() {
     return {
       user: constUser,
-      habitos: constHabitos,
+      nomeHabito: "",
       rotinaSemanal: [],
       nomeHabito: "",
       modalDiaVisible: false,
@@ -202,8 +203,8 @@ export default {
   created() {
     this.$store.dispatch("fetchUsuario");
 
+
     this.rotinaSemanal = [];
-    this.nomeHabito = this.habitos[0].titulo;
   },
   watch: {
     horaTemp: function () {

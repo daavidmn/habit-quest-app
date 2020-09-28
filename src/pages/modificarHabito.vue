@@ -24,9 +24,9 @@
     <view class="scroll-area">
       <ScrollView :fadingEdgeLength="0" :showsVerticalScrollIndicator="false">
         <view class="scroll-box">
-          <view v-if="habitos.length > 0">
+          <view v-if="(userr[0].habitos[habitoSelecionado])">
             <view v-for="(habit, key) in userr[0].habitos[habitoSelecionado].rotinaSemanal" :key="key">
-              <HabitScreenBox @remove="() => removerRotina()"
+              <HabitScreenBox @remove="() => removerRotina(key)"
                 :dia="habit.diaSetado"
                 :hora="habit.horaSetada"
                 :minuto="habit.minutoSetado"
@@ -189,7 +189,6 @@ export default {
   data() {
     return {
       user: constUser,
-      habitos: constHabitos,
       modalDiaVisible: false,
       modalHoraVisible: false,
       diaTemp: "",
@@ -207,13 +206,12 @@ export default {
     habitoSelecionado() {
       return this.$store.state.storeHabitoSelecionado;
     },
-    nomeHabito(){
-      return this.userr[0].habitos[this.habitoSelecionado].titulo;
-    }
   },
   created() {
 
     this.$store.dispatch("fetchUsuario");
+
+    this.nomeHabito = this.userr[0].habitos[this.habitoSelecionado].titulo;
 
   },
   watch: {
@@ -237,21 +235,24 @@ export default {
     },
   },
   methods: {
+
     removerRotina: function (id){
+
       this.userr[0].habitos[this.habitoSelecionado].rotinaSemanal.splice(id,1);
+
     },
     removerHabito: function (){
+      let copiaUser=this.userr;
 
-      if(this.userr[0].habitos.length > 1){
-      this.userr[0].habitos.splice(this.habitoSelecionado,1);
+      if((this.habitoSelecionado+1) == (copiaUser[0].habitos.length)){copiaUser[0].habitos.pop(); }
 
-      this.$store.commit('setSalvarUsuario', this.userr);
+      else{copiaUser[0].habitos.splice(this.habitoSelecionado,1);}
+      
+      this.$store.commit('setSalvarUsuario', copiaUser);
 
       this.$store.dispatch('salvarUsuario');
 
-      this.navigation.navigate("inicio");}
-
-      else{alert("Você precisa manter pelo menos um habito");}
+      this.navigation.navigate("inicio");
 
     },
     modalDia() {

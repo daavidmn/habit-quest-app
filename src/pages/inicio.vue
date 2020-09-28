@@ -4,7 +4,7 @@
       <view class="avatar-mini">
         <image
           :style="{ width: 25, height: 25 }"
-          :source="require('../assets/img/avatar/020-superhero-19.png')"
+          :source="require('../assets/img/avatar/020-superhero.png')"
         />
       </view>
       <view class="progress-bar">
@@ -25,8 +25,6 @@
         <text class="achievements-text">15</text>
       </view>
     </view>
-
-    
 
     <view class="weekbar">
       <text>{{ userr[0].nome }}</text>
@@ -89,7 +87,6 @@ export default {
     userr() {
       return this.$store.state.storeUsuario;
     },
-    
   },
 
   created() {
@@ -102,7 +99,7 @@ export default {
     },
   },
   methods: {
-    goToCadastrar: function() {
+    goToCadastrar: function () {
       this.navigation.navigate("cadastroHabito");
     },
     onPressButton: function () {

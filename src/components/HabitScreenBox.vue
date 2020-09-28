@@ -3,38 +3,43 @@
     <view class="box-above">
       <view class="box-above-left">
         <view v-if="dia === 0">
-          <text :style="{fontSize: 14, color: 'white'}">Domingo</text>
+          <text :style="{ fontSize: 14, color: 'white' }">Domingo</text>
         </view>
         <view v-else-if="dia === 1">
-          <text :style="{fontSize: 14, color: 'white'}">Segunda-feira</text>
+          <text :style="{ fontSize: 14, color: 'white' }">Segunda-feira</text>
         </view>
         <view v-else-if="dia === 2">
-          <text :style="{fontSize: 14, color: 'white'}">Terça-feira</text>
+          <text :style="{ fontSize: 14, color: 'white' }">Terça-feira</text>
         </view>
         <view v-else-if="dia === 3">
-          <text :style="{fontSize: 14, color: 'white'}">Quarta-feira</text>
+          <text :style="{ fontSize: 14, color: 'white' }">Quarta-feira</text>
         </view>
         <view v-else-if="dia === 4">
-          <text :style="{fontSize: 14, color: 'white'}">Quinta-feira</text>
+          <text :style="{ fontSize: 14, color: 'white' }">Quinta-feira</text>
         </view>
         <view v-else-if="dia === 5">
-          <text :style="{fontSize: 14, color: 'white'}">Sexta-feira</text>
+          <text :style="{ fontSize: 14, color: 'white' }">Sexta-feira</text>
         </view>
         <view v-else-if="dia === 6">
-          <text :style="{fontSize: 14, color: 'white'}">Sábado</text>
+          <text :style="{ fontSize: 14, color: 'white' }">Sábado</text>
         </view>
       </view>
-      
+
       <view class="box-above-right">
         <touchable-opacity :on-press="() => removerRotina()">
-        <MaterialCommunityIcons name="window-close" :size="18" color="white" />
+          <MaterialCommunityIcons
+            name="window-close"
+            :size="18"
+            color="white"
+          />
         </touchable-opacity>
       </view>
-    
     </view>
 
     <view class="box-below">
-      <text :style="{fontSize: 14, color: 'white'}">Notificar às {{ hora }}:{{ minuto }}</text>
+      <text :style="{ fontSize: 14, color: 'white' }"
+        >Notificar às {{ hora }}:{{ minuto }}</text
+      >
     </view>
   </view>
 </template>
@@ -45,14 +50,12 @@ export default {
   components: {
     MaterialCommunityIcons,
   },
-  props: ["dia", "hora", "minuto","rotinaId"],
-   methods: {
+  props: ["dia", "hora", "minuto", "rotinaId"],
+  methods: {
     removerRotina() {
-
-      this.$emit('remove', this.rotinaId);
-
+      this.$emit("remove", this.rotinaId);
     },
-  }
+  },
 };
 </script>
 

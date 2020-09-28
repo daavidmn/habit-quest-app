@@ -17,7 +17,7 @@
         </touchable-opacity>
       </view>
     </view>
-    <touchable-opacity class="botao-apoiador">
+    <touchable-opacity class="botao-apoiador" :on-press="() => salvarAvatar()">
       <text class="text-apoiador">Confirmar</text>
     </touchable-opacity>
     <text>{{ teste }}</text>
@@ -48,6 +48,7 @@ export default {
   data() {
     return {
       classSelected: [],
+      avatarSelecionado:"",
       teste: "",
     };
   },
@@ -55,6 +56,18 @@ export default {
     this.$store.dispatch("fetchUsuario");
   },
   methods: {
+    salvarAvatar:function(){
+
+      this.userr[0].avatarIndex = (this.avatarSelecionado);
+
+      this.$store.commit("setSalvarUsuario",this.userr);
+
+      this.$store.dispatch("salvarUsuario");
+
+      this.$store.dispatch("fetchUsuario");
+
+      this.navigation.pop();
+    },
     selectAvatar(indice) {
       let v = indice - 1;
       for (let i = 0; i < 20; i++) {
@@ -63,14 +76,7 @@ export default {
       this.classSelected[v] = true;
       console.log(this.classSelected);
       this.teste += " ";
-
-      this.userr[0].avatarIndex = (indice-1);
-
-      this.$store.commit("setSalvarUsuario",this.userr);
-
-      this.$store.dispatch("salvarUsuario");
-
-      this.$store.dispatch("fetchUsuario");
+      this.avatarSelecionado = v;
 
     },
   },

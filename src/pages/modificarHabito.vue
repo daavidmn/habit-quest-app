@@ -49,6 +49,14 @@
       <text :style="{ fontSize: 12 }"
         >Cuidado, essa ação irá apagar seu progresso nesse hábito.</text
       >
+      
+      <touchable-opacity
+        class="confirmar-habito"
+        :on-press="() => definirHabito()"
+      >
+        <text class="confirmar-estilo">Confirmar</text>
+      </touchable-opacity>
+
       <touchable-opacity
         class="remover-habito"
         :on-press="() => removerHabito()"
@@ -58,12 +66,6 @@
           :style="{ fontSize: 14, fontWeight: 'bold' }"
           >Remover hábito</text
         >
-      </touchable-opacity>
-      <touchable-opacity
-        class="confirmar-habito"
-        :on-press="() => definirHabito()"
-      >
-        <text class="confirmar-estilo">Confirmar</text>
       </touchable-opacity>
     </view>
 

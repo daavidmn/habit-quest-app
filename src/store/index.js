@@ -63,7 +63,7 @@ export default new Vuex.Store({
                   xpProx: 100,
                   totalRotinas: 0,
                   rotinasCompletadas:0,
-                  avatarIndex: 1,
+                  avatarIndex: 2,
                   habitos: [
                     // {
                     //   titulo: 'Corrida com cachorro',
@@ -171,7 +171,7 @@ export default new Vuex.Store({
                 xpProx: 100,
                 totalRotinas: 0,
                 rotinasCompletadas:0,
-                avatarIndex:1,
+                avatarIndex:2,
                 habitos: [
                   // {
                   //   titulo: 'Corrida com cachorro',

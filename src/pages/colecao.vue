@@ -13,7 +13,7 @@
         </view>
         <view class="box-baixo">
           <view class="box-baixo-esquerda">
-            <text class="texto-branco">Nível 150</text>
+            <text class="texto-branco">{{userr[0].level}}</text>
           </view>
           <view class="box-baixo-direita">
             <view class="achievements">

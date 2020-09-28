@@ -1,6 +1,6 @@
 <template>
   <view class="container">
-    <text class="text-title">Avatares desbloqueados: x/16 (y%)</text>
+    <text class="text-title">Avatares desbloqueados: 16/16 (100%)</text>
     <view class="avatar-container">
       <view v-for="index in 20" :key="index">
         <touchable-opacity :on-press="() => selectAvatar(index)">
@@ -68,6 +68,7 @@ export default {
   padding-right: 15px;
   padding-left: 15px;
   align-items: center;
+  justify-content: space-evenly;
   background-color: #e8e8e8;
 }
 .text-title {
@@ -77,7 +78,6 @@ export default {
   /* font-weight: bold; */
 }
 .avatar-container {
-  height: 450px;
   margin-top: 20px;
   flex-direction: row;
   flex-wrap: wrap;
@@ -85,8 +85,8 @@ export default {
   justify-content: space-between;
 }
 .avatar-box {
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
   background-color: white;
   margin: 5px;
   border-radius: 8px;
@@ -99,7 +99,7 @@ export default {
 .botao-apoiador {
   height: 45px;
   width: 60%;
-  margin-top: 50px;
+  margin-top: 20px;
   border-radius: 20px;
   background-color: #386641;
   align-items: center;

@@ -5,7 +5,7 @@
 
         <image
           :style="{ width: 25, height: 25 }"
-          :source="avatar[0].src"
+          :source="avatar[2].src"
         />
 
       </view>
@@ -91,6 +91,7 @@
                       :hora="rotina.horaSetada"
                       :minutos="rotina.minutoSetado"
                       :dia="rotina.diaSetado"
+                      :diaSemana="rotina.diaSemana"
                       :habitoId="key"
                       :navigation="navigation"
                     />

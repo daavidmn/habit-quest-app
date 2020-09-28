@@ -17,7 +17,28 @@
       </view>
       <view class="below-text">
         <view>
-          <text>{{ hora }}:{{minutos}}         Dia: {{dia}}</text>
+          <view v-if="dia === 0">
+          <text :style="{ fontSize: 14, color: 'black' }">Hora: {{ hora }}:{{minutos}}</text> <text>Dia: Dia: Domingo</text>
+        </view>
+        <view v-else-if="dia === 1">
+          <text :style="{ fontSize: 14, color: 'black' }">Hora: {{ hora }}:{{minutos}}</text> <text>Dia: Segunda-feira</text>
+        </view>
+        <view v-else-if="dia === 2">
+          <text :style="{ fontSize: 14, color: 'black' }">Hora: {{ hora }}:{{minutos}}</text> <text>Dia: Terça-feira</text>
+        </view>
+        <view v-else-if="dia === 3">
+          <text :style="{ fontSize: 14, color: 'black' }">Hora: {{ hora }}:{{minutos}}</text> <text>Dia: Quarta-feira</text>
+        </view>
+        <view v-else-if="dia === 4">
+          <text :style="{ fontSize: 14, color: 'black' }">Hora: {{ hora }}:{{minutos}}</text> <text>Dia: Quinta-feira</text>
+        </view>
+        <view v-else-if="dia === 5">
+          <text :style="{ fontSize: 14, color: 'black' }">Hora: {{ hora }}:{{minutos}}</text> <text>Dia: Sexta-feira</text>
+        </view>
+        <view v-else-if="dia === 6">
+          <text :style="{ fontSize: 14, color: 'black' }">Hora: {{ hora }}:{{minutos}}</text> <text>Dia: Sábado</text>
+        </view>
+         
         </view>
       </view>
       </touchable-opacity>
